@@ -30,7 +30,7 @@ function Login() {
     <>
       <div className="section log-banner">
         <img
-          src="https://github.com/abaddon-x/seg/raw/master/frontend/public/favicon.ico"
+          src="https://github.com/lev10sa/seg/raw/master/frontend/public/favicon.ico"
           alt=""
         />
         <div>
