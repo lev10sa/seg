@@ -1,0 +1,71 @@
+### CATCH ERROR
+GET http://localhost:5000/
+Content-Type: application/json
+
+### GET ALL DATA
+GET http://localhost:5000/api/invoices
+Content-Type: application/json
+
+### GET A DATA BY ID
+GET http://localhost:5000/api/invoices/6601a37671e18382510bcd95
+Content-Type: application/json
+
+### SAVE DATA
+POST http://localhost:5000/api/invoices
+Content-Type: application/json
+
+{
+    "name": "A",
+    "company": "A",
+    "email": "A",
+    "phone": 2000,
+    "bookList": [
+        
+        {
+        "bookName": "A",
+        "isbn": "A",
+        "price": "A",
+        "qty": "A",
+        "disc": "A"
+    },
+    {
+        "bookName": "B",
+        "isbn": "B",
+        "price": "B",
+        "qty": "B",
+        "disc": "B"
+    }
+    ]
+}
+
+### UPDATE DATA
+PATCH http://localhost:5000/api/invoices/id/6605455789832cec0e1cbbcb
+Content-Type: application/json
+
+{
+    "name": "A",
+    "company": "A",
+    "email": "A",
+    "phone": 2000,
+    "bookList": [
+        
+        {
+        "bookName": "A",
+        "isbn": "A",
+        "price": "A",
+        "qty": "A",
+        "disc": "A"
+    },
+    {
+        "bookName": "B",
+        "isbn": "B",
+        "price": "B",
+        "qty": "B",
+        "disc": "B"
+    }
+    ]
+}
+
+### DELETE DATA
+DELETE http://localhost:5000/api/invoices/id/6605443989832cec0e1cbbc9
+Content-Type: application/json

@@ -1,0 +1,39 @@
+### CATCH ERROR
+GET http://localhost:5000/
+Content-Type: application/json
+
+### GET ALL DATA
+GET http://localhost:5000/api/books
+Content-Type: application/json
+
+### GET A DATA BY ID
+GET http://localhost:5000/api/books/6601a37671e18382510bcd95
+Content-Type: application/json
+
+### SAVE DATA
+POST http://localhost:5000/api/books
+Content-Type: application/json
+
+{
+    "name": "A",
+    "isbn": "A",
+    "category": "A",
+    "bookPrice": 2000,
+    "ebookPrice": 2000
+}
+
+### UPDATE DATA
+PATCH http://localhost:5000/api/books/6601a37671e18382510bcd95
+Content-Type: application/json
+
+{
+    "name": "B",
+    "isbn": "B",
+    "category": "B",
+    "bookPrice": 1000,
+    "ebookPrice": 1000
+}
+
+### DELETE DATA
+DELETE http://localhost:5000/api/books/6601a3f871e18382510bcd98
+Content-Type: application/json
