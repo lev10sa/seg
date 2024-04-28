@@ -14,6 +14,7 @@ import quotationRouter from "./routes/QuotationRoute.js";
 import orderRouter from "./routes/OrderRoute.js";
 import partyRouter from "./routes/PartyRoute.js";
 import eventRouter from "./routes/EventRoute.js";
+import postRouter from "./routes/PostRoute.js";
 
 // prepare dependencies
 config();
@@ -30,7 +31,8 @@ app.use(
   quotationRouter,
   orderRouter,
   partyRouter,
-  eventRouter
+  eventRouter,
+  postRouter
 );
 
 // connect to db
