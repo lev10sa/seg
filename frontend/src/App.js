@@ -17,13 +17,17 @@ import {
   Login,
   EventAdd,
   EventEdit,
-  EventListOne,
-  EventViewOne,
+  EventList,
+  EventView,
   EventPartyEdit,
-  EventPartyListOne,
+  EventPartyList,
+  PostAdd,
+  PostEdit,
 } from "./pages";
-import { NavigationOne } from "./components";
+import { Navigation } from "./components";
 import Cookies from "js-cookie";
+import PostList from "./pages/Post/PostList";
+import PostView from "./pages/Post/PostView";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState();
@@ -40,7 +44,7 @@ const App = () => {
     <>
       {isLogin === true ? (
         <Router>
-          <NavigationOne />
+          <Navigation />
           <div className="main-page">
             <Routes>
               <Route path="/" element={<BookList />} />
@@ -56,21 +60,22 @@ const App = () => {
               <Route path="/orders" element={<OrderList />} />
               <Route path="/order-add" element={<OrderAdd />} />
               <Route path="/order-edit/:id" element={<OrderEdit />} />
-              <Route path="/events" element={<EventListOne />} />
+              <Route path="/posts" element={<PostList />} />
+              <Route path="/post-add" element={<PostAdd />} />
+              <Route path="/post-edit/:id" element={<PostEdit />} />
+              <Route path="/post-view/:id" element={<PostView />} />
+              <Route path="/events" element={<EventList />} />
               <Route path="/event-add" element={<EventAdd />} />
               <Route path="/event-edit/:id" element={<EventEdit />} />
-              <Route path="/event-view/:id" element={<EventViewOne />} />
-              <Route
-                path="/event-join-list/:id"
-                element={<EventPartyListOne />}
-              />
+              <Route path="/event-view/:id" element={<EventView />} />
+              <Route path="/event-join-list/:id" element={<EventPartyList />} />
               <Route path="/event-join-edit/:id" element={<EventPartyEdit />} />
             </Routes>
           </div>
         </Router>
       ) : (
         <Router>
-          <NavigationOne />
+          <Navigation />
           <div className="main-page">
             <Routes>
               <Route path="/" element={<Login />} />

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 // create the main function
-const NavigationOne = () => {
+const Navigation = () => {
   // setting up useNavigate
   const navigate = useNavigate();
 
@@ -48,6 +48,9 @@ const NavigationOne = () => {
               <button onClick={() => navigate(`/events`)}>
                 <i className="fas fa-calendar-alt"></i> <span>Event</span>
               </button>
+              <button onClick={() => navigate(`/posts`)}>
+                <i className="fas fa-file-alt"></i> <span>Post</span>
+              </button>
               <button onClick={logOut}>
                 <i className="fas fa-sign-out-alt"></i> <span>Logout</span>
               </button>
@@ -69,4 +72,4 @@ const NavigationOne = () => {
 };
 
 // export the main function
-export default NavigationOne;
+export default Navigation;

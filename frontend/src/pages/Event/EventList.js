@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 // create the main function
-const EventListOne = () => {
+const EventList = () => {
   // create the useState
   const [events, setEvents] = useState([]); // state for Event list
   const [searchs, setSearch] = useState(""); // state for search
@@ -185,4 +185,4 @@ const EventListOne = () => {
 };
 
 // export the main function
-export default EventListOne;
+export default EventList;

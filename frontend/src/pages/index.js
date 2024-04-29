@@ -5,3 +5,4 @@ export * from "./Quotation";
 export * from "./Purchase";
 export * from "./Login";
 export * from "./Event";
+export * from "./Post";

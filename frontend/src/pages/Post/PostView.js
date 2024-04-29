@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 // create the main function
-const EventViewOne = () => {
+const PostView = () => {
   // create the useState
   const [event, setEvent] = useState({
     price: "",
@@ -179,4 +179,4 @@ const EventViewOne = () => {
 };
 
 // export the main function
-export default EventViewOne;
+export default PostView;

@@ -1,5 +1,5 @@
 // get the navbar
-import NavigationOne from "./NavigationOne";
+import Navigation from "./Navigation";
 
 // export the navbar
-export { NavigationOne };
+export { Navigation };

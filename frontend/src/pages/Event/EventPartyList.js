@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-function EventPartyListOne() {
+function EventPartyList() {
   // create the useState
   const [parties, setParty] = useState([]); // state for Invoice list
   const [searchs, setSearch] = useState(""); // state for search
@@ -136,4 +136,4 @@ function EventPartyListOne() {
   );
 }
 
-export default EventPartyListOne;
+export default EventPartyList;
