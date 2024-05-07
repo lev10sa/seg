@@ -132,18 +132,15 @@ const PostList = () => {
         <div className="section">
           <div className="section">
             {posts.map((post, index) => (
-              <div className="post" key={index}>
+              <div className="event" key={index}>
                 <img src={post.img} alt={post.img} />
                 <div className="section caption">
-                  <h6 title={post.name}>{post.name}</h6>
-                  <p title={post.pic}>
-                    <strong>Speaker:</strong> {post.pic}
+                  <h6 title={post.title}>{post.title}</h6>
+                  <p>
+                    <strong>Category:</strong> {post.category}
                   </p>
                   <p>
-                    <strong>Time:</strong> {formatTime(post.start)}
-                  </p>
-                  <p title={post.address}>
-                    <strong>Location:</strong> {post.address}
+                    <strong>Published:</strong> {formatTime(post.start)}
                   </p>
                   <button
                     onClick={() => navigate(`/post-edit/${post._id}`)}

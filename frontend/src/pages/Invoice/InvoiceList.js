@@ -130,7 +130,7 @@ const InvoiceList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/invoice/xlsx/${invoice.serie}.xlsx`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Invoice/${invoice.serie}.xlsx`)
                         }
                         download
                       >
@@ -139,7 +139,7 @@ const InvoiceList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/invoice/pdf/${invoice.serie}.pdf`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Invoice/${invoice.serie}.pdf`)
                         }
                         download
                       >

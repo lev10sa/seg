@@ -129,7 +129,7 @@ const OrderList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/order/xlsx/${order.serie}.xlsx`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Order/${order.serie}.xlsx`)
                         }
                         download
                       >
@@ -138,7 +138,7 @@ const OrderList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/order/pdf/${order.serie}.pdf`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Order/${order.serie}.pdf`)
                         }
                         download
                       >

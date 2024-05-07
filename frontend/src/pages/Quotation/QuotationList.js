@@ -129,7 +129,7 @@ const QuotationList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/quotation/xlsx/${quotation.serie}.xlsx`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Quotation/${quotation.serie}.xlsx`)
                         }
                         download
                       >
@@ -138,7 +138,7 @@ const QuotationList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/seg/raw/master/docs/quotation/pdf/${quotation.serie}.pdf`)
+                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Quotation/${quotation.serie}.pdf`)
                         }
                         download
                       >

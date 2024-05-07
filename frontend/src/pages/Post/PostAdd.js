@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function PostAdd() {
-  // Fetches latest Event count for serie generation (Optional)
+  // Fetches latest Post count for serie generation (Optional)
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [postData, setPostData] = useState({
@@ -15,38 +15,33 @@ function PostAdd() {
     file: [],
   });
 
-  function resizeTextarea(textarea) {
-    textarea.style.height = "auto";
-    textarea.style.height = textarea.scrollHeight + "px";
-  }
-
   // Setting up useNavigate
   const navigate = useNavigate();
 
-  const handleChange = (event) => {
+  const handleChange = (Post) => {
     // For non-file inputs, set the value directly
     setPostData({
       ...postData,
-      [event.target.name]: event.target.value,
+      [Post.target.title]: Post.target.value,
     });
   };
 
-  const handleFile = (event) => {
-    setSelectedFile(event.target.files[0]);
+  const handleFile = (Post) => {
+    setSelectedFile(Post.target.files[0]);
     // Access the filename from the selected file
-    const fileDir = "https://compasspubindonesia.com/media/api/events/img/";
-    const file = event.target.files[0];
-    const filename = fileDir + file.name;
+    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const file = Post.target.files[0];
+    const filename = fileDir + file.title;
     setPostData({
       ...postData,
       img: filename,
     });
   };
 
-  const AddEvent = async (e) => {
-    e.preventDefault();
+  const AddPost = async (e) => {
+    e.prPostDefault();
 
-    const slg = postData.name.toLocaleLowerCase().split(" ").join("-");
+    const slg = postData.title.toLocaleLowerCase().split(" ").join("-");
 
     const cleanedData = {
       ...postData,
@@ -57,10 +52,10 @@ function PostAdd() {
     formData.append("img", selectedFile);
 
     try {
-      // Add the Event into database with axios
-      await axios.post(`https://seg-server.vercel.app/api/events`, cleanedData);
+      // Add the Post into database with axios
+      await axios.post(`https://seg-server.vercel.app/api/posts`, cleanedData);
       await axios.post(
-        `https://compasspubindonesia.com/media/api/events/index.php`,
+        `https://compasspubindonesia.com/media/api/posts/index.php`,
         formData,
         {
           headers: {
@@ -69,7 +64,7 @@ function PostAdd() {
         }
       );
       // Navigate to main page
-      navigate(`/events`);
+      navigate(`/posts`);
     } catch (error) {
       console.log(error.message); // Display error messages
     }
@@ -79,24 +74,37 @@ function PostAdd() {
     <>
       <div className="section">
         <div className="section headline">
-          <h4>Add Event</h4>
-          <button onClick={() => navigate(`/events`)} className="btn">
-            See All Events
+          <h4>Add Post</h4>
+          <button onClick={() => navigate(`/posts`)} className="btn">
+            See All Posts
           </button>
         </div>
         <div className="section">
-          <form onSubmit={AddEvent} className="form">
+          <form onSubmit={AddPost} className="form">
             <div className="field">
-              <label className="label">Name</label>
+              <label className="label">Title</label>
               <input
                 type="text"
                 autoComplete="on"
                 className="input"
-                id="name"
-                name="name"
-                value={postData.name}
+                id="title"
+                name="title"
+                value={postData.title}
                 onChange={handleChange}
-                placeholder="Event Name"
+                placeholder="Post Title"
+              />
+            </div>
+            <div className="field">
+              <label className="label">Slug</label>
+              <input
+                type="text"
+                autoComplete="on"
+                className="input"
+                id="slug"
+                name="slug"
+                value={postData.slug}
+                onChange={handleChange}
+                placeholder="Slug"
               />
             </div>
             <div className="field">
@@ -113,27 +121,15 @@ function PostAdd() {
               </select>
             </div>
             <div className="field">
-              <label className="label">Start</label>
+              <label className="label">Date</label>
               <input
                 type="datetime-local"
                 className="input"
-                id="start"
-                name="start"
-                value={postData.start}
+                id="date"
+                name="date"
+                value={postData.date}
                 onChange={handleChange}
-                placeholder="Start"
-              />
-            </div>
-            <div className="field">
-              <label className="label">End</label>
-              <input
-                type="datetime-local"
-                className="input"
-                id="end"
-                name="end"
-                value={postData.end}
-                onChange={handleChange}
-                placeholder="End"
+                placeholder="Date"
               />
             </div>
             <div className="field">
@@ -159,7 +155,7 @@ function PostAdd() {
                 name="price"
                 value={postData.price}
                 onChange={handleChange}
-                placeholder="Event Price in Rupiah"
+                placeholder="Post Price in Rupiah"
               />
             </div>
             <div className="field">
@@ -184,7 +180,7 @@ function PostAdd() {
                 id="img"
                 name="img"
                 onChange={handleFile}
-                placeholder="Event Image"
+                placeholder="Post Image"
               />
             </div>
             <div className="field">
@@ -197,8 +193,7 @@ function PostAdd() {
                 name="address"
                 value={postData.address}
                 onChange={handleChange}
-                placeholder="Event Address"
-                onInput={resizeTextarea(this)}
+                placeholder="Post Address"
               ></textarea>
             </div>
             <div className="field">
@@ -211,7 +206,7 @@ function PostAdd() {
                 name="desc"
                 value={postData.desc}
                 onChange={handleChange}
-                placeholder="Event Description"
+                placeholder="Post Description"
               ></textarea>
             </div>
             <div className="section">
