@@ -28,6 +28,9 @@ const prtSchema = mongoose.Schema(
     event: {
       type: String,
     },
+    room: {
+      type: String,
+    },
   },
   {
     timestamps: true,
