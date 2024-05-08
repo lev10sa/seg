@@ -171,6 +171,21 @@ function EventPartyEdit() {
                 required
               ></textarea>
             </div>
+            <div className="field">
+              <label className="label">Attendance | Kehadiran</label>
+              <select
+                id="room"
+                name="room"
+                value={eventData.room}
+                onChange={handleChange}
+              >
+                <option value="">
+                  --- Select Attendance | Pilih Kehadiran ---
+                </option>
+                <option value="Online">Online | Daring</option>
+                <option value="Onsite">Onsite | Luring</option>
+              </select>
+            </div>
             <div className="section">
               <div className="controls">
                 <button type="button" onClick={delEvent} className="btn">
