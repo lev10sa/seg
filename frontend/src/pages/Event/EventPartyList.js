@@ -88,6 +88,7 @@ function EventPartyList() {
                   <th>Participant Name</th>
                   <th>Company</th>
                   <th>Occupation</th>
+                  <th>Attendance</th>
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Address</th>
@@ -103,6 +104,7 @@ function EventPartyList() {
                     <td>{party.name}</td>
                     <td>{party.company}</td>
                     <td>{party.job}</td>
+                    <td>{party.room}</td>
                     <td>{party.phone}</td>
                     <td>{party.email}</td>
                     <td>{party.address}</td>
