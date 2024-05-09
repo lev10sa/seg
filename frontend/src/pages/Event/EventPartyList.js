@@ -81,9 +81,9 @@ function EventPartyList() {
       ) : (
         <>
           <div>
-            <table className="table frame" style={{ tableLayout: "fixed" }}>
+            <table className="table frame">
               <thead>
-                <tr style={{ width: "100%" }}>
+                <tr>
                   <th>No.</th>
                   <th>Participant Name</th>
                   <th>Company</th>
@@ -99,7 +99,7 @@ function EventPartyList() {
               <tbody>
                 {parties.map((party, index) => (
                   // table content
-                  <tr key={party._id} style={{ width: "100%" }}>
+                  <tr key={party._id}>
                     <td>{index + 1}</td>
                     <td>{party.name}</td>
                     <td>{party.company}</td>
