@@ -81,10 +81,7 @@ function EventPartyList() {
       ) : (
         <>
           <div>
-            <table
-              className="table frame"
-              style={{ overflowX: "scroll", width: "100px" }}
-            >
+            <table className="table frame">
               <thead>
                 <tr>
                   <th>No.</th>
