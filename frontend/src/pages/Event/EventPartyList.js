@@ -80,8 +80,11 @@ function EventPartyList() {
         <div className="section">No data...</div> // display status when loading
       ) : (
         <>
-          <div style={{ overflowX: "scroll" }}>
-            <table className="table frame">
+          <div>
+            <table
+              className="table frame"
+              style={{ overflowX: "scroll", width: "100px" }}
+            >
               <thead>
                 <tr>
                   <th>No.</th>
