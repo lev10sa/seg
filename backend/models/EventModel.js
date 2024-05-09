@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 // create a schema
 const evtSchema = mongoose.Schema(
   {
-    name: {
+    title: {
       type: String,
     },
     slug: {
@@ -35,6 +35,9 @@ const evtSchema = mongoose.Schema(
       type: String,
     },
     contact: {
+      type: String,
+    },
+    group: {
       type: String,
     },
   },
