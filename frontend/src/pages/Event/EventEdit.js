@@ -91,10 +91,12 @@ function EventEdit() {
   }, [id]);
 
   const handleChange = (event) => {
-    setEventData({
-      ...eventData,
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.value !== "") {
+      setEventData({
+        ...eventData,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleFile = (event) => {
@@ -219,7 +221,7 @@ function EventEdit() {
                 className="input"
                 id="group"
                 name="group"
-                value={eventData.title}
+                value={eventData.group}
                 onChange={handleChange}
                 placeholder="WhatsApp Group Link"
               />

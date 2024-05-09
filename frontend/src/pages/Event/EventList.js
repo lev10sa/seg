@@ -149,7 +149,7 @@ const EventList = () => {
               <div className="event" key={index}>
                 <img src={event.img} alt={event.img} />
                 <div className="section caption">
-                  <h6 title={event.name}>{event.name}</h6>
+                  <h6 title={event.title}>{event.title}</h6>
                   <p title={event.pic}>
                     <strong>Speaker:</strong> {event.pic}
                   </p>

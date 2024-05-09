@@ -25,11 +25,12 @@ function EventAdd() {
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    // For non-file inputs, set the value directly
-    setEventData({
-      ...eventData,
-      [event.target.name]: event.target.value,
-    });
+    if (event.target.value !== "") {
+      setEventData({
+        ...eventData,
+        [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleFile = (event) => {
@@ -184,7 +185,7 @@ function EventAdd() {
                 className="input"
                 id="group"
                 name="group"
-                value={eventData.title}
+                value={eventData.group}
                 onChange={handleChange}
                 placeholder="WhatsApp Group Link"
               />
