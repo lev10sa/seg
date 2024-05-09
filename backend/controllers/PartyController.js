@@ -21,7 +21,7 @@ export const setParty = asyncHandler(async (req, res) => {
 // get all prts
 export const getParty = asyncHandler(async (req, res) => {
   try {
-    const prt = await Party.find().sort({ name: -1, company: -1 });
+    const prt = await Party.find().sort({ name: 1, company: 1, createdAt: -1 });
     if (!prt) {
       res.status(404);
       throw new Error(`cannot find any Party`);
@@ -37,8 +37,9 @@ export const getParty = asyncHandler(async (req, res) => {
 export const getPartyById = asyncHandler(async (req, res) => {
   try {
     const prt = await Party.findById(req.params.id).sort({
-      name: -1,
-      company: -1,
+      name: 1,
+      company: 1,
+      createdAt: -1,
     });
     if (!prt) {
       res.status(404);
@@ -62,7 +63,7 @@ export const getPartyByEvent = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ name: -1, company: -1 });
+    }).sort({ name: 1, company: 1, createdAt: -1 });
     if (!prt) {
       res.status(404);
       throw new Error(`cannot find any Party id`);
@@ -105,7 +106,7 @@ export const getPartyByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ name: -1, company: -1 });
+    }).sort({ name: 1, company: 1, createdAt: -1 });
     if (!prt) {
       res.status(404);
       throw new Error(`cannot find any Party id`);

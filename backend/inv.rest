@@ -1,5 +1,5 @@
 ### CATCH ERROR
-GET http://localhost:5000/
+GET http://seg-server.vercel.app/api/parties
 Content-Type: application/json
 
 ### GET ALL DATA
