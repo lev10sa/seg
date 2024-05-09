@@ -10,7 +10,7 @@ function EventAdd() {
     price: "",
     slug: "",
     model: "",
-    name: "",
+    title: "",
     desc: "",
     pic: "",
     img: "",
@@ -18,6 +18,7 @@ function EventAdd() {
     start: "",
     end: "",
     contact: "",
+    group: "",
   });
 
   // Setting up useNavigate
@@ -92,9 +93,9 @@ function EventAdd() {
                 type="text"
                 autoComplete="on"
                 className="input"
-                id="name"
-                name="name"
-                value={eventData.name}
+                id="title"
+                name="title"
+                value={eventData.title}
                 onChange={handleChange}
                 placeholder="Event Name"
               />
@@ -173,6 +174,19 @@ function EventAdd() {
                 value={eventData.contact}
                 onChange={handleChange}
                 placeholder="Contact of Committee"
+              />
+            </div>
+            <div className="field">
+              <label className="label">WhatsApp Group</label>
+              <input
+                type="text"
+                autoComplete="on"
+                className="input"
+                id="group"
+                name="group"
+                value={eventData.title}
+                onChange={handleChange}
+                placeholder="WhatsApp Group Link"
               />
             </div>
             <div className="field">

@@ -9,7 +9,7 @@ function EventEdit() {
     price: "",
     slug: "",
     model: "",
-    name: "",
+    title: "",
     desc: "",
     pic: "",
     img: "",
@@ -17,6 +17,7 @@ function EventEdit() {
     start: "",
     end: "",
     contact: "",
+    group: "",
   });
 
   // get id from parameter
@@ -127,9 +128,9 @@ function EventEdit() {
                 type="text"
                 autoComplete="on"
                 className="input"
-                id="name"
-                name="name"
-                value={eventData.name}
+                id="title"
+                name="title"
+                value={eventData.title}
                 onChange={handleChange}
                 placeholder="Event Name"
               />
@@ -208,6 +209,19 @@ function EventEdit() {
                 value={eventData.contact}
                 onChange={handleChange}
                 placeholder="Contact of Committee"
+              />
+            </div>
+            <div className="field">
+              <label className="label">WhatsApp Group</label>
+              <input
+                type="text"
+                autoComplete="on"
+                className="input"
+                id="group"
+                name="group"
+                value={eventData.title}
+                onChange={handleChange}
+                placeholder="WhatsApp Group Link"
               />
             </div>
             <div className="field">
