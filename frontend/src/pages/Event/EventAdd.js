@@ -92,7 +92,6 @@ function EventAdd() {
               <label className="label">Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="title"
                 name="title"
@@ -142,7 +141,6 @@ function EventAdd() {
               <label className="label">Speaker(s)</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="pic"
                 name="pic"
@@ -155,7 +153,6 @@ function EventAdd() {
               <label className="label">Price</label>
               <input
                 type="number"
-                autoComplete="on"
                 className="input"
                 id="price"
                 name="price"
@@ -168,7 +165,6 @@ function EventAdd() {
               <label className="label">Contact Email/Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="contact"
                 name="contact"
@@ -181,7 +177,6 @@ function EventAdd() {
               <label className="label">WhatsApp Group</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="group"
                 name="group"
@@ -194,7 +189,6 @@ function EventAdd() {
               <label className="label">Image</label>
               <input
                 type="file"
-                autoComplete="on"
                 className="input"
                 id="img"
                 name="img"
@@ -205,8 +199,11 @@ function EventAdd() {
             <div className="field">
               <label className="label">Address</label>
               <textarea
+                onInput={() => {
+                  this.style.height = "auto";
+                  this.style.height = this.scrollHeight + "px";
+                }}
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"
@@ -218,8 +215,11 @@ function EventAdd() {
             <div className="field">
               <label className="label">Description</label>
               <textarea
+                onInput={() => {
+                  this.style.height = "auto";
+                  this.style.height = this.scrollHeight + "px";
+                }}
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="desc"
                 name="desc"

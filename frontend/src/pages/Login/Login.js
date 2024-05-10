@@ -49,7 +49,6 @@ function Login() {
           <label className="label">Username</label>
           <input
             type="text"
-            autoComplete="on"
             className="input"
             id="user"
             name="user"
@@ -62,7 +61,6 @@ function Login() {
           <label className="label">Password</label>
           <input
             type="text"
-            autoComplete="on"
             className="input"
             id="pass"
             name="pass"

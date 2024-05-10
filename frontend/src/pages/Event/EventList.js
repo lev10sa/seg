@@ -129,7 +129,6 @@ const EventList = () => {
         <div className="section">
           <input
             type="text"
-            autoComplete="on"
             className="input"
             value={search} // set value from search state
             onInput={(e) => setSearch(e.target.value)} // update search state on change

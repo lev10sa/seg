@@ -125,7 +125,6 @@ function PostEdit() {
               <label className="label">Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="name"
                 name="name"
@@ -175,7 +174,6 @@ function PostEdit() {
               <label className="label">Speaker(s)</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="pic"
                 name="pic"
@@ -188,7 +186,6 @@ function PostEdit() {
               <label className="label">Price</label>
               <input
                 type="number"
-                autoComplete="on"
                 className="input"
                 id="price"
                 name="price"
@@ -201,7 +198,6 @@ function PostEdit() {
               <label className="label">Contact Email/Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="contact"
                 name="contact"
@@ -214,7 +210,6 @@ function PostEdit() {
               <label className="label">Image</label>
               <input
                 type="file"
-                autoComplete="on"
                 className="input"
                 id="img"
                 name="img"
@@ -225,8 +220,11 @@ function PostEdit() {
             <div className="field">
               <label className="label">Address</label>
               <textarea
+                onInput={() => {
+                  this.style.height = "auto";
+                  this.style.height = this.scrollHeight + "px";
+                }}
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"
@@ -238,8 +236,11 @@ function PostEdit() {
             <div className="field">
               <label className="label">Description</label>
               <textarea
+                onInput={() => {
+                  this.style.height = "auto";
+                  this.style.height = this.scrollHeight + "px";
+                }}
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="desc"
                 name="desc"

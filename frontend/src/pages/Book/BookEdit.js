@@ -87,7 +87,6 @@ const BookEdit = () => {
               <label className="label">Book Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -98,7 +97,6 @@ const BookEdit = () => {
               <label className="label">ISBN</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={isbn}
                 onChange={(e) => setIsbn(e.target.value)}
@@ -109,7 +107,6 @@ const BookEdit = () => {
               <label className="label">Category</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
@@ -130,7 +127,6 @@ const BookEdit = () => {
               <label className="label">E-Book Price</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={ebookPrice}
                 onChange={(e) => setEbookPrice(e.target.value)}

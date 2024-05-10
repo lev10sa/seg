@@ -50,7 +50,6 @@ const BookAdd = () => {
               <label className="label">Book Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -61,7 +60,6 @@ const BookAdd = () => {
               <label className="label">ISBN</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={isbn}
                 onChange={(e) => setIsbn(e.target.value)}
@@ -72,7 +70,6 @@ const BookAdd = () => {
               <label className="label">Category</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}

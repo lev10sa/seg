@@ -90,25 +90,24 @@ function InvoiceAdd() {
     }
   };
 
-  const fetchLatestCount = async () => {
-    try {
-      const url = `https://seg-server.vercel.app/api/invoices`; // modify URL based on backend
-      const datas = await axios.get(url);
-      const count = datas.data.length;
-      const serie = generateSerie(count);
-
-      setInvoiceData({
-        ...invoiceData,
-        serie: serie,
-      });
-    } catch (error) {
-      console.error("Error fetching latest invoice count:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchLatestCount = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/invoices`; // modify URL based on backend
+        const datas = await axios.get(url);
+        const count = datas.data.length;
+        const serie = generateSerie(count);
+
+        setInvoiceData({
+          ...invoiceData,
+          serie: serie,
+        });
+      } catch (error) {
+        console.error("Error fetching latest invoice count:", error);
+      }
+    };
     fetchLatestCount();
-  }, []);
+  }, [invoiceData]);
 
   return (
     <>
@@ -125,7 +124,6 @@ function InvoiceAdd() {
               <label className="label">No.</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="serie"
                 name="serie"
@@ -150,7 +148,6 @@ function InvoiceAdd() {
               <label className="label">PIC Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="name"
                 name="name"
@@ -163,7 +160,6 @@ function InvoiceAdd() {
               <label className="label">Company</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="company"
                 name="company"
@@ -176,7 +172,6 @@ function InvoiceAdd() {
               <label className="label">Email</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="email"
                 name="email"
@@ -189,7 +184,6 @@ function InvoiceAdd() {
               <label className="label">Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="phone"
                 name="phone"
@@ -202,7 +196,6 @@ function InvoiceAdd() {
               <label className="label">Address</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"
@@ -215,7 +208,6 @@ function InvoiceAdd() {
               <label className="label">Sales Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="sales"
                 name="sales"
@@ -234,7 +226,6 @@ function InvoiceAdd() {
                   <label className="label">Book Name</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`bookName-${index}`}
                     name={`bookName`}
                     value={book.bookName}
@@ -246,7 +237,6 @@ function InvoiceAdd() {
                   <label className="label">ISBN</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`isbn-${index}`}
                     name={`isbn`}
                     value={book.isbn}
@@ -258,7 +248,6 @@ function InvoiceAdd() {
                   <label className="label">Price</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`price-${index}`}
                     name={`price`}
                     value={book.price}
@@ -270,7 +259,6 @@ function InvoiceAdd() {
                   <label className="label">Quantity</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`qty-${index}`}
                     name={`qty`}
                     value={book.qty}
@@ -282,7 +270,6 @@ function InvoiceAdd() {
                   <label className="label">Discount</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`disc-${index}`}
                     name={`disc`}
                     value={book.disc}

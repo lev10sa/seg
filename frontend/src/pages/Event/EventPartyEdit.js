@@ -4,14 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function EventPartyEdit() {
   // Fetches latest Event count for serie generation (Optional)
-  function autoResize() {
-    this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";
-  }
-
-  document
-    .getElementsByTagName("textarea")
-    .addEventListener("input", autoResize, false);
 
   const { id } = useParams();
 
@@ -103,7 +95,6 @@ function EventPartyEdit() {
               <label className="label">Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="name"
                 name="name"
@@ -133,7 +124,6 @@ function EventPartyEdit() {
               <label className="label">Company/Agency</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="company"
                 name="company"
@@ -146,7 +136,6 @@ function EventPartyEdit() {
               <label className="label">Email</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="email"
                 name="email"
@@ -160,7 +149,6 @@ function EventPartyEdit() {
               <label className="label">Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="phone"
                 name="phone"
@@ -173,8 +161,11 @@ function EventPartyEdit() {
             <div className="field">
               <label className="label">City</label>
               <textarea
+                onInput={() => {
+                  this.style.height = "auto";
+                  this.style.height = this.scrollHeight + "px";
+                }}
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"

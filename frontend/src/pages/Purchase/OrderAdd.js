@@ -123,7 +123,6 @@ const OrderAdd = () => {
               <label className="label">No.</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="serie"
                 name="serie"
@@ -148,7 +147,6 @@ const OrderAdd = () => {
               <label className="label">PIC Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="name"
                 name="name"
@@ -161,7 +159,6 @@ const OrderAdd = () => {
               <label className="label">Company</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="company"
                 name="company"
@@ -174,7 +171,6 @@ const OrderAdd = () => {
               <label className="label">Email</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="email"
                 name="email"
@@ -187,7 +183,6 @@ const OrderAdd = () => {
               <label className="label">Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="phone"
                 name="phone"
@@ -200,7 +195,6 @@ const OrderAdd = () => {
               <label className="label">Address</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"
@@ -213,7 +207,6 @@ const OrderAdd = () => {
               <label className="label">Sales Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="sales"
                 name="sales"
@@ -232,7 +225,6 @@ const OrderAdd = () => {
                   <label className="label">Book Name</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`bookName-${index}`}
                     name={`bookName`}
                     value={book.bookName}
@@ -244,7 +236,6 @@ const OrderAdd = () => {
                   <label className="label">ISBN</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`isbn-${index}`}
                     name={`isbn`}
                     value={book.isbn}
@@ -256,7 +247,6 @@ const OrderAdd = () => {
                   <label className="label">Price</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`price-${index}`}
                     name={`price`}
                     value={book.price}
@@ -268,7 +258,6 @@ const OrderAdd = () => {
                   <label className="label">Quantity</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`qty-${index}`}
                     name={`qty`}
                     value={book.qty}
@@ -280,7 +269,6 @@ const OrderAdd = () => {
                   <label className="label">Discount</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`disc-${index}`}
                     name={`disc`}
                     value={book.disc}

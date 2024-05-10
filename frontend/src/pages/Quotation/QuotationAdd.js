@@ -125,7 +125,6 @@ function QuotationAdd() {
               <label className="label">No.</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="serie"
                 name="serie"
@@ -150,7 +149,6 @@ function QuotationAdd() {
               <label className="label">PIC Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="name"
                 name="name"
@@ -163,7 +161,6 @@ function QuotationAdd() {
               <label className="label">Company</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="company"
                 name="company"
@@ -176,7 +173,6 @@ function QuotationAdd() {
               <label className="label">Email</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="email"
                 name="email"
@@ -189,7 +185,6 @@ function QuotationAdd() {
               <label className="label">Phone</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="phone"
                 name="phone"
@@ -202,7 +197,6 @@ function QuotationAdd() {
               <label className="label">Address</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="address"
                 name="address"
@@ -215,7 +209,6 @@ function QuotationAdd() {
               <label className="label">Sales Name</label>
               <input
                 type="text"
-                autoComplete="on"
                 className="input"
                 id="sales"
                 name="sales"
@@ -234,7 +227,6 @@ function QuotationAdd() {
                   <label className="label">Book Name</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`bookName-${index}`}
                     name={`bookName`}
                     value={book.bookName}
@@ -246,7 +238,6 @@ function QuotationAdd() {
                   <label className="label">ISBN</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`isbn-${index}`}
                     name={`isbn`}
                     value={book.isbn}
@@ -258,7 +249,6 @@ function QuotationAdd() {
                   <label className="label">Price</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`price-${index}`}
                     name={`price`}
                     value={book.price}
@@ -270,7 +260,6 @@ function QuotationAdd() {
                   <label className="label">Quantity</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`qty-${index}`}
                     name={`qty`}
                     value={book.qty}
@@ -282,7 +271,6 @@ function QuotationAdd() {
                   <label className="label">Discount</label>
                   <input
                     type="text"
-                    autoComplete="on"
                     id={`disc-${index}`}
                     name={`disc`}
                     value={book.disc}
