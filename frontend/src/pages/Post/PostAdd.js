@@ -180,10 +180,8 @@ function PostAdd() {
             <div className="field">
               <label className="label">Address</label>
               <textarea
-                onInput={() => {
-                  this.style.height = "auto";
-                  this.style.height = this.scrollHeight + "px";
-                }}
+                onInput='() => {this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";}'
                 type="text"
                 className="input"
                 id="address"
@@ -196,10 +194,8 @@ function PostAdd() {
             <div className="field">
               <label className="label">Description</label>
               <textarea
-                onInput={() => {
-                  this.style.height = "auto";
-                  this.style.height = this.scrollHeight + "px";
-                }}
+                onInput='() => {this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";}'
                 type="text"
                 className="input"
                 id="desc"
