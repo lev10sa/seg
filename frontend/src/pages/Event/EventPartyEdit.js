@@ -161,8 +161,6 @@ function EventPartyEdit() {
             <div className="field">
               <label className="label">City</label>
               <textarea
-                onInput='() => {this.style.height = "auto";
-    this.style.height = this.scrollHeight + "px";}'
                 type="text"
                 className="input"
                 id="address"
