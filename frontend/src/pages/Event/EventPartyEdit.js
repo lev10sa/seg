@@ -4,6 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 function EventPartyEdit() {
   // Fetches latest Event count for serie generation (Optional)
+  function autoResize() {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  }
+
+  document
+    .getElementsByTagName("textarea")
+    .addEventListener("input", autoResize, false);
 
   const { id } = useParams();
 
@@ -50,12 +58,17 @@ function EventPartyEdit() {
 
   // create Event deleter function
   const delEvent = async () => {
-    try {
-      await axios.delete(`https://seg-server.vercel.app/api/parties/id/${id}`); // modify URL based on backend
-      // navigate to main page
-      navigate(`/events`);
-    } catch (error) {
-      console.log(error.message); // display error message
+    if (window.confirm("Delete this?") === true) {
+      try {
+        await axios.delete(
+          `https://seg-server.vercel.app/api/parties/id/${id}`
+        ); // modify URL based on backend
+        // navigate to main page
+        navigate(`/events`);
+      } catch (error) {
+        console.log(error.message); // display error message
+      }
+    } else {
     }
   };
 

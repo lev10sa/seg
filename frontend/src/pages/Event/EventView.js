@@ -158,12 +158,6 @@ const EventView = () => {
                 </p>
                 <pre>{event.desc}</pre>
                 <button
-                  onClick={() => navigate(`/event-edit/${event._id}`)}
-                  className="btn"
-                >
-                  EDIT
-                </button>
-                <button
                   onClick={() => navigate(`/event-join-list/${event._id}`)}
                   className="btn"
                 >

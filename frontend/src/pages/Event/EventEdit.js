@@ -28,12 +28,15 @@ function EventEdit() {
 
   // create Event deleter function
   const delEvent = async () => {
-    try {
-      await axios.delete(`https://seg-server.vercel.app/api/events/id/${id}`); // modify URL based on backend
-      // navigate to main page
-      navigate(`/events`);
-    } catch (error) {
-      console.log(error.message); // display error message
+    if (window.confirm("Delete this?") === true) {
+      try {
+        await axios.delete(`https://seg-server.vercel.app/api/events/id/${id}`); // modify URL based on backend
+        // navigate to main page
+        navigate(`/events`);
+      } catch (error) {
+        console.log(error.message); // display error message
+      }
+    } else {
     }
   };
 
