@@ -152,7 +152,7 @@ const EventView = () => {
                 <p>
                   <strong>Location:</strong>
                 </p>
-                <pre>{event.address}</pre>
+                <p>{event.address}</p>
                 <p>
                   <strong>Description:</strong>
                 </p>

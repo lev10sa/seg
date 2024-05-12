@@ -169,8 +169,10 @@ body {
     height: auto;
     display: inline-block;
     overflow: hidden;
-    margin: 1rem 3rem;
+    margin: auto 2rem;
     vertical-align: top;
+    border: 1px solid #111;
+    padding: 1rem 2rem;
   }
 
   .view .caption textarea {
@@ -217,6 +219,14 @@ body {
 
   .view .btn:nth-child(even) {
     margin-right: 5px;
+  }
+
+  .view pre {
+    width: 100%;
+    height: 150px;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   .event {
@@ -386,7 +396,7 @@ body {
     display: block;
     overflow: hidden;
     border: 1px solid #222;
-    table-layout: fixed;
+    table-layout: auto;
   }
 
   .table tr:hover {
