@@ -59,7 +59,7 @@ function EventPartyList() {
   return (
     <>
       <div className="section headline">
-        <h4>Party List ({parties.length})</h4>
+        <h4>Party List</h4>
         <button onClick={() => navigate(`/event-view/${id}`)} className="btn">
           See Event
         </button>
@@ -72,6 +72,7 @@ function EventPartyList() {
             placeholder="Search Parties..."
           />
         </div>
+        <p>Ditemukan: {parties.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading party Database...</div> // display status when loading

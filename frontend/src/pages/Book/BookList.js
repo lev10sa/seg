@@ -74,7 +74,7 @@ const BookList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Book List ({books.length})</h4>
+        <h4>Book List</h4>
         <button onClick={() => navigate(`/book-add`)} className="btn">
           Add Book
         </button>
@@ -87,6 +87,7 @@ const BookList = () => {
             placeholder="Search Books..."
           />
         </div>
+        <p>Ditemukan: {books.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading Book Database...</div> // display status when loading

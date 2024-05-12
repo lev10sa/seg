@@ -86,7 +86,7 @@ const OrderList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Order List ({orders.length})</h4>
+        <h4>Order List</h4>
         <button onClick={() => navigate(`/order-add`)} className="btn">
           Add Order
         </button>
@@ -99,6 +99,7 @@ const OrderList = () => {
             placeholder="Search orders..."
           />
         </div>
+        <p>Ditemukan: {orders.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading Order Database...</div> // display status when loading

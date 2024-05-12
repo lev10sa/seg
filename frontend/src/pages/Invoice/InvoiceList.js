@@ -87,7 +87,7 @@ const InvoiceList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Invoice List ({invoices.length})</h4>
+        <h4>Invoice List</h4>
         <button onClick={() => navigate(`/invoice-add`)} className="btn">
           Add Invoice
         </button>
@@ -100,6 +100,7 @@ const InvoiceList = () => {
             placeholder="Search Invoices..."
           />
         </div>
+        <p>Ditemukan: {invoices.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading Invoice Database...</div> // display status when loading

@@ -86,7 +86,7 @@ const QuotationList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Quotation List ({quotations.length})</h4>
+        <h4>Quotation List</h4>
         <button onClick={() => navigate(`/quotation-add`)} className="btn">
           Add Quotation
         </button>
@@ -99,6 +99,7 @@ const QuotationList = () => {
             placeholder="Search quotations..."
           />
         </div>
+        <p>Ditemukan: {quotations.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading Quotation Database...</div> // display status when loading

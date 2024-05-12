@@ -122,7 +122,7 @@ const EventList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Event List ({events.length})</h4>
+        <h4>Event List</h4>
         <button onClick={() => navigate(`/event-add`)} className="btn">
           Add Event
         </button>
@@ -135,6 +135,7 @@ const EventList = () => {
             placeholder="Search Events..."
           />
         </div>
+        <p>Ditemukan: {events.length} data</p>
       </div>
       {isLoading ? (
         <div className="section">Loading Event Database...</div> // display status when loading
