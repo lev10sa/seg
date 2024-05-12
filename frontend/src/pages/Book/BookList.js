@@ -74,7 +74,7 @@ const BookList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Book List</h4>
+        <h4>Book List ({books.length})</h4>
         <button onClick={() => navigate(`/book-add`)} className="btn">
           Add Book
         </button>

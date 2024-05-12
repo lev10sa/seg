@@ -23,6 +23,14 @@ button {
   text-decoration: none;
 }
 
+textarea {
+  width: 100%;
+  min-height: 200px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: block;
+}
+
 h1,
 h2,
 h3,

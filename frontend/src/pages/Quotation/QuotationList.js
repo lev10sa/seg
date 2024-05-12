@@ -86,7 +86,7 @@ const QuotationList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Quotation List</h4>
+        <h4>Quotation List ({quotations.length})</h4>
         <button onClick={() => navigate(`/quotation-add`)} className="btn">
           Add Quotation
         </button>

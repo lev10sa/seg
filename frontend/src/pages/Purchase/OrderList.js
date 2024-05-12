@@ -86,7 +86,7 @@ const OrderList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Order List</h4>
+        <h4>Order List ({orders.length})</h4>
         <button onClick={() => navigate(`/order-add`)} className="btn">
           Add Order
         </button>

@@ -59,7 +59,7 @@ function EventPartyList() {
   return (
     <>
       <div className="section headline">
-        <h4>Party List</h4>
+        <h4>Party List ({parties.length})</h4>
         <button onClick={() => navigate(`/event-view/${id}`)} className="btn">
           See Event
         </button>

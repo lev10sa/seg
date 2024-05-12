@@ -122,7 +122,7 @@ const EventList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Event List</h4>
+        <h4>Event List ({events.length})</h4>
         <button onClick={() => navigate(`/event-add`)} className="btn">
           Add Event
         </button>

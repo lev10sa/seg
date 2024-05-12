@@ -38,7 +38,7 @@ const App = () => {
       logged !== undefined ? setIsLogin(true) : setIsLogin(false);
     };
     getLogin();
-  }, []);
+  }, [isLogin]);
 
   return (
     <>

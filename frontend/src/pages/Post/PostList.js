@@ -108,7 +108,7 @@ const PostList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Post List</h4>
+        <h4>Post List ({posts.length})</h4>
         <button onClick={() => navigate(`/post-add`)} className="btn">
           Add Post
         </button>

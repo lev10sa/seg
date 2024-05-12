@@ -9,8 +9,11 @@ const Navigation = () => {
   const navigate = useNavigate();
 
   const logOut = () => {
-    Cookies.remove("isLogin");
-    window.location.replace(`/`);
+    if (window.confirm("Yakin mau keluar?") === true) {
+      Cookies.remove("isLogin");
+      window.location.replace(`/`);
+    } else {
+    }
   };
 
   const [isLogin, setIsLogin] = useState();

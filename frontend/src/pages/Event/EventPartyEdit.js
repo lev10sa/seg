@@ -159,19 +159,6 @@ function EventPartyEdit() {
               />
             </div>
             <div className="field">
-              <label className="label">City</label>
-              <textarea
-                type="text"
-                className="input"
-                id="address"
-                name="address"
-                value={eventData.address}
-                onChange={handleChange}
-                placeholder="City"
-                required
-              ></textarea>
-            </div>
-            <div className="field">
               <label className="label">Attendance | Kehadiran</label>
               <select
                 id="room"
@@ -185,6 +172,19 @@ function EventPartyEdit() {
                 <option value="Online">Online | Daring</option>
                 <option value="Onsite">Onsite | Luring</option>
               </select>
+            </div>
+            <div className="field">
+              <label className="label">City</label>
+              <textarea
+                type="text"
+                className="input"
+                id="address"
+                name="address"
+                value={eventData.address}
+                onChange={handleChange}
+                placeholder="City"
+                required
+              ></textarea>
             </div>
             <div className="section">
               <div className="controls">

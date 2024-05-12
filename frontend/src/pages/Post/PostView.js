@@ -112,7 +112,7 @@ const PostView = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Event View</h4>
+        <h4>Event View </h4>
         <button onClick={() => navigate(`/events`)} className="btn">
           See All Events
         </button>

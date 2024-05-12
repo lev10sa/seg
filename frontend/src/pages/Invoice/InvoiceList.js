@@ -87,7 +87,7 @@ const InvoiceList = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Invoice List</h4>
+        <h4>Invoice List ({invoices.length})</h4>
         <button onClick={() => navigate(`/invoice-add`)} className="btn">
           Add Invoice
         </button>
