@@ -22,8 +22,8 @@ export const setParty = asyncHandler(async (req, res) => {
 export const getParty = asyncHandler(async (req, res) => {
   try {
     const prt = await Party.find().sort({
-      name: 1,
       room: -1,
+      name: 1,
       address: 1,
     });
     if (!prt) {
@@ -41,8 +41,8 @@ export const getParty = asyncHandler(async (req, res) => {
 export const getPartyById = asyncHandler(async (req, res) => {
   try {
     const prt = await Party.findById(req.params.id).sort({
-      name: 1,
       room: -1,
+      name: 1,
       address: 1,
     });
     if (!prt) {

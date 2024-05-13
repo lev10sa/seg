@@ -81,7 +81,7 @@ function EventPartyList() {
       ) : (
         <>
           <div>
-            <table className="table frame">
+            <table className="table frame sit">
               <thead>
                 <tr>
                   <th>No.</th>
@@ -124,7 +124,7 @@ function EventPartyList() {
                         }
                         className="btn"
                       >
-                        Edit This
+                        Edit
                       </button>
                     </td>
                   </tr>
