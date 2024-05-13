@@ -68,7 +68,7 @@ const OrderList = () => {
     };
 
     getOrders();
-  }, [search]); // dependency array with only `getOrders`
+  }, [search, orders]); // dependency array with only `getOrders`
 
   function formatDate(dateString) {
     // Create a new Date object from the input string

@@ -68,7 +68,7 @@ const EventList = () => {
     };
 
     getEvents();
-  }, [search]); // dependency array with only `getEvents`
+  }, [search, events]); // dependency array with only `getEvents`
 
   function formatTime(dateString) {
     // Create a new Date object from the provided dateString

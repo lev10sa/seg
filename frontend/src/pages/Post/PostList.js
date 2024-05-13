@@ -54,7 +54,7 @@ const PostList = () => {
     };
 
     getPosts();
-  }, [search]); // dependency array with only `getPosts`
+  }, [search, posts]); // dependency array with only `getPosts`
 
   function formatTime(dateString) {
     // Create a new Date object from the provided dateString
