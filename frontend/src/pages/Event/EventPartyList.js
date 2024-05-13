@@ -107,7 +107,7 @@ function EventPartyList() {
                     <td>{party.room}</td>
                     <td>{party.phone}</td>
                     <td>{party.email}</td>
-                    <td>{party.address}</td>
+                    <td>{party.address.toUpperCase()}</td>
                     <td>
                       <a
                         href={`${party.file}`}
