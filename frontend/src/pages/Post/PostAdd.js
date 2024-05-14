@@ -17,22 +17,22 @@ function PostAdd() {
   // Setting up useNavigate
   const navigate = useNavigate();
 
-  const handleChange = (Post) => {
+  const handleChange = (e) => {
     // For non-file inputs, set the value directly
-    setPostData({
+
+    const cleanData = {
       ...postData,
-      [Post.target.title]: Post.target.value,
-    });
+      [e.target.name]: e.target.value,
+    };
+
+    setPostData(cleanData);
   };
 
   const AddPost = async (e) => {
     e.prPostDefault();
 
-    const slg = postData.title.toLocaleLowerCase().split(" ").join("-");
-
     const cleanedData = {
       ...postData,
-      slug: slg,
     };
 
     try {
@@ -75,7 +75,7 @@ function PostAdd() {
                 className="input"
                 id="slug"
                 name="slug"
-                value={postData.slug}
+                value={postData.title.toLocaleLowerCase().split(" ").join("-")}
                 onChange={handleChange}
                 placeholder="Slug"
               />
@@ -105,16 +105,17 @@ function PostAdd() {
                 placeholder="Date"
               />
             </div>
-            <div className="field">
-              <label className="label">Address</label>
+            <div className="field" style={{ width: "100%" }}>
+              <label className="label">Caption</label>
               <textarea
                 type="text"
                 className="input"
-                id="address"
-                name="address"
-                value={postData.address}
+                id="body"
+                name="body"
+                value={postData.body}
                 onChange={handleChange}
-                placeholder="Post Address"
+                placeholder="Write captions here..."
+                style={{ height: "400px" }}
               ></textarea>
             </div>
             <div className="section">
