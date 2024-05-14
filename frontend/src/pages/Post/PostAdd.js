@@ -11,7 +11,6 @@ function PostAdd() {
     category: "",
     body: "",
     date: "",
-    file: [],
   });
 
   // Setting up useNavigate
