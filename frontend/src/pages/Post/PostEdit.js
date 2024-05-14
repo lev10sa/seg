@@ -23,26 +23,6 @@ function PostEdit() {
   // Setting up useNavigate
   const navigate = useNavigate();
 
-  // setting up useEffect to do tasks in real-time
-  useEffect(() => {
-    // create Event loader callback function
-    const getPostById = async () => {
-      try {
-        // get all the datas from database with axios
-        const res = await axios.get(
-          `https://seg-server.vercel.app/api/posts/id/${id}`
-        );
-
-        // input all the datas into useState
-        setPostData(res.data);
-      } catch (error) {
-        console.log(error); // display error message
-      }
-    };
-
-    getPostById();
-  }, [id]);
-
   // create Event deleter function
   const delPost = async () => {
     if (window.confirm("Delete this?") === true) {
@@ -104,6 +84,7 @@ function PostEdit() {
   const EditPost = async (e) => {
     document.getElementById("submit").innerText("Updating...");
     document.getElementById("submit").type = "reset";
+
     e.preventDefault();
 
     const cleanedData = {
@@ -152,6 +133,26 @@ function PostEdit() {
       console.error("Error:", error.message);
     }
   };
+
+  // setting up useEffect to do tasks in real-time
+  useEffect(() => {
+    // create Event loader callback function
+    const getPostById = async () => {
+      try {
+        // get all the datas from database with axios
+        const res = await axios.get(
+          `https://seg-server.vercel.app/api/posts/id/${id}`
+        );
+
+        // input all the datas into useState
+        setPostData(res.data);
+      } catch (error) {
+        console.log(error); // display error message
+      }
+    };
+
+    getPostById();
+  }, [id]);
 
   return (
     <>
