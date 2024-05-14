@@ -22,10 +22,20 @@ function PostAdd() {
 
   const handleChange = (e) => {
     // For non-file inputs, set the value directly
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    const seconds = String(now.getSeconds()).padStart(2, "0");
+    const formattedDate = `-${day}-${month}-${year}-${hours}-${minutes}-${seconds}`;
 
     const cleanData = {
       ...postData,
       [e.target.name]: e.target.value,
+      slug:
+        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
     setPostData(cleanData);
@@ -45,18 +55,17 @@ function PostAdd() {
   const handleFile = (event) => {
     const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const files = Array.from(event.target.files);
-    const filenames = files.map((file) => fileDir + file.name);
+    const filenames = files.map((file) => ({
+      url: fileDir + file.name,
+    }));
     setSelectedFile(files);
     setPostData({
       ...postData,
-      fileList: [...postData.fileList, { url: filenames }],
+      fileList: filenames,
     });
   };
 
   const AddPost = async (e) => {
-    document.getElementById("submit").innerText =
-      "Saving data, please wait a moment...";
-
     e.preventDefault();
 
     const cleanedData = {
@@ -70,9 +79,13 @@ function PostAdd() {
     fileData.append("fileList", selectedFile);
 
     try {
-      // Add the Post into database with axios
-      await axios.post(`https://seg-server.vercel.app/api/posts`, cleanedData);
-      await axios.post(
+      const response1 = await axios.post(
+        `https://seg-server.vercel.app/api/posts`,
+        cleanedData
+      );
+      console.log("Response from main API:", response1.data);
+
+      const response2 = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/index.php`,
         bannerData,
         {
@@ -81,7 +94,9 @@ function PostAdd() {
           },
         }
       );
-      await axios.post(
+      console.log("Response from banner upload:", response2.data);
+
+      const response3 = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/index.php`,
         fileData,
         {
@@ -90,10 +105,11 @@ function PostAdd() {
           },
         }
       );
-      // Navigate to main page
+      console.log("Response from file upload:", response3.data);
+
       navigate(`/posts`);
     } catch (error) {
-      console.log(error.message); // Display error messages
+      console.error("Error:", error.message);
     }
   };
 
@@ -127,7 +143,7 @@ function PostAdd() {
                 className="input"
                 id="slug"
                 name="slug"
-                value={postData.title.toLocaleLowerCase().split(" ").join("-")}
+                value={postData.slug}
                 onChange={handleChange}
                 placeholder="Slug"
               />
