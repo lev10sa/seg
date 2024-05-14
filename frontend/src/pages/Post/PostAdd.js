@@ -155,11 +155,11 @@ function PostAdd() {
               />
             </div>
             <div className="field">
-              <label className="label">Banner</label>
+              <label className="label">Banner (Cover Image for the Post)</label>
               <input type="file" className="input" onChange={handleBanner} />
             </div>
             <div className="field">
-              <label className="label">Images</label>
+              <label className="label">Featured Images (Max. 10)</label>
               <input
                 type="file"
                 className="input"
