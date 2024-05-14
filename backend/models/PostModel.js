@@ -16,10 +16,13 @@ const pstSchema = mongoose.Schema(
     date: {
       type: String,
     },
+    banner: {
+      type: String,
+    },
     body: {
       type: String,
     },
-    file: [
+    fileList: [
       {
         url: { type: String },
       },

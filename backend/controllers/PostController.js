@@ -21,7 +21,9 @@ export const setPost = asyncHandler(async (req, res) => {
 // get all pst
 export const getPosts = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.find().populate("file").sort({ date: -1, title: 1 });
+    const pst = await Post.find()
+      .populate("fileList")
+      .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
       throw new Error(`cannot find any Post`);
@@ -37,7 +39,7 @@ export const getPosts = asyncHandler(async (req, res) => {
 export const getPostById = asyncHandler(async (req, res) => {
   try {
     const pst = await Post.findById(req.params.id)
-      .populate("file")
+      .populate("fileList")
       .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
@@ -76,7 +78,7 @@ export const getPostByKey = asyncHandler(async (req, res) => {
           },
         },
         {
-          file: {
+          fileList: {
             $elemMatch: {
               url: { $regex: req.params.key, $options: "i" }, // Case-insensitive search
             },
@@ -84,7 +86,7 @@ export const getPostByKey = asyncHandler(async (req, res) => {
         },
       ],
     })
-      .populate("file")
+      .populate("fileList")
       .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
