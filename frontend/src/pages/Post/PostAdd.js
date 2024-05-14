@@ -76,7 +76,9 @@ function PostAdd() {
     bannerData.append("banner", selectedBanner);
 
     const fileData = new FormData();
-    fileData.append("fileList", selectedFile);
+    selectedFile.forEach((file, index) => {
+      fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
+    });
 
     try {
       const response1 = await axios.post(
@@ -86,7 +88,7 @@ function PostAdd() {
       console.log("Response from main API:", response1.data);
 
       const response2 = await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/index.php`,
+        `https://compasspubindonesia.com/media/api/posts/banner.php`,
         bannerData,
         {
           headers: {
@@ -97,7 +99,7 @@ function PostAdd() {
       console.log("Response from banner upload:", response2.data);
 
       const response3 = await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/index.php`,
+        `https://compasspubindonesia.com/media/api/posts/files.php`,
         fileData,
         {
           headers: {
