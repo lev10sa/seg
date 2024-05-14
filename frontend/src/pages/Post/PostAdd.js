@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function PostAdd() {
   // Fetches latest Post count for serie generation (Optional)
 
-  const [selectedFile, setSelectedFile] = useState(null);
   const [postData, setPostData] = useState({
     title: "",
     slug: "",
@@ -26,18 +25,6 @@ function PostAdd() {
     });
   };
 
-  const handleFile = (Post) => {
-    setSelectedFile(Post.target.files[0]);
-    // Access the filename from the selected file
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
-    const file = Post.target.files[0];
-    const filename = fileDir + file.title;
-    setPostData({
-      ...postData,
-      img: filename,
-    });
-  };
-
   const AddPost = async (e) => {
     e.prPostDefault();
 
@@ -48,21 +35,9 @@ function PostAdd() {
       slug: slg,
     };
 
-    const formData = new FormData();
-    formData.append("img", selectedFile);
-
     try {
       // Add the Post into database with axios
       await axios.post(`https://seg-server.vercel.app/api/posts`, cleanedData);
-      await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/index.php`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
       // Navigate to main page
       navigate(`/posts`);
     } catch (error) {
@@ -80,7 +55,7 @@ function PostAdd() {
           </button>
         </div>
         <div className="section">
-          <form onSubmit={AddPost} className="form">
+          <form onSubmit={AddPost} className="form posti">
             <div className="field">
               <label className="label">Title</label>
               <input
@@ -106,16 +81,16 @@ function PostAdd() {
               />
             </div>
             <div className="field">
-              <label className="label">Model</label>
+              <label className="label">Category</label>
               <select
-                name="model"
-                value={postData.model}
+                name="category"
+                value={postData.category}
                 onChange={handleChange}
               >
-                <option value="">--- Select Model ---</option>
-                <option value="Online">Online</option>
-                <option value="Onsite">Onsite</option>
-                <option value="Hybrid (Online & Onsite)">Hybrid</option>
+                <option value="">--- Select Category ---</option>
+                <option value="Education">Education</option>
+                <option value="Book Review">Book Review</option>
+                <option value="Event">Event</option>
               </select>
             </div>
             <div className="field">
@@ -131,53 +106,6 @@ function PostAdd() {
               />
             </div>
             <div className="field">
-              <label className="label">Speaker(s)</label>
-              <input
-                type="text"
-                className="input"
-                id="pic"
-                name="pic"
-                value={postData.pic}
-                onChange={handleChange}
-                placeholder="Speaker 1, Speaker 2, Speaker 3..."
-              />
-            </div>
-            <div className="field">
-              <label className="label">Price</label>
-              <input
-                type="number"
-                className="input"
-                id="price"
-                name="price"
-                value={postData.price}
-                onChange={handleChange}
-                placeholder="Post Price in Rupiah"
-              />
-            </div>
-            <div className="field">
-              <label className="label">Contact Email/Phone</label>
-              <input
-                type="text"
-                className="input"
-                id="contact"
-                name="contact"
-                value={postData.contact}
-                onChange={handleChange}
-                placeholder="Contact of Committee"
-              />
-            </div>
-            <div className="field">
-              <label className="label">Image</label>
-              <input
-                type="file"
-                className="input"
-                id="img"
-                name="img"
-                onChange={handleFile}
-                placeholder="Post Image"
-              />
-            </div>
-            <div className="field">
               <label className="label">Address</label>
               <textarea
                 type="text"
@@ -187,18 +115,6 @@ function PostAdd() {
                 value={postData.address}
                 onChange={handleChange}
                 placeholder="Post Address"
-              ></textarea>
-            </div>
-            <div className="field">
-              <label className="label">Description</label>
-              <textarea
-                type="text"
-                className="input"
-                id="desc"
-                name="desc"
-                value={postData.desc}
-                onChange={handleChange}
-                placeholder="Post Description"
               ></textarea>
             </div>
             <div className="section">
