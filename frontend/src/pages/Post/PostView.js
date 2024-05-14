@@ -15,20 +15,6 @@ const PostView = () => {
   // setting up useNavigate
   const navigate = useNavigate();
 
-  // create currency format function
-  function formatCurrency(number) {
-    // define options for formatting
-    const options = {
-      style: "currency", // set currency
-      currency: "IDR", // set currency code for Indonesian Rupiah (IDR)
-      minimumFractionDigits: 2, // set minimum decimal places to 2
-      maximumFractionDigits: 2, // set maximum decimal places to 2
-    };
-
-    // use toLocaleString() with the defined options
-    return new Intl.NumberFormat("id-ID", options).format(number);
-  }
-
   // setting up useEffect to do tasks in real-time
 
   useEffect(() => {

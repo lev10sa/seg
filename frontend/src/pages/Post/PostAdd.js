@@ -90,12 +90,9 @@ function PostAdd() {
     });
 
     try {
-      const response1 = await axios.post(
-        `https://seg-server.vercel.app/api/posts`,
-        cleanedData
-      );
+      await axios.post(`https://seg-server.vercel.app/api/posts`, cleanedData);
 
-      const response2 = await axios.post(
+      await axios.post(
         `https://compasspubindonesia.com/media/api/posts/banner.php`,
         bannerData,
         {
@@ -105,7 +102,7 @@ function PostAdd() {
         }
       );
 
-      const response3 = await axios.post(
+      await axios.post(
         `https://compasspubindonesia.com/media/api/posts/files.php`,
         fileData,
         {
