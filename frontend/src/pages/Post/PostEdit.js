@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -22,6 +22,26 @@ function PostEdit() {
 
   // Setting up useNavigate
   const navigate = useNavigate();
+
+  // setting up useEffect to do tasks in real-time
+  useEffect(() => {
+    // create Event loader callback function
+    const getPostById = async () => {
+      try {
+        // get all the datas from database with axios
+        const res = await axios.get(
+          `https://seg-server.vercel.app/api/posts/id/${id}`
+        );
+
+        // input all the datas into useState
+        setPostData(res.data);
+      } catch (error) {
+        console.log(error); // display error message
+      }
+    };
+
+    getPostById();
+  }, [id]);
 
   // create Event deleter function
   const delPost = async () => {
