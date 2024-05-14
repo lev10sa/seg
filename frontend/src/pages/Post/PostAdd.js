@@ -94,7 +94,6 @@ function PostAdd() {
         `https://seg-server.vercel.app/api/posts`,
         cleanedData
       );
-      console.log("Response from main API:", response1.data);
 
       const response2 = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/banner.php`,
@@ -105,7 +104,6 @@ function PostAdd() {
           },
         }
       );
-      console.log("Response from banner upload:", response2.data);
 
       const response3 = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/files.php`,
@@ -116,7 +114,6 @@ function PostAdd() {
           },
         }
       );
-      console.log("Response from file upload:", response3.data);
 
       navigate(`/posts`);
     } catch (error) {
