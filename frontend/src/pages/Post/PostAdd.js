@@ -49,11 +49,14 @@ function PostAdd() {
     setSelectedFile(files);
     setPostData({
       ...postData,
-      fileList: filenames,
+      fileList: [...postData.fileList, { url: filenames }],
     });
   };
 
   const AddPost = async (e) => {
+    document.getElementById("submit").innerText =
+      "Saving data, please wait a moment...";
+
     e.preventDefault();
 
     const cleanedData = {
@@ -182,11 +185,8 @@ function PostAdd() {
             </div>
             <div className="section">
               <div className="controls">
-                <button type="reset" className="btn">
-                  Reset
-                </button>
-                <button type="submit" className="btn">
-                  Create
+                <button type="submit" className="btn" id="submit">
+                  Create This Post
                 </button>
               </div>
             </div>
