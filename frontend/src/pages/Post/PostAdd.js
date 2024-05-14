@@ -65,8 +65,6 @@ function PostAdd() {
   };
 
   const AddPost = async (e) => {
-    document.getElementById("submit").innerText("Saving data, please wait...");
-
     e.preventDefault();
 
     const cleanedData = {
