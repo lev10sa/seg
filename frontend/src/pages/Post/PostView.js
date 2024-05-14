@@ -96,6 +96,16 @@ const PostView = () => {
     return `${dayOfWeek}, ${day} ${month} ${year}. ${time} WIB`;
   }
 
+  const selMain = (value) => {
+    document.getElementById("main").src = document.getElementById(
+      `main-${value}`
+    ).src;
+
+    value > 0
+      ? document.getElementById(`main-${value - 1}`).classList.toggle("active")
+      : document.getElementById(`main-${value}`).classList.toggle("active");
+  };
+
   // render the display
   return (
     <>
@@ -113,9 +123,36 @@ const PostView = () => {
         // display table after loading
         <div className="section">
           <div className="section">
-            <div className="posts" key={post._id}>
+            <div className="posts section" key={post._id}>
               <h3>{post.title}</h3>
               <p>{formatTime(post.date)}</p>
+              <p>
+                <strong>Category:</strong> {post.category}
+              </p>
+              <div className="section"></div>
+              <div className="film">
+                <img src={post.banner} alt={post.banner} id="main" />
+                <div className="panel">
+                  <img
+                    src={post.banner}
+                    alt={post.banner}
+                    id="main-0"
+                    onClick={() => selMain(0)}
+                  />
+                  {post.fileList.map((file, index) => (
+                    <img
+                      src={file.url}
+                      alt={file.url}
+                      key={index + 1}
+                      id={`main-${index + 1}`}
+                      onClick={() => selMain(index + 1)}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="section"></div>
+              <div className="section"></div>
+              <pre dangerouslySetInnerHTML={{ __html: post.body }} />
             </div>
           </div>
         </div>
