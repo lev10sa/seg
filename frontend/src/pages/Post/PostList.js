@@ -133,7 +133,7 @@ const PostList = () => {
           <div className="section">
             {posts.map((post, index) => (
               <div className="event" key={index}>
-                <img src={post.file} alt={post.file} />
+                <img src={post.banner} alt={post.banner} />
                 <div className="section caption">
                   <h6 title={post.title}>{post.title}</h6>
                   <p>

@@ -11,6 +11,7 @@ function PostAdd() {
     category: "",
     body: "",
     date: "",
+    banner: "",
     fileList: [],
   });
 
@@ -65,7 +66,7 @@ function PostAdd() {
                 name="title"
                 value={postData.title}
                 onChange={handleChange}
-                placeholder="Post Title"
+                placeholder="Title"
               />
             </div>
             <div className="field">
