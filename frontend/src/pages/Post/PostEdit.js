@@ -8,8 +8,6 @@ function PostEdit() {
   // get id from parameter
   const { id } = useParams();
 
-  const [selectedBanner, setSelectedBanner] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
   const [postData, setPostData] = useState({
     title: "",
     slug: "",
@@ -43,9 +41,7 @@ function PostEdit() {
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
     const year = now.getFullYear();
-    const hours = String(now.getHours()).padStart(2, "0");
-    const minutes = String(now.getMinutes()).padStart(2, "0");
-    const formattedDate = `-${day}-${month}-${year}-${hours}-${minutes}`;
+    const formattedDate = `-${day}-${month}-${year}`;
 
     const cleanData = {
       ...postData,
@@ -57,47 +53,23 @@ function PostEdit() {
     setPostData(cleanData);
   };
 
-  const handleBanner = (event) => {
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
-    const file = event.target.files[0];
-    const filename = fileDir + file.name;
-    setSelectedBanner(file);
-    setPostData({
-      ...postData,
-      banner: filename,
-    });
-  };
-
-  const handleFile = (event) => {
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
-    const files = Array.from(event.target.files);
-    const filenames = files.map((file) => ({
-      url: fileDir + file.name,
-    }));
-    setSelectedFile(files);
-    setPostData({
-      ...postData,
-      fileList: filenames,
-    });
-  };
-
   const EditPost = async (e) => {
     e.preventDefault();
 
     document.getElementById("submit").innerText = `Updating data...`;
     document.getElementById("submit").type = `reset`;
 
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+    const formattedDate = `-${day}-${month}-${year}`;
+
     const cleanedData = {
       ...postData,
+      slug:
+        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
-
-    const bannerData = new FormData();
-    bannerData.append("banner", selectedBanner);
-
-    const fileData = new FormData();
-    selectedFile.forEach((file, index) => {
-      fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
-    });
 
     try {
       const response1 = await axios.patch(
@@ -105,28 +77,6 @@ function PostEdit() {
         cleanedData
       );
       console.log("Response from main API:", response1.data);
-
-      const response2 = await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/banner.php`,
-        bannerData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("Response from banner upload:", response2.data);
-
-      const response3 = await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/files.php`,
-        fileData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log("Response from file upload:", response3.data);
 
       navigate(`/posts`);
     } catch (error) {
@@ -212,19 +162,6 @@ function PostEdit() {
                 value={postData.date}
                 onChange={handleChange}
                 placeholder="Date"
-              />
-            </div>
-            <div className="field">
-              <label className="label">Banner (Cover Image for the Post)</label>
-              <input type="file" className="input" onChange={handleBanner} />
-            </div>
-            <div className="field">
-              <label className="label">Featured Images (Max. 10)</label>
-              <input
-                type="file"
-                className="input"
-                multiple
-                onChange={handleFile}
               />
             </div>
             <div className="field" style={{ width: "100%" }}>
