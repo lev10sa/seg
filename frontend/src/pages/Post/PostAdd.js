@@ -28,7 +28,7 @@ function PostAdd() {
   };
 
   const AddPost = async (e) => {
-    e.prPostDefault();
+    e.preventDefault();
 
     const cleanedData = {
       ...postData,
