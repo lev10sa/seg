@@ -6,19 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 // create the main function
 const PostView = () => {
   // create the useState
-  const [event, setEvent] = useState({
-    price: "",
-    slug: "",
-    model: "",
-    name: "",
-    desc: "",
-    pic: "",
-    img: "",
-    address: "",
-    start: "",
-    end: "",
-    contact: "",
-  });
+  const [post, setPost] = useState({});
   const [isLoading, setIsLoading] = useState(true); // state for loading
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -45,19 +33,19 @@ const PostView = () => {
 
   useEffect(() => {
     // create party loader callback function
-    const getEvent = async () => {
+    const getPost = async () => {
       try {
-        const url = `https://seg-server.vercel.app/api/events/id/${id}`; // modify URL based on backend
+        const url = `https://seg-server.vercel.app/api/posts/id/${id}`; // modify URL based on backend
         const datas = await axios.get(url); // get datas from URL with axios
         datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
-        setEvent(datas.data);
+        setPost(datas.data);
         setIsLoading(false);
       } catch (error) {
         console.log(error.message); // display error message
       }
     };
 
-    getEvent(); // dependency array with only `search`
+    getPost(); // dependency array with only `search`
   }, [id]); // dependency array with only `getParty`
 
   function formatTime(dateString) {
@@ -112,64 +100,22 @@ const PostView = () => {
   return (
     <>
       <div className="section headline">
-        <h4>Event View </h4>
-        <button onClick={() => navigate(`/events`)} className="btn">
-          See All Events
+        <h4>Post View </h4>
+        <button onClick={() => navigate(`/posts`)} className="btn">
+          See All Posts
         </button>
       </div>
       {isLoading ? (
-        <div className="section">Loading Event Database...</div> // display status when loading
+        <div className="section">Loading Post Database...</div> // display status when loading
       ) : isEmpty ? (
         <div className="section">No data...</div> // display status when loading
       ) : (
         // display table after loading
         <div className="section">
           <div className="section">
-            <div className="view" key={event._id}>
-              <img src={event.img} alt={event.img} />
-              <div className="section caption">
-                <h4 title={event.name}>{event.name}</h4>
-                <p title={event.pic}>
-                  <strong>Speaker:</strong>
-                </p>
-                <p> {event.pic}</p>
-                <p>
-                  <strong>Role:</strong>
-                </p>
-                <p> {event.model}</p>
-                <p>
-                  <strong>Start:</strong>
-                </p>
-                <p> {formatTime(event.start)}</p>
-                <p>
-                  <strong>Finish:</strong>
-                </p>
-                <p>{formatTime(event.end)}</p>
-                <p>
-                  <strong>Price:</strong>
-                </p>
-                <p>{formatCurrency(event.price)}</p>
-                <p>
-                  <strong>Location:</strong>
-                </p>
-                <pre>{event.address}</pre>
-                <p>
-                  <strong>Description:</strong>
-                </p>
-                <pre>{event.desc}</pre>
-                <button
-                  onClick={() => navigate(`/event-edit/${event._id}`)}
-                  className="btn"
-                >
-                  EDIT
-                </button>
-                <button
-                  onClick={() => navigate(`/event-join-list/${event._id}`)}
-                  className="btn"
-                >
-                  VIEW PARTICIPANT
-                </button>
-              </div>
+            <div className="posts" key={post._id}>
+              <h3>{post.title}</h3>
+              <p>{formatTime(post.date)}</p>
             </div>
           </div>
         </div>
