@@ -19,9 +19,6 @@ const pstSchema = mongoose.Schema(
     body: {
       type: String,
     },
-    img: {
-      type: String,
-    },
     file: [
       {
         url: { type: String },

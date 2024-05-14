@@ -21,9 +21,7 @@ export const setPost = asyncHandler(async (req, res) => {
 // get all pst
 export const getPosts = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.find()
-      .populate("file")
-      .sort({ date: -1, title: -1 });
+    const pst = await Post.find().populate("file").sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
       throw new Error(`cannot find any Post`);
@@ -40,7 +38,7 @@ export const getPostById = asyncHandler(async (req, res) => {
   try {
     const pst = await Post.findById(req.params.id)
       .populate("file")
-      .sort({ date: -1, title: -1 });
+      .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
       throw new Error(`cannot find any Post id`);
@@ -85,7 +83,9 @@ export const getPostByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ date: -1, title: -1 });
+    })
+      .populate("file")
+      .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
       throw new Error(`cannot find any Post id`);
