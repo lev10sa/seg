@@ -2,7 +2,8 @@
 import PostAdd from "./PostAdd";
 import PostEdit from "./PostEdit";
 import PostList from "./PostList";
-import PostView from "./PostView";
+import PostEnView from "./PostEnView";
+import PostIdView from "./PostIdView";
 
 // export all of the book functions
-export { PostAdd, PostEdit, PostList, PostView };
+export { PostAdd, PostEdit, PostList, PostEnView, PostIdView };

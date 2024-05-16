@@ -23,11 +23,12 @@ import {
   EventPartyList,
   PostAdd,
   PostEdit,
+  PostList,
+  PostEnView,
+  PostIdView,
 } from "./pages";
 import { Navigation } from "./components";
 import Cookies from "js-cookie";
-import PostList from "./pages/Post/PostList";
-import PostView from "./pages/Post/PostView";
 
 const App = () => {
   const [isLogin, setIsLogin] = useState();
@@ -63,7 +64,8 @@ const App = () => {
               <Route path="/posts" element={<PostList />} />
               <Route path="/post-add" element={<PostAdd />} />
               <Route path="/post-edit/:id" element={<PostEdit />} />
-              <Route path="/post-view/:id" element={<PostView />} />
+              <Route path="/post-view/en/:id" element={<PostEnView />} />
+              <Route path="/post-view/id/:id" element={<PostIdView />} />
               <Route path="/events" element={<EventList />} />
               <Route path="/event-add" element={<EventAdd />} />
               <Route path="/event-edit/:id" element={<EventEdit />} />

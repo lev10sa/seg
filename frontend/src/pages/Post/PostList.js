@@ -8,7 +8,7 @@ const PostList = () => {
   // create the useState
   const [posts, setPosts] = useState([]); // state for post list
   const [searchs, setSearch] = useState(""); // state for search
-  const [lang, setLang] = useState("id"); // state for search
+  const [lang, setLang] = useState("en"); // state for search
   const [isLoading, setIsLoading] = useState(true); // state for loading
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -61,7 +61,7 @@ const PostList = () => {
     };
 
     getPosts();
-  }, [search, posts, lang]); // dependency array with only `getPosts`
+  }, [search, lang]); // dependency array with only `getPosts`
 
   function formatTime(dateString) {
     // Create a new Date object from the provided dateString
@@ -130,7 +130,7 @@ const PostList = () => {
         </div>
         <p>Ditemukan: {posts.length} data</p>
       </div>
-      <div className="lang">
+      <div className="section">
         <span>
           <strong>Language:</strong>
         </span>
@@ -158,9 +158,6 @@ const PostList = () => {
                     <strong>Category:</strong> {post.category}
                   </p>
                   <p>
-                    <strong>Tags:</strong> {post.tags}
-                  </p>
-                  <p>
                     <strong>Published:</strong> {formatTime(post.date)}
                   </p>
                   <button
@@ -170,7 +167,7 @@ const PostList = () => {
                     EDIT
                   </button>
                   <button
-                    onClick={() => navigate(`/post-view/${post._id}`)}
+                    onClick={() => navigate(`/post-view/${lang}/${post._id}`)}
                     className="btn"
                   >
                     VIEW

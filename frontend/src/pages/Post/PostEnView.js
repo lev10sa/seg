@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 // create the main function
-const PostView = () => {
+const PostEnView = () => {
   // create the useState
   const [post, setPost] = useState({});
   const [isLoading, setIsLoading] = useState(true); // state for loading
@@ -21,7 +21,7 @@ const PostView = () => {
     // create party loader callback function
     const getPost = async () => {
       try {
-        const url = `https://seg-server.vercel.app/api/posts/id/${id}`; // modify URL based on backend
+        const url = `https://seg-server.vercel.app/api/posts/en/id/${id}`; // modify URL based on backend
         const datas = await axios.get(url); // get datas from URL with axios
         datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
         setPost(datas.data);
@@ -115,6 +115,9 @@ const PostView = () => {
               <p>
                 <strong>Category:</strong> {post.category}
               </p>
+              <p>
+                <strong>Tags:</strong> {post.tags}
+              </p>
               <div className="section"></div>
               <div className="film">
                 <img src={post.banner} alt={post.banner} id="main" />
@@ -148,4 +151,4 @@ const PostView = () => {
 };
 
 // export the main function
-export default PostView;
+export default PostEnView;
