@@ -40,7 +40,8 @@ const PostList = () => {
           let url = "";
           lang === "en"
             ? (url = `https://seg-server.vercel.app/api/posts/en`)
-            : lang === "id"
+            : (url = `https://seg-server.vercel.app/api/posts/id`);
+          lang === "id"
             ? (url = `https://seg-server.vercel.app/api/posts/id`)
             : (url = `https://seg-server.vercel.app/api/posts/en`);
           // modify URL based on backend
@@ -52,7 +53,8 @@ const PostList = () => {
           let url = "";
           lang === "en" && search !== ""
             ? (url = `https://seg-server.vercel.app/api/posts/en/key/${search}`)
-            : lang === "id" && search !== ""
+            : (url = `https://seg-server.vercel.app/api/posts/id/key/${search}`);
+          lang === "id" && search !== ""
             ? (url = `https://seg-server.vercel.app/api/posts/id/key/${search}`)
             : (url = `https://seg-server.vercel.app/api/posts/en/key/${search}`);
           // modify URL based on backend
@@ -153,35 +155,34 @@ const PostList = () => {
         <div className="section">No data...</div> // display status when loading
       ) : (
         // display table after loading
+
         <div className="section">
-          <div className="section">
-            {posts.map((post, index) => (
-              <div className="event" key={index}>
-                <img src={post.banner} alt={post.banner} />
-                <div className="section caption">
-                  <h6 title={post.title}>{post.title}</h6>
-                  <p>
-                    <strong>Category:</strong> {post.category}
-                  </p>
-                  <p>
-                    <strong>Published:</strong> {formatTime(post.date)}
-                  </p>
-                  <button
-                    onClick={() => navigate(`/post-edit/${post._id}`)}
-                    className="btn"
-                  >
-                    EDIT
-                  </button>
-                  <button
-                    onClick={() => navigate(`/post-view/${lang}/${post._id}`)}
-                    className="btn"
-                  >
-                    VIEW
-                  </button>
-                </div>
+          {posts.map((post, index) => (
+            <div className="event" key={index}>
+              <img src={post.banner} alt={post.banner} />
+              <div className="section caption">
+                <h6 title={post.title}>{post.title}</h6>
+                <p>
+                  <strong>Category:</strong> {post.category}
+                </p>
+                <p>
+                  <strong>Published:</strong> {formatTime(post.date)}
+                </p>
+                <button
+                  onClick={() => navigate(`/post-edit/${post._id}`)}
+                  className="btn"
+                >
+                  EDIT
+                </button>
+                <button
+                  onClick={() => navigate(`/post-view/${lang}/${post._id}`)}
+                  className="btn"
+                >
+                  VIEW
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       )}
     </>
