@@ -19,7 +19,20 @@
   padding: 2px 10px;
 }
 
-.lang button:hover {
+.lang button {
+  width: auto;
+  height: auto;
+  display: inline-block;
+  overflow: hidden;
+  background: #eee;
+  color: #111;
+  margin: auto;
+  margin-left: 8px;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+
+.lang button.active {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
 }

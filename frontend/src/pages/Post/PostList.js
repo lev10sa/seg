@@ -119,6 +119,12 @@ const PostList = () => {
     return `${dayOfWeek}, ${day} ${month} ${year}. ${time} WIB`;
   }
 
+  const langSet = (a, b) => {
+    setLang(a);
+    document.getElementById(a).classList.add("active");
+    document.getElementById(b).classList.remove("active");
+  };
+
   // render the display
   return (
     <>
@@ -138,14 +144,17 @@ const PostList = () => {
         </div>
         <p>Ditemukan: {posts.length} data</p>
       </div>
-      <div className="lang section">
-        <span>
-          <strong>Language:</strong>
-        </span>
-        <button type="button" onClick={() => setLang("en")}>
+      <div className="section lang">
+        <span>Select Language:</span>
+        <button
+          type="button"
+          onClick={() => langSet("en", "id")}
+          id="en"
+          className="active"
+        >
           English
         </button>
-        <button type="button" onClick={() => setLang("id")}>
+        <button type="button" onClick={() => langSet("id", "en")} id="id">
           Indonesian
         </button>
       </div>
