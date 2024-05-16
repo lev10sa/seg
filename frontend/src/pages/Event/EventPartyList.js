@@ -53,7 +53,7 @@ function EventPartyList() {
     }; // dependency array with only `search`
 
     getParty();
-  }, [id, search, parties]); // dependency array with only `getParty`
+  }, [id, search]); // dependency array with only `getParty`
 
   // render the display
   return (

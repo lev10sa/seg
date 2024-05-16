@@ -7,6 +7,8 @@ function EventPartyEdit() {
 
   const { id } = useParams();
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const [eventData, setEventData] = useState({
     name: "",
     company: "",
@@ -15,6 +17,20 @@ function EventPartyEdit() {
     phone: "",
     address: "",
   });
+
+  const handleFile = (event) => {
+    if (event.target.files[0] !== null) {
+      setSelectedFile(event.target.files[0]);
+      // Access the filename from the selected file
+      const fileDir = "https://compasspubindonesia.com/media/api/events/img/";
+      const file = event.target.files[0];
+      const filename = fileDir + file.name;
+      setEventData({
+        ...eventData,
+        img: filename,
+      });
+    }
+  };
 
   // Setting up useNavigate
   const navigate = useNavigate();
@@ -34,11 +50,23 @@ function EventPartyEdit() {
       ...eventData,
     };
 
+    const formData = new FormData();
+    formData.append("img", selectedFile);
+
     try {
       // Add the Event into database with axios
       await axios.patch(
         `https://seg-server.vercel.app/api/parties/id/${id}`,
         cleanedData
+      );
+      await axios.post(
+        `https://compasspubindonesia.com/media/api/bills/index.php`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       // Navigate to main page
@@ -185,6 +213,18 @@ function EventPartyEdit() {
                 placeholder="City"
                 required
               ></textarea>
+            </div>
+            <div className="field">
+              <label className="label">Image</label>
+              <input
+                type="file"
+                className="input"
+                id="img"
+                name="img"
+                onChange={handleFile}
+                placeholder="Event Image"
+                value={eventData.img}
+              />
             </div>
             <div className="section">
               <div className="controls">

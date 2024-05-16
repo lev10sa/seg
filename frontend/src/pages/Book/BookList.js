@@ -68,7 +68,7 @@ const BookList = () => {
     };
 
     getBooks();
-  }, [books, search]); // dependency array with only `getBooks`
+  }, [search]); // dependency array with only `getBooks`
 
   // render the display
   return (

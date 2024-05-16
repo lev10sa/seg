@@ -257,6 +257,7 @@ function EventEdit() {
                 name="img"
                 onChange={handleFile}
                 placeholder="Event Image"
+                value={eventData.img}
               />
             </div>
             <div className="section">

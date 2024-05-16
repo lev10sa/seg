@@ -67,7 +67,7 @@ const QuotationList = () => {
       }
     };
     getQuotations();
-  }, [search, quotations]); // dependency array with only `getQuotations`
+  }, [search]); // dependency array with only `getQuotations`
 
   function formatDate(dateString) {
     // Create a new Date object from the input string
