@@ -86,7 +86,7 @@ function QuotationAdd() {
       // Navigate to main page
       navigate(`/quotations`);
     } catch (error) {
-      console.log(error.message); // Display error message
+      window.alert(error.message); // Display error message
     }
   };
 

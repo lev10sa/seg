@@ -27,7 +27,7 @@ const PostIdView = () => {
         setPost(datas.data);
         setIsLoading(false);
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     };
 

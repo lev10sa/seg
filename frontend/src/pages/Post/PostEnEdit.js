@@ -23,7 +23,7 @@ function PostEnEdit() {
         // navigate to main page
         navigate(`/posts`);
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     } else {
     }

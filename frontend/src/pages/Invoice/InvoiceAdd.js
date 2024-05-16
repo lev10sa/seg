@@ -86,7 +86,7 @@ function InvoiceAdd() {
       // Navigate to main page
       navigate(`/invoices`);
     } catch (error) {
-      console.log(error.message); // Display error messages
+      window.alert(error.message); // Display error messages
     }
   };
 

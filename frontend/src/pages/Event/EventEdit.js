@@ -34,7 +34,7 @@ function EventEdit() {
         // navigate to main page
         navigate(`/events`);
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     } else {
     }

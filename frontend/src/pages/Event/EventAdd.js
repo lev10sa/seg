@@ -73,7 +73,7 @@ function EventAdd() {
       // Navigate to main page
       navigate(`/events`);
     } catch (error) {
-      console.log(error.message); // Display error messages
+      window.alert(error.message); // Display error messages
     }
   };
 

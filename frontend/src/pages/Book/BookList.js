@@ -63,7 +63,7 @@ const BookList = () => {
           setBooks(datas.data);
         }
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     };
 

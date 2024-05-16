@@ -30,7 +30,7 @@ const BookAdd = () => {
       // navigate to main page
       navigate(`/`);
     } catch (error) {
-      console.log(error.message); // display error message
+      window.alert(error.message); // display error message
     }
   };
 

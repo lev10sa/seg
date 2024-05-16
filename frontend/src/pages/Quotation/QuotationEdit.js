@@ -32,7 +32,7 @@ const QuotationEdit = () => {
       // navigate to main page
       navigate(`/quotations`);
     } catch (error) {
-      console.log(error.message); // display error message
+      window.alert(error.message); // display error message
     }
   };
 

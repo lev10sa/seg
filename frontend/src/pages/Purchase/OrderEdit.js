@@ -30,7 +30,7 @@ const OrderEdit = () => {
       // navigate to main page
       navigate(`/orders`);
     } catch (error) {
-      console.log(error.message); // display error message
+      window.alert(error.message); // display error message
     }
   };
 

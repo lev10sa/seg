@@ -30,7 +30,7 @@ const InvoiceEdit = () => {
       // navigate to main page
       navigate(`/invoices`);
     } catch (error) {
-      console.log(error.message); // display error message
+      window.alert(error.message); // display error message
     }
   };
 

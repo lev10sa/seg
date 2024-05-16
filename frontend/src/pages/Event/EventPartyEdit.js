@@ -72,7 +72,7 @@ function EventPartyEdit() {
       // Navigate to main page
       navigate(`/events`);
     } catch (error) {
-      console.log(error.message); // Display error messages
+      window.alert(error.message); // Display error messages
     }
   };
 
@@ -86,7 +86,7 @@ function EventPartyEdit() {
         // navigate to main page
         navigate(`/events`);
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     } else {
     }
@@ -101,7 +101,7 @@ function EventPartyEdit() {
 
         setEventData(datas.data);
       } catch (error) {
-        console.log(error.message); // display error message
+        window.alert(error.message); // display error message
       }
     };
 

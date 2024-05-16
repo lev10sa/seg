@@ -84,7 +84,7 @@ const OrderAdd = () => {
       // Navigate to main page
       navigate(`/orders`);
     } catch (error) {
-      console.log(error.message); // Display error message
+      window.alert(error.message); // Display error message
     }
   };
 
