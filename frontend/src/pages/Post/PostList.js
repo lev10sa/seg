@@ -35,20 +35,26 @@ const PostList = () => {
   useEffect(() => {
     // create book loader callback function
     const getPosts = async () => {
-      let url = "";
-      lang === "en"
-        ? (url = `https://seg-server.vercel.app/api/posts/en`)
-        : lang === "id"
-        ? (url = `https://seg-server.vercel.app/api/posts/id`)
-        : (url = `https://seg-server.vercel.app/api/posts/en`);
       try {
         if (!search) {
+          let url = "";
+          lang === "en"
+            ? (url = `https://seg-server.vercel.app/api/posts/en`)
+            : lang === "id"
+            ? (url = `https://seg-server.vercel.app/api/posts/id`)
+            : (url = `https://seg-server.vercel.app/api/posts/en`);
           // modify URL based on backend
           const datas = await axios.get(url); // get datas from URL with axios
           datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
           setPosts(datas.data);
           setIsLoading(false);
         } else {
+          let url = "";
+          lang === "en" && search !== ""
+            ? (url = `https://seg-server.vercel.app/api/posts/en/key/${search}`)
+            : lang === "id" && search !== ""
+            ? (url = `https://seg-server.vercel.app/api/posts/id/key/${search}`)
+            : (url = `https://seg-server.vercel.app/api/posts/en/key/${search}`);
           // modify URL based on backend
           const datas = await axios.get(url); // get datas from URL with axios
           datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
