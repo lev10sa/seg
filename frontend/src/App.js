@@ -22,10 +22,11 @@ import {
   EventPartyEdit,
   EventPartyList,
   PostAdd,
-  PostEdit,
   PostList,
   PostEnView,
   PostIdView,
+  PostEnEdit,
+  PostIdEdit,
 } from "./pages";
 import { Navigation } from "./components";
 import Cookies from "js-cookie";
@@ -63,7 +64,8 @@ const App = () => {
               <Route path="/order-edit/:id" element={<OrderEdit />} />
               <Route path="/posts" element={<PostList />} />
               <Route path="/post-add" element={<PostAdd />} />
-              <Route path="/post-edit/:id" element={<PostEdit />} />
+              <Route path="/post-edit/en/:id" element={<PostEnEdit />} />
+              <Route path="/post-edit/id/:id" element={<PostIdEdit />} />
               <Route path="/post-view/en/:id" element={<PostEnView />} />
               <Route path="/post-view/id/:id" element={<PostIdView />} />
               <Route path="/events" element={<EventList />} />

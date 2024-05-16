@@ -166,10 +166,10 @@ const PostList = () => {
                   <strong>Category:</strong> {post.category}
                 </p>
                 <p>
-                  <strong>Published:</strong> {formatTime(post.date)}
+                  <strong>Date:</strong> {formatTime(post.date)}
                 </p>
                 <button
-                  onClick={() => navigate(`/post-edit/${post._id}`)}
+                  onClick={() => navigate(`/post-edit/${lang}/${post._id}`)}
                   className="btn"
                 >
                   EDIT

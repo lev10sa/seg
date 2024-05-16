@@ -2,36 +2,20 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-function PostEdit() {
+function PostIdEdit() {
   // Fetches latest Post count for serie generation (Optional)
 
   // get id from parameter
   const { id } = useParams();
 
-  const [postData, setPostData] = useState({
-    title: "",
-    slug: "",
-    category: "",
-    body: "",
-    date: "",
-    tags: "",
-    lang: "",
-    banner: "",
-    fileList: [],
-  });
+  const [postData, setPostData] = useState([]);
 
   // Setting up useNavigate
   const navigate = useNavigate();
 
   // create Event deleter function
   const delPost = async () => {
-    let url = "";
-    let lang = postData.lang;
-    lang === "en"
-      ? (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`)
-      : lang === "id"
-      ? (url = `https://seg-server.vercel.app/api/posts/id/id/${id}`)
-      : (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`);
+    let url = `https://seg-server.vercel.app/api/posts/id/id/${id}`;
 
     if (window.confirm("Delete this?") === true) {
       try {
@@ -81,13 +65,7 @@ function PostEdit() {
         postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
-    let url = "";
-    let lang = postData.lang;
-    lang === "en"
-      ? (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`)
-      : lang === "id"
-      ? (url = `https://seg-server.vercel.app/api/posts/id/id/${id}`)
-      : (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`);
+    let url = `https://seg-server.vercel.app/api/posts/id/id/${id}`;
 
     try {
       const response1 = await axios.patch(url, cleanedData);
@@ -103,11 +81,10 @@ function PostEdit() {
   useEffect(() => {
     // create Event loader callback function
     const getPostById = async () => {
+      let url = `https://seg-server.vercel.app/api/posts/id/id/${id}`;
       try {
         // get all the datas from database with axios
-        const res = await axios.get(
-          `https://seg-server.vercel.app/api/posts/id/${id}`
-        );
+        const res = await axios.get(url);
 
         // input all the datas into useState
         setPostData(res.data);
@@ -220,4 +197,4 @@ function PostEdit() {
   );
 }
 
-export default PostEdit;
+export default PostIdEdit;
