@@ -161,7 +161,7 @@ const PostList = () => {
             <div className="event" key={index}>
               <img src={post.banner} alt={post.banner} />
               <div className="section caption">
-                <h6 title={post.title}>{post.title}</h6>
+                <h6 title={post.title}>{post.title.toUpperCase()}</h6>
                 <p>
                   <strong>Category:</strong> {post.category}
                 </p>
