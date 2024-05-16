@@ -14,6 +14,8 @@ function PostEdit() {
     category: "",
     body: "",
     date: "",
+    tags: "",
+    lang: "",
     banner: "",
     fileList: [],
   });
@@ -23,9 +25,17 @@ function PostEdit() {
 
   // create Event deleter function
   const delPost = async () => {
+    let url = "";
+    let lang = postData.lang;
+    lang === "en"
+      ? (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`)
+      : lang === "id"
+      ? (url = `https://seg-server.vercel.app/api/posts/id/id/${id}`)
+      : (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`);
+
     if (window.confirm("Delete this?") === true) {
       try {
-        await axios.delete(`https://seg-server.vercel.app/api/posts/id/${id}`); // modify URL based on backend
+        await axios.delete(url); // modify URL based on backend
         // navigate to main page
         navigate(`/posts`);
       } catch (error) {
@@ -71,11 +81,16 @@ function PostEdit() {
         postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
+    let url = "";
+    let lang = postData.lang;
+    lang === "en"
+      ? (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`)
+      : lang === "id"
+      ? (url = `https://seg-server.vercel.app/api/posts/id/id/${id}`)
+      : (url = `https://seg-server.vercel.app/api/posts/en/id/${id}`);
+
     try {
-      const response1 = await axios.patch(
-        `https://seg-server.vercel.app/api/posts/id/${id}`,
-        cleanedData
-      );
+      const response1 = await axios.patch(url, cleanedData);
       console.log("Response from main API:", response1.data);
 
       navigate(`/posts`);
@@ -141,16 +156,27 @@ function PostEdit() {
             </div>
             <div className="field">
               <label className="label">Category</label>
-              <select
+              <input
+                type="text"
+                className="input"
+                id="category"
                 name="category"
                 value={postData.category}
                 onChange={handleChange}
-              >
-                <option value="">--- Select Category ---</option>
-                <option value="Education">Education</option>
-                <option value="Book Review">Book Review</option>
-                <option value="Event">Event</option>
-              </select>
+                placeholder="Category"
+              />
+            </div>
+            <div className="field">
+              <label className="label">Tags</label>
+              <input
+                type="text"
+                className="input"
+                id="tags"
+                name="tags"
+                value={postData.tags}
+                onChange={handleChange}
+                placeholder="Tags"
+              />
             </div>
             <div className="field">
               <label className="label">Date</label>

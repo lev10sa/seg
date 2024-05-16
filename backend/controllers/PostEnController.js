@@ -1,11 +1,11 @@
 // import dependencies
-import Post from "../models/PostModel.js";
+import PostEn from "../models/PostEnModel.js";
 import asyncHandler from "express-async-handler";
 
-// Add  Post
-export const setPost = asyncHandler(async (req, res) => {
+// Add  PostEn
+export const setPostEn = asyncHandler(async (req, res) => {
   try {
-    const pst = new Post(req.body);
+    const pst = new PostEn(req.body);
     const saved = await pst.save();
     if (!saved) {
       res.status(404);
@@ -19,14 +19,14 @@ export const setPost = asyncHandler(async (req, res) => {
 });
 
 // get all pst
-export const getPosts = asyncHandler(async (req, res) => {
+export const getPostEn = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.find()
+    const pst = await PostEn.find()
       .populate("fileList")
       .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
-      throw new Error(`cannot find any Post`);
+      throw new Error(`cannot find any PostEn`);
     }
     res.status(200).json(pst);
   } catch (error) {
@@ -35,15 +35,15 @@ export const getPosts = asyncHandler(async (req, res) => {
   }
 });
 
-// get a Post by id
-export const getPostById = asyncHandler(async (req, res) => {
+// get a PostEn by id
+export const getPostEnById = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.findById(req.params.id)
+    const pst = await PostEn.findById(req.params.id)
       .populate("fileList")
       .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
-      throw new Error(`cannot find any Post id`);
+      throw new Error(`cannot find any PostEn id`);
     }
     res.status(200).json(pst);
   } catch (error) {
@@ -52,10 +52,10 @@ export const getPostById = asyncHandler(async (req, res) => {
   }
 });
 
-// get a Post by key
-export const getPostByKey = asyncHandler(async (req, res) => {
+// get a PostEn by key
+export const getPostEnByKey = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.find({
+    const pst = await PostEn.find({
       $or: [
         {
           title: {
@@ -63,12 +63,12 @@ export const getPostByKey = asyncHandler(async (req, res) => {
           },
         },
         {
-          slug: {
+          category: {
             $regex: req.params.key,
           },
         },
         {
-          category: {
+          tags: {
             $regex: req.params.key,
           },
         },
@@ -90,7 +90,7 @@ export const getPostByKey = asyncHandler(async (req, res) => {
       .sort({ date: -1, title: 1 });
     if (!pst) {
       res.status(404);
-      throw new Error(`cannot find any Post id`);
+      throw new Error(`cannot find any PostEn id`);
     }
     res.status(200).json(pst);
   } catch (error) {
@@ -99,17 +99,17 @@ export const getPostByKey = asyncHandler(async (req, res) => {
   }
 });
 
-// Edit Post
-export const updPost = asyncHandler(async (req, res) => {
+// Edit PostEn
+export const updPostEn = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.findByIdAndUpdate(
+    const pst = await PostEn.findByIdAndUpdate(
       { _id: req.params.id },
       req.body,
       { new: true } // exclude file field
     );
     if (!pst) {
       res.status(404);
-      throw new Error(`cannot find any Post id`);
+      throw new Error(`cannot find any PostEn id`);
     }
     res.status(200).json(pst);
   } catch (error) {
@@ -118,13 +118,13 @@ export const updPost = asyncHandler(async (req, res) => {
   }
 });
 
-// delete a Post
-export const delPost = asyncHandler(async (req, res) => {
+// delete a PostEn
+export const delPostEn = asyncHandler(async (req, res) => {
   try {
-    const pst = await Post.findByIdAndDelete({ _id: req.params.id });
+    const pst = await PostEn.findByIdAndDelete({ _id: req.params.id });
     if (!pst) {
       res.status(404);
-      throw new Error(`cannot find any Post id`);
+      throw new Error(`cannot find any PostEn id`);
     }
     res.status(200).json(pst);
   } catch (error) {

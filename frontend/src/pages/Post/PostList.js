@@ -8,6 +8,7 @@ const PostList = () => {
   // create the useState
   const [posts, setPosts] = useState([]); // state for post list
   const [searchs, setSearch] = useState(""); // state for search
+  const [lang, setLang] = useState("id"); // state for search
   const [isLoading, setIsLoading] = useState(true); // state for loading
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -34,15 +35,21 @@ const PostList = () => {
   useEffect(() => {
     // create book loader callback function
     const getPosts = async () => {
+      let url = "";
+      lang === "en"
+        ? (url = `https://seg-server.vercel.app/api/posts/en`)
+        : lang === "id"
+        ? (url = `https://seg-server.vercel.app/api/posts/id`)
+        : (url = `https://seg-server.vercel.app/api/posts/en`);
       try {
         if (!search) {
-          const url = `https://seg-server.vercel.app/api/posts/`; // modify URL based on backend
+          // modify URL based on backend
           const datas = await axios.get(url); // get datas from URL with axios
           datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
           setPosts(datas.data);
           setIsLoading(false);
         } else {
-          const url = `https://seg-server.vercel.app/api/posts/key/${search}`; // modify URL based on backend
+          // modify URL based on backend
           const datas = await axios.get(url); // get datas from URL with axios
           datas.data.length === 0 ? setIsEmpty(true) : setIsEmpty(false);
           setPosts(datas.data);
@@ -54,7 +61,7 @@ const PostList = () => {
     };
 
     getPosts();
-  }, [search, posts]); // dependency array with only `getPosts`
+  }, [search, posts, lang]); // dependency array with only `getPosts`
 
   function formatTime(dateString) {
     // Create a new Date object from the provided dateString
@@ -123,6 +130,17 @@ const PostList = () => {
         </div>
         <p>Ditemukan: {posts.length} data</p>
       </div>
+      <div className="lang">
+        <span>
+          <strong>Language:</strong>
+        </span>
+        <button type="button" onClick={() => setLang("en")}>
+          English
+        </button>
+        <button type="button" onClick={() => setLang("id")}>
+          Indonesian
+        </button>
+      </div>
       {isLoading ? (
         <div className="section">Loading Post Database...</div> // display status when loading
       ) : isEmpty ? (
@@ -138,6 +156,9 @@ const PostList = () => {
                   <h6 title={post.title}>{post.title}</h6>
                   <p>
                     <strong>Category:</strong> {post.category}
+                  </p>
+                  <p>
+                    <strong>Tags:</strong> {post.tags}
                   </p>
                   <p>
                     <strong>Published:</strong> {formatTime(post.date)}

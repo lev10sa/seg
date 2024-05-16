@@ -13,6 +13,8 @@ function PostAdd() {
     category: "",
     body: "",
     date: "",
+    tags: "",
+    lang: "",
     banner: "",
     fileList: [],
   });
@@ -89,8 +91,16 @@ function PostAdd() {
       fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
     });
 
+    let url = "";
+    let lang = postData.lang;
+    lang === "en"
+      ? (url = `https://seg-server.vercel.app/api/posts/en`)
+      : lang === "id"
+      ? (url = `https://seg-server.vercel.app/api/posts/id`)
+      : (url = `https://seg-server.vercel.app/api/posts/en`);
+
     try {
-      await axios.post(`https://seg-server.vercel.app/api/posts`, cleanedData);
+      await axios.post(url, cleanedData);
 
       await axios.post(
         `https://compasspubindonesia.com/media/api/posts/banner.php`,
@@ -155,15 +165,34 @@ function PostAdd() {
             </div>
             <div className="field">
               <label className="label">Category</label>
-              <select
+              <input
+                type="text"
+                className="input"
+                id="category"
                 name="category"
                 value={postData.category}
                 onChange={handleChange}
-              >
-                <option value="">--- Select Category ---</option>
-                <option value="Education">Education</option>
-                <option value="Book Review">Book Review</option>
-                <option value="Event">Event</option>
+                placeholder="Category"
+              />
+            </div>
+            <div className="field">
+              <label className="label">Tags</label>
+              <input
+                type="text"
+                className="input"
+                id="tags"
+                name="tags"
+                value={postData.tags}
+                onChange={handleChange}
+                placeholder="Tags"
+              />
+            </div>
+            <div className="field">
+              <label className="label">Language</label>
+              <select name="lang" value={postData.lang} onChange={handleChange}>
+                <option value="">--- Select Language ---</option>
+                <option value="en">English</option>
+                <option value="id">Indonesia</option>
               </select>
             </div>
             <div className="field">

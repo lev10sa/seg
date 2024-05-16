@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 // create a schema
-const pstSchema = mongoose.Schema(
+const pstEnSchema = mongoose.Schema(
   {
     title: {
       type: String,
@@ -11,6 +11,12 @@ const pstSchema = mongoose.Schema(
       type: String,
     },
     category: {
+      type: String,
+    },
+    tags: {
+      type: String,
+    },
+    lang: {
       type: String,
     },
     date: {
@@ -34,4 +40,4 @@ const pstSchema = mongoose.Schema(
 );
 
 // export the schema
-export default mongoose.model("Post", pstSchema);
+export default mongoose.model("PostEn", pstEnSchema);
