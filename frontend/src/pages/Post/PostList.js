@@ -138,7 +138,7 @@ const PostList = () => {
         </div>
         <p>Ditemukan: {posts.length} data</p>
       </div>
-      <div className="section">
+      <div className="lang section">
         <span>
           <strong>Language:</strong>
         </span>
