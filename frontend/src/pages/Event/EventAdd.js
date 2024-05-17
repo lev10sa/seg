@@ -8,7 +8,6 @@ function EventAdd() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [eventData, setEventData] = useState({
     price: "",
-    slug: "",
     model: "",
     title: "",
     desc: "",
@@ -48,11 +47,8 @@ function EventAdd() {
   const AddEvent = async (e) => {
     e.preventDefault();
 
-    const slg = eventData.name.toLocaleLowerCase().split(" ").join("-");
-
     const cleanedData = {
       ...eventData,
-      slug: slg,
     };
 
     const formData = new FormData();
