@@ -41,10 +41,12 @@ function PostAdd() {
   };
 
   const handleBanner = (event) => {
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const file = event.target.files[0];
-    const filename = fileDir + file.name;
     setSelectedBanner(file);
+
+    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const filename = fileDir + file.name;
+
     setPostData({
       ...postData,
       banner: filename,
@@ -52,11 +54,12 @@ function PostAdd() {
   };
 
   const handleFile = (event) => {
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const files = Array.from(event.target.files);
+    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const filenames = files.map((file) => ({
       url: fileDir + file.name,
     }));
+
     setSelectedFile(files);
     setPostData({
       ...postData,
@@ -67,10 +70,11 @@ function PostAdd() {
   const AddPost = async (e) => {
     e.preventDefault();
 
+    // Update button state
     document.getElementById("submit").innerText = `Saving data, please wait...`;
     document.getElementById("submit").type = `reset`;
 
-    // For non-file inputs, set the value directly
+    // Create cleanedData
     const now = new Date();
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -79,8 +83,7 @@ function PostAdd() {
 
     const cleanedData = {
       ...postData,
-      slug:
-        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
+      slug: postData.title.toLowerCase().split(" ").join("-") + formattedDate,
     };
 
     const bannerData = new FormData();
@@ -88,23 +91,18 @@ function PostAdd() {
 
     const fileData = new FormData();
     selectedFile.forEach((file, index) => {
-      fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
+      fileData.append(`fileList[]`, file);
     });
 
-    let url = "";
-    let lang = postData.lang;
-
-    lang === "en"
-      ? (url = `https://seg-server.vercel.app/api/posts/en`)
-      : (url = `https://seg-server.vercel.app/api/posts/id`);
-    lang === "id"
-      ? (url = `https://seg-server.vercel.app/api/posts/id`)
-      : (url = `https://seg-server.vercel.app/api/posts/en`);
+    let url =
+      postData.lang === "en"
+        ? `https://seg-server.vercel.app/api/posts/en`
+        : `https://seg-server.vercel.app/api/posts/id`;
 
     try {
       await axios.post(url, cleanedData);
 
-      await axios.post(
+      const bannerResponse = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/banner.php`,
         bannerData,
         {
@@ -114,7 +112,9 @@ function PostAdd() {
         }
       );
 
-      await axios.post(
+      console.log(bannerResponse.data);
+
+      const fileResponse = await axios.post(
         `https://compasspubindonesia.com/media/api/posts/files.php`,
         fileData,
         {
@@ -123,6 +123,8 @@ function PostAdd() {
           },
         }
       );
+
+      console.log(fileResponse.data);
 
       navigate(`/posts`);
     } catch (error) {
