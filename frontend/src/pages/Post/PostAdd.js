@@ -87,7 +87,7 @@ function PostAdd() {
     bannerData.append("banner", selectedBanner);
 
     const fileData = new FormData();
-    selectedFile.forEach((file) => {
+    selectedFile.forEach((file, index) => {
       fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
     });
 
