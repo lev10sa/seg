@@ -248,18 +248,6 @@ function EventEdit() {
                 placeholder="Event Description"
               ></textarea>
             </div>
-            <div className="field">
-              <label className="label">Image</label>
-              <input
-                type="file"
-                className="input"
-                id="img"
-                name="img"
-                onChange={handleFile}
-                placeholder="Event Image"
-                value={eventData.img}
-              />
-            </div>
             <div className="section">
               <div className="controls">
                 <button type="button" onClick={delEvent} className="btn">
