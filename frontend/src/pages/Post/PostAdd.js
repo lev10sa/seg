@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function PostAdd() {
   // Fetches latest Post count for serie generation (Optional)
 
-  const [selectedBanner, setSelectedBanner] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [postData, setPostData] = useState({
     title: "",
@@ -40,17 +39,6 @@ function PostAdd() {
     setPostData(cleanData);
   };
 
-  const handleBanner = (event) => {
-    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
-    const file = event.target.files[0];
-    const filename = fileDir + file.name;
-    setSelectedBanner(file);
-    setPostData({
-      ...postData,
-      banner: filename,
-    });
-  };
-
   const handleFile = (event) => {
     const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const files = Array.from(event.target.files);
@@ -83,11 +71,8 @@ function PostAdd() {
         postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
-    const bannerData = new FormData();
-    bannerData.append("banner", selectedBanner);
-
     const fileData = new FormData();
-    selectedFile.forEach((file, index) => {
+    selectedFile.forEach((file) => {
       fileData.append(`fileList[]`, file); // Append each file with `fileList[]` key
     });
 
@@ -101,16 +86,6 @@ function PostAdd() {
 
     try {
       await axios.post(url, cleanedData);
-
-      await axios.post(
-        `https://compasspubindonesia.com/media/api/posts/banner.php`,
-        bannerData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
 
       await axios.post(
         `https://compasspubindonesia.com/media/api/posts/files.php`,
@@ -209,7 +184,7 @@ function PostAdd() {
             </div>
             <div className="field">
               <label className="label">Banner (Cover Image for the Post)</label>
-              <input type="file" className="input" onChange={handleBanner} />
+              <input type="file" className="input" onChange={handleFile} />
             </div>
             <div className="field">
               <label className="label">Featured Images (Max. 10)</label>
