@@ -3,10 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function PostAdd() {
-  // Fetches latest Post count for serie generation (Optional)
-
   const [selectedBanner, setSelectedBanner] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState([]);
   const [postData, setPostData] = useState({
     title: "",
     slug: "",
@@ -19,11 +17,9 @@ function PostAdd() {
     fileList: [],
   });
 
-  // Setting up useNavigate
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    // For non-file inputs, set the value directly
     const now = new Date();
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -41,12 +37,10 @@ function PostAdd() {
   };
 
   const handleBanner = (event) => {
-    const file = event.target.files[0];
-    setSelectedBanner(file);
-
     const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const file = event.target.files[0];
     const filename = fileDir + file.name;
-
+    setSelectedBanner(file);
     setPostData({
       ...postData,
       banner: filename,
@@ -54,12 +48,11 @@ function PostAdd() {
   };
 
   const handleFile = (event) => {
-    const files = Array.from(event.target.files);
     const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const files = Array.from(event.target.files);
     const filenames = files.map((file) => ({
       url: fileDir + file.name,
     }));
-
     setSelectedFile(files);
     setPostData({
       ...postData,
@@ -69,12 +62,9 @@ function PostAdd() {
 
   const AddPost = async (e) => {
     e.preventDefault();
+    document.getElementById("submit").innerText = "Saving data, please wait...";
+    document.getElementById("submit").type = "reset";
 
-    // Update button state
-    document.getElementById("submit").innerText = `Saving data, please wait...`;
-    document.getElementById("submit").type = `reset`;
-
-    // Create cleanedData
     const now = new Date();
     const day = String(now.getDate()).padStart(2, "0");
     const month = String(now.getMonth() + 1).padStart(2, "0");
@@ -83,52 +73,41 @@ function PostAdd() {
 
     const cleanedData = {
       ...postData,
-      slug: postData.title.toLowerCase().split(" ").join("-") + formattedDate,
+      slug:
+        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
     const bannerData = new FormData();
     bannerData.append("banner", selectedBanner);
 
     const fileData = new FormData();
-    selectedFile.forEach((file, index) => {
-      fileData.append(`fileList[]`, file);
+    selectedFile.forEach((file) => {
+      fileData.append("fileList[]", file); // Append each file with `fileList[]` key
     });
 
     let url =
-      postData.lang === "en"
-        ? `https://seg-server.vercel.app/api/posts/en`
-        : `https://seg-server.vercel.app/api/posts/id`;
+      postData.lang === "id"
+        ? `https://seg-server.vercel.app/api/posts/id`
+        : `https://seg-server.vercel.app/api/posts/en`;
 
     try {
       await axios.post(url, cleanedData);
-
-      const bannerResponse = await axios.post(
+      await axios.post(
         `https://compasspubindonesia.com/media/api/posts/banner.php`,
         bannerData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
-
-      console.log(bannerResponse.data);
-
-      const fileResponse = await axios.post(
+      await axios.post(
         `https://compasspubindonesia.com/media/api/posts/files.php`,
         fileData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        { headers: { "Content-Type": "multipart/form-data" } }
       );
-
-      console.log(fileResponse.data);
-
       navigate(`/posts`);
     } catch (error) {
-      console.error("Error:", error.message);
+      console.error(
+        "Error:",
+        error.response ? error.response.data : error.message
+      );
     }
   };
 

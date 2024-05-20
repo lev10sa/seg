@@ -226,7 +226,6 @@ const QuotationList = () => {
                     <tr>
                       <th>Item Name</th>
                       <th>ISBN</th>
-                      <th>Qty</th>
                       <th>Price</th>
                       <th>Discount</th>
                       <th>Total</th>
@@ -237,7 +236,6 @@ const QuotationList = () => {
                       <tr key={index}>
                         <td>{book.bookName}</td>
                         <td>{book.isbn}</td>
-                        <td>{book.qty}</td>
                         <td>{formatCurrency(book.price)}</td>
                         <td>{book.disc}%</td>
                         <td>
