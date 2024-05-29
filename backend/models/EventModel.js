@@ -7,9 +7,6 @@ const evtSchema = mongoose.Schema(
     title: {
       type: String,
     },
-    slug: {
-      type: String,
-    },
     price: {
       type: String,
     },
