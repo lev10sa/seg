@@ -18,7 +18,7 @@ function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
     // Replace with your actual login logic (e.g., API calls)
-    if (data.user === "compasspubid" && data.pass === "compasspubid2024") {
+    if (data.user === "compasspubid" && data.pass === "compasspubid") {
       Cookies.set("isLogin", "true", { expires: 7 });
       window.location.replace(`/`);
     } else {
