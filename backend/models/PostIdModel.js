@@ -7,9 +7,6 @@ const pstIdSchema = mongoose.Schema(
     title: {
       type: String,
     },
-    slug: {
-      type: String,
-    },
     category: {
       type: String,
     },

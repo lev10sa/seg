@@ -8,7 +8,6 @@ const EventView = () => {
   // create the useState
   const [event, setEvent] = useState({
     price: "",
-    slug: "",
     model: "",
     name: "",
     desc: "",

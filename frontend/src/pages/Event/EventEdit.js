@@ -7,7 +7,6 @@ function EventEdit() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [eventData, setEventData] = useState({
     price: "",
-    slug: "",
     model: "",
     title: "",
     desc: "",
@@ -46,7 +45,6 @@ function EventEdit() {
     const slg = eventData.name.toLocaleLowerCase().split(" ").join("-");
     const cleanedData = {
       ...eventData,
-      slug: slg,
     };
 
     const formData = new FormData();

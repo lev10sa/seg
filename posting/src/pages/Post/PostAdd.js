@@ -7,7 +7,7 @@ function PostAdd() {
   const [selectedFile, setSelectedFile] = useState([]);
   const [postData, setPostData] = useState({
     title: "",
-    slug: "",
+
     category: "",
     body: "",
     date: "",
@@ -29,8 +29,6 @@ function PostAdd() {
     const cleanData = {
       ...postData,
       [e.target.name]: e.target.value,
-      slug:
-        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
     setPostData(cleanData);
@@ -73,8 +71,6 @@ function PostAdd() {
 
     const cleanedData = {
       ...postData,
-      slug:
-        postData.title.toLocaleLowerCase().split(" ").join("-") + formattedDate,
     };
 
     const bannerData = new FormData();
@@ -134,18 +130,7 @@ function PostAdd() {
                 placeholder="Title"
               />
             </div>
-            <div className="field">
-              <label className="label">Slug</label>
-              <input
-                type="text"
-                className="input"
-                id="slug"
-                name="slug"
-                value={postData.slug}
-                onChange={handleChange}
-                placeholder="Slug"
-              />
-            </div>
+
             <div className="field">
               <label className="label">Category</label>
               <input
