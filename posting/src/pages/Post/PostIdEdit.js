@@ -8,6 +8,8 @@ function PostIdEdit() {
   // get it down
 
   // get id from parameter
+  const [selectedBanner, setSelectedBanner] = useState(null);
+  const [selectedFile, setSelectedFile] = useState([]);
   const { id } = useParams();
 
   const [postData, setPostData] = useState([]);
@@ -63,10 +65,28 @@ function PostIdEdit() {
       ...postData,
     };
 
+    const bannerData = new FormData();
+    bannerData.append("banner", selectedBanner);
+
+    const fileData = new FormData();
+    selectedFile.forEach((file) => {
+      fileData.append("fileList[]", file); // Append each file with `fileList[]` key
+    });
+
     let url = `https://seg-server.vercel.app/api/posts/id/id/${id}`;
 
     try {
       const response1 = await axios.patch(url, cleanedData);
+      await axios.post(
+        `https://compasspubindonesia.com/media/api/posts/banner.php`,
+        bannerData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      await axios.post(
+        `https://compasspubindonesia.com/media/api/posts/files.php`,
+        fileData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
       console.log("Response from main API:", response1.data);
 
       navigate(`/posts`);
