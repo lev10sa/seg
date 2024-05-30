@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 function PostIdEdit() {
   // Fetches latest Post count for serie generation (Optional)
 
-//get it
+  // get it down
 
   // get id from parameter
   const { id } = useParams();
@@ -93,7 +93,7 @@ function PostIdEdit() {
 
     getPostById();
   }, [id]);
-  
+
   const handleBanner = (event) => {
     const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
     const file = event.target.files[0];
