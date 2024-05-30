@@ -91,6 +91,30 @@ function PostIdEdit() {
 
     getPostById();
   }, [id]);
+  
+  const handleBanner = (event) => {
+    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const file = event.target.files[0];
+    const filename = fileDir + file.name;
+    setSelectedBanner(file);
+    setPostData({
+      ...postData,
+      banner: filename,
+    });
+  };
+
+  const handleFile = (event) => {
+    const fileDir = "https://compasspubindonesia.com/media/api/posts/img/";
+    const files = Array.from(event.target.files);
+    const filenames = files.map((file) => ({
+      url: fileDir + file.name,
+    }));
+    setSelectedFile(files);
+    setPostData({
+      ...postData,
+      fileList: filenames,
+    });
+  };
 
   return (
     <>
@@ -150,6 +174,19 @@ function PostIdEdit() {
                 value={postData.date}
                 onChange={handleChange}
                 placeholder="Date"
+              />
+            </div>
+            <div className="field">
+              <label className="label">Banner (Cover Image for the Post)</label>
+              <input type="file" className="input" onChange={handleBanner} />
+            </div>
+            <div className="field">
+              <label className="label">Featured Images (Max. 10)</label>
+              <input
+                type="file"
+                className="input"
+                multiple
+                onChange={handleFile}
               />
             </div>
             <div className="field" style={{ width: "100%" }}>
