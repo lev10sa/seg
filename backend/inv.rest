@@ -1,45 +1,69 @@
 ### CATCH ERROR
-GET http://seg-server.vercel.app/api/parties
+GET https://seg-server.vercel.app/api/bookid
 Content-Type: application/json
 
 ### GET ALL DATA
-GET http://localhost:5000/api/invoices
+GET https://seg-server.vercel.app/api/bookid
 Content-Type: application/json
 
 ### GET A DATA BY ID
-GET http://localhost:5000/api/invoices/6601a37671e18382510bcd95
+GET https://seg-server.vercel.app/api/bookid/id/
 Content-Type: application/json
 
 ### SAVE DATA
-POST http://localhost:5000/api/invoices
+POST https://seg-server.vercel.app/api/bookid
 Content-Type: application/json
 
-{
-    "name": "A",
-    "company": "A",
-    "email": "A",
-    "phone": 2000,
-    "bookList": [
-        
-        {
-        "bookName": "A",
-        "isbn": "A",
-        "price": "A",
-        "qty": "A",
-        "disc": "A"
+  
+    {
+        "src": "https://www.compasspub.com/userfiles/item/20200903161644_itm.jpg",
+        "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey1/work/&prev=17",
+        "name": "Odyssey 1 - Student Book and Workbook",
+        "isbn": "9781640155978",
+        "category": "Course Books",
+        "bookPrice": "125000",
+        "ebookPrice": "62500"
     },
     {
-        "bookName": "B",
-        "isbn": "B",
-        "price": "B",
-        "qty": "B",
-        "disc": "B"
+        "src": "https://www.compasspub.com/userfiles/item/20200903161657_itm.jpg",
+        "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey2/work/&prev=15",
+        "name": "Odyssey 2 - Student Book and Workbook",
+        "isbn": "9781640155985",
+        "category": "Course Books",
+        "bookPrice": "125000",
+        "ebookPrice": "62500"
+    },
+    {
+        "src": "https://www.compasspub.com/userfiles/item/20200903161710_itm.jpg",
+        "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey3/work/&prev=15",
+        "name": "Odyssey 3 - Student Book and Workbook",
+        "isbn": "9781640155992",
+        "category": "Course Books",
+        "bookPrice": "125000",
+        "ebookPrice": "62500"
+    },
+    {
+        "src": "https://www.compasspub.com/userfiles/item/20200903161722_itm.jpg",
+        "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey4/work/&prev=15",
+        "name": "Odyssey 4 - Student Book and Workbook",
+        "isbn": "9781640156005",
+        "category": "Course Books",
+        "bookPrice": "125000",
+        "ebookPrice": "62500"
+    },
+    {
+        "src": "https://www.compasspub.com/userfiles/item/20200903161733_itm.jpg",
+        "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey5/work/&prev=15",
+        "name": "Odyssey 5 - Student Book and Workbook",
+        "isbn": "9781640156012",
+        "category": "Course Books",
+        "bookPrice": "125000",
+        "ebookPrice": "62500"
     }
-    ]
-}
+
 
 ### UPDATE DATA
-PATCH http://localhost:5000/api/invoices/id/6605455789832cec0e1cbbcb
+PATCH https://seg-server.vercel.app/api/bookid
 Content-Type: application/json
 
 {
@@ -67,5 +91,5 @@ Content-Type: application/json
 }
 
 ### DELETE DATA
-DELETE http://localhost:5000/api/invoices/id/6605443989832cec0e1cbbc9
+DELETE https://seg-server.vercel.app/api/bookid/id/
 Content-Type: application/json
