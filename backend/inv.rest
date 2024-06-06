@@ -1,17 +1,17 @@
 ### CATCH ERROR
-GET https://seg-server.vercel.app/api/bookid
+GET https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
 ### GET ALL DATA
-GET https://seg-server.vercel.app/api/bookid
+GET https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
 ### GET A DATA BY ID
-GET https://seg-server.vercel.app/api/bookid/id/
+GET https://seg-server.vercel.app/api/booked/id/
 Content-Type: application/json
 
 ### SAVE DATA
-POST https://seg-server.vercel.app/api/bookid
+POST https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
   
@@ -63,7 +63,7 @@ Content-Type: application/json
 
 
 ### UPDATE DATA
-PATCH https://seg-server.vercel.app/api/bookid
+PATCH https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
 {
@@ -91,5 +91,5 @@ Content-Type: application/json
 }
 
 ### DELETE DATA
-DELETE https://seg-server.vercel.app/api/bookid/id/
+DELETE https://seg-server.vercel.app/api/booked/id/
 Content-Type: application/json

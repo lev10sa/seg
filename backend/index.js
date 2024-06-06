@@ -9,6 +9,7 @@ import errorHandler from "./config/error.js";
 
 // import routers
 import bookRouter from "./routes/BookRoute.js";
+import bookedRouter from "./routes/BookedRoute.js";
 import invoiceRouter from "./routes/InvoiceRoute.js";
 import quotationRouter from "./routes/QuotationRoute.js";
 import orderRouter from "./routes/OrderRoute.js";
@@ -28,6 +29,7 @@ app.use(
   cors(),
   errorHandler,
   bookRouter,
+  bookedRouter,
   invoiceRouter,
   quotationRouter,
   orderRouter,
