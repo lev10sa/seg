@@ -14,7 +14,6 @@ Content-Type: application/json
 POST https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
-  
     {
         "src": "https://www.compasspub.com/userfiles/item/20200903161644_itm.jpg",
         "url": "https://eb.compasspub.com/v2/?uri=books/Odyssey1/work/&prev=17",
