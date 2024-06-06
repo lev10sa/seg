@@ -8,7 +8,7 @@ const PostList = () => {
   // create the useState
   const [posts, setPosts] = useState([]); // state for post list
   const [searchs, setSearch] = useState(""); // state for search
-  const [lang, setLang] = useState("en"); // state for search
+  const [lang, setLang] = useState("id"); // state for search
   const [isLoading, setIsLoading] = useState(true); // state for loading
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -152,14 +152,14 @@ const PostList = () => {
         <span>Select Language:</span>
         <button
           type="button"
-          onClick={() => langSet("en", "id")}
-          id="en"
+          onClick={() => langSet("id", "en")}
+          id="id"
           className="active"
         >
-          English
+          Indonesia
         </button>
-        <button type="button" onClick={() => langSet("id", "en")} id="id">
-          Indonesian
+        <button type="button" onClick={() => langSet("en", "id")} id="en">
+          English
         </button>
       </div>
       {isLoading ? (
