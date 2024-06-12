@@ -107,7 +107,7 @@ function InvoiceAdd() {
       }
     };
     fetchLatestCount();
-  }, [invoiceData]);
+  }, []);
 
   return (
     <>
