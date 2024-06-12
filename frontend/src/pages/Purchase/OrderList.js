@@ -137,15 +137,6 @@ const OrderList = () => {
                       </button>
                       <button
                         className="btn"
-                        onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Order/${order.serie}.pdf`)
-                        }
-                        download
-                      >
-                        GET PDF
-                      </button>
-                      <button
-                        className="btn"
                         onClick={() => navigate(`/order-edit/${order._id}`)}
                       >
                         EDIT

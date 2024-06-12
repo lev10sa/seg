@@ -138,15 +138,6 @@ const QuotationList = () => {
                       <button
                         className="btn"
                         onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Quotation/${quotation.serie}.pdf`)
-                        }
-                        download
-                      >
-                        GET PDF
-                      </button>
-                      <button
-                        className="btn"
-                        onClick={() =>
                           navigate(`/quotation-edit/${quotation._id}`)
                         }
                       >

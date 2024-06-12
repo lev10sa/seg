@@ -138,15 +138,6 @@ const InvoiceList = () => {
                       </button>
                       <button
                         className="btn"
-                        onClick={() =>
-                          (window.location.href = `https://github.com/lev10sa/docs/raw/master/Invoice/${invoice.serie}.pdf`)
-                        }
-                        download
-                      >
-                        GET PDF
-                      </button>
-                      <button
-                        className="btn"
                         onClick={() => navigate(`/invoice-edit/${invoice._id}`)}
                       >
                         EDIT
