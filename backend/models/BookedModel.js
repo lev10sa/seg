@@ -25,6 +25,9 @@ const bookedSchema = mongoose.Schema(
     ebookPrice: {
       type: String,
     },
+    cefr: {
+      type: String,
+    },
   },
   {
     timestamps: true,
