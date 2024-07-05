@@ -4,12 +4,6 @@ import mongoose from "mongoose";
 // create a schema
 const bookSchema = mongoose.Schema(
   {
-    src: {
-      type: String,
-    },
-    url: {
-      type: String,
-    },
     name: {
       type: String,
     },
@@ -19,7 +13,10 @@ const bookSchema = mongoose.Schema(
     category: {
       type: String,
     },
-    cefr: {
+    bookPrice: {
+      type: String,
+    },
+    ebookPrice: {
       type: String,
     },
   },
