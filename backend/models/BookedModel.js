@@ -19,12 +19,6 @@ const bookedSchema = mongoose.Schema(
     category: {
       type: String,
     },
-    bookPrice: {
-      type: String,
-    },
-    ebookPrice: {
-      type: String,
-    },
     cefr: {
       type: String,
     },
