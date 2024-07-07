@@ -21,7 +21,7 @@ export const setEvent = asyncHandler(async (req, res) => {
 // get all evts
 export const getEvent = asyncHandler(async (req, res) => {
   try {
-    const evt = await Event.find().sort({ name: -1, model: -1, start: -1 });
+    const evt = await Event.find().sort({ createdAt: -1, updatedAt: -1, name: -1, model: -1, start: -1 });
     if (!evt) {
       res.status(404);
       throw new Error(`cannot find any Event`);
@@ -37,9 +37,7 @@ export const getEvent = asyncHandler(async (req, res) => {
 export const getEventById = asyncHandler(async (req, res) => {
   try {
     const evt = await Event.findById(req.params.id).sort({
-      name: -1,
-      model: -1,
-      start: -1,
+      createdAt: -1, updatedAt: -1, name: -1, model: -1, start: -1
     });
     if (!evt) {
       res.status(404);
@@ -73,7 +71,7 @@ export const getEventByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ name: -1, model: -1, start: -1 });
+    }).sort({ createdAt: -1, updatedAt: -1, name: -1, model: -1, start: -1 });
     if (!evt) {
       res.status(404);
       throw new Error(`cannot find any Event id`);
