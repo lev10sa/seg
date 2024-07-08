@@ -11,17 +11,18 @@ GET https://seg-server.vercel.app/api/booked/id/
 Content-Type: application/json
 
 ### GET A DATA BY KEY
-GET https://seg-server.vercel.app/api/books/key/Hang%20Out
+GET https://seg-server.vercel.app/api/books/key/Ni%20Hao
 Content-Type: application/json
 
 ### SAVE DATA
 POST https://seg-server.vercel.app/api/booked
 Content-Type: application/json
 
+
+
 ### UPDATE DATA
 PATCH https://seg-server.vercel.app/api/booked/id/6688fbc48dc58f8744554d45
 Content-Type: application/json
-
 {
     "_id": "6688fbc48dc58f8744554d45",
     "src": "https://www.compasspub.com/userfiles/item/20200922134859_itm.jpg",
@@ -35,3 +36,5 @@ Content-Type: application/json
 ### DELETE DATA
 DELETE https://seg-server.vercel.app/api/booked/id/6687bd027a227bdc982fb1b5
 Content-Type: application/json
+
+
