@@ -94,7 +94,13 @@ function QuotationAdd() {
     try {
       const url = `https://seg-server.vercel.app/api/quotations`; // modify URL based on backend
       const datas = await axios.get(url);
-      const count = datas.data.length;
+      const currentMonth = new Date().getMonth();
+      const res = datas.data;
+      const filtered = res.filter((re) => {
+        const dates = new Date(re.date);
+        return dates.getMonth() === currentMonth;
+      });
+      const count = filtered.length;
       const serie = generateSerie(count);
 
       setQuotationData({
