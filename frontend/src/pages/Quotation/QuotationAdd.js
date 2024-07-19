@@ -42,8 +42,8 @@ function QuotationAdd() {
   const handleBookChange = (index) => (event) => {
     const { name, value } = event.target;
 
-    if (name === "_id") {
-      const selectedBook = books.find((book) => book._id === value);
+    if (name === "isbn") {
+      const selectedBook = books.find((book) => book.isbn === value);
 
       if (!selectedBook) {
         console.error(`Book with _id ${value} not found`);
@@ -56,7 +56,7 @@ function QuotationAdd() {
           index === i
             ? {
                 ...book,
-                _id: value,
+
                 bookName: selectedBook.name,
                 isbn: selectedBook.isbn,
                 price: selectedBook.bookPrice,
@@ -274,14 +274,18 @@ function QuotationAdd() {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  <input
+                  <select
                     type="text"
-                    id={`bookName-${index}`}
-                    name={`bookName`}
-                    value={book.bookName}
+                    id={`isbn-${index}`}
+                    name={`isbn`}
+                    value={book.isbn}
                     onChange={handleBookChange(index)}
-                    placeholder={`Book Name ${index + 1}`}
-                  />
+                  >
+                    <option value="">--- Select Book ---</option>
+                    {books.map((item, i) => (
+                      <option value={item.isbn}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>

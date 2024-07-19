@@ -42,8 +42,8 @@ function InvoiceAdd() {
   const handleBookChange = (index) => (event) => {
     const { name, value } = event.target;
 
-    if (name === "_id") {
-      const selectedBook = books.find((book) => book._id === value);
+    if (name === "isbn") {
+      const selectedBook = books.find((book) => book.isbn === value);
 
       if (!selectedBook) {
         console.error(`Book with _id ${value} not found`);
@@ -56,7 +56,7 @@ function InvoiceAdd() {
           index === i
             ? {
                 ...book,
-                _id: value,
+
                 bookName: selectedBook.name,
                 isbn: selectedBook.isbn,
                 price: selectedBook.bookPrice,
@@ -275,14 +275,14 @@ function InvoiceAdd() {
                   <label className="label">Book Name</label>
                   <select
                     type="text"
-                    id={`_id-${index}`}
-                    name={`_id`}
-                    value={book._id}
+                    id={`isbn-${index}`}
+                    name={`isbn`}
+                    value={book.isbn}
                     onChange={handleBookChange(index)}
                   >
                     <option value="">--- Select Book ---</option>
                     {books.map((item, i) => (
-                      <option value={item._id}>{item.name}</option>
+                      <option value={item.isbn}>{item.name}</option>
                     ))}
                   </select>
                 </div>

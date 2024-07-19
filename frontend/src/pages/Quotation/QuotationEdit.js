@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // create the main function
 const QuotationEdit = () => {
+  const [books, setBooks] = useState([]);
+
   const [quotationData, setQuotationData] = useState({
     serie: "",
     date: "",
@@ -76,6 +78,18 @@ const QuotationEdit = () => {
     };
 
     getQuotationById();
+
+    const getBooks = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/books`; // modify URL based on backend
+        const datas = await axios.get(url);
+        setBooks(datas.data);
+      } catch (error) {
+        window.alert(error.message); // display error message
+      }
+    };
+
+    getBooks();
   }, [id]);
 
   const handleChange = (event) => {
@@ -86,14 +100,43 @@ const QuotationEdit = () => {
   };
 
   const handleBookChange = (index) => (event) => {
-    setQuotationData({
-      ...quotationData,
-      bookList: quotationData.bookList.map((book, i) =>
-        index === i
-          ? { ...book, [event.target.name]: event.target.value }
-          : book
-      ),
-    });
+    const { name, value } = event.target;
+
+    if (name === "isbn") {
+      const selectedBook = books.find((book) => book.isbn === value);
+
+      if (!selectedBook) {
+        console.error(`Book with _id ${value} not found`);
+        return;
+      }
+
+      setQuotationData({
+        ...quotationData,
+        bookList: quotationData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+
+                bookName: selectedBook.name,
+                isbn: selectedBook.isbn,
+                price: selectedBook.bookPrice,
+              }
+            : book
+        ),
+      });
+    } else {
+      setQuotationData({
+        ...quotationData,
+        bookList: quotationData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
   };
 
   const handleAddBook = (e) => {
@@ -231,14 +274,18 @@ const QuotationEdit = () => {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  <input
+                  <select
                     type="text"
-                    id={`bookName-${index}`}
-                    name={`bookName`}
-                    value={book.bookName}
+                    id={`isbn-${index}`}
+                    name={`isbn`}
+                    value={book.isbn}
                     onChange={handleBookChange(index)}
-                    placeholder={`Book Name ${index + 1}`}
-                  />
+                  >
+                    <option value="">--- Select Book ---</option>
+                    {books.map((item, i) => (
+                      <option value={item.isbn}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>

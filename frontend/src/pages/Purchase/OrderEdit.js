@@ -5,6 +5,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // create the main function
 const OrderEdit = () => {
+  const [books, setBooks] = useState([]);
+
   const [orderData, setOrderData] = useState({
     serie: "",
     date: "",
@@ -74,6 +76,18 @@ const OrderEdit = () => {
     };
 
     getOrderById();
+
+    const getBooks = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/books`; // modify URL based on backend
+        const datas = await axios.get(url);
+        setBooks(datas.data);
+      } catch (error) {
+        window.alert(error.message); // display error message
+      }
+    };
+
+    getBooks();
   }, [id]);
 
   const handleChange = (event) => {
@@ -84,14 +98,43 @@ const OrderEdit = () => {
   };
 
   const handleBookChange = (index) => (event) => {
-    setOrderData({
-      ...orderData,
-      bookList: orderData.bookList.map((book, i) =>
-        index === i
-          ? { ...book, [event.target.name]: event.target.value }
-          : book
-      ),
-    });
+    const { name, value } = event.target;
+
+    if (name === "isbn") {
+      const selectedBook = books.find((book) => book.isbn === value);
+
+      if (!selectedBook) {
+        console.error(`Book with _id ${value} not found`);
+        return;
+      }
+
+      setOrderData({
+        ...orderData,
+        bookList: orderData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+
+                bookName: selectedBook.name,
+                isbn: selectedBook.isbn,
+                price: selectedBook.bookPrice,
+              }
+            : book
+        ),
+      });
+    } else {
+      setOrderData({
+        ...orderData,
+        bookList: orderData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
   };
 
   const handleAddBook = (e) => {
@@ -229,14 +272,18 @@ const OrderEdit = () => {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  <input
+                  <select
                     type="text"
-                    id={`bookName-${index}`}
-                    name={`bookName`}
-                    value={book.bookName}
+                    id={`isbn-${index}`}
+                    name={`isbn`}
+                    value={book.isbn}
                     onChange={handleBookChange(index)}
-                    placeholder={`Book Name ${index + 1}`}
-                  />
+                  >
+                    <option value="">--- Select Book ---</option>
+                    {books.map((item, i) => (
+                      <option value={item.isbn}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>
