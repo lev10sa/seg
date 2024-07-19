@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 function InvoiceAdd() {
   // Fetches latest invoice count for serie generation
 
+  const [books, setBooks] = useState([]);
+
   const [invoiceData, setInvoiceData] = useState({
     serie: "",
     date: "",
@@ -38,14 +40,43 @@ function InvoiceAdd() {
   };
 
   const handleBookChange = (index) => (event) => {
-    setInvoiceData({
-      ...invoiceData,
-      bookList: invoiceData.bookList.map((book, i) =>
-        index === i
-          ? { ...book, [event.target.name]: event.target.value }
-          : book
-      ),
-    });
+    const { name, value } = event.target;
+
+    if (name === "_id") {
+      const selectedBook = books.find((book) => book._id === value);
+
+      if (!selectedBook) {
+        console.error(`Book with _id ${value} not found`);
+        return;
+      }
+
+      setInvoiceData({
+        ...invoiceData,
+        bookList: invoiceData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                _id: value,
+                bookName: selectedBook.name,
+                isbn: selectedBook.isbn,
+                price: selectedBook.bookPrice,
+              }
+            : book
+        ),
+      });
+    } else {
+      setInvoiceData({
+        ...invoiceData,
+        bookList: invoiceData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
   };
 
   const handleAddBook = (e) => {
@@ -113,6 +144,18 @@ function InvoiceAdd() {
       }
     };
     fetchLatestCount();
+
+    const getBooks = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/books`; // modify URL based on backend
+        const datas = await axios.get(url);
+        setBooks(datas.data);
+      } catch (error) {
+        window.alert(error.message); // display error message
+      }
+    };
+
+    getBooks();
   }, []);
 
   return (
@@ -230,14 +273,18 @@ function InvoiceAdd() {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  <input
+                  <select
                     type="text"
-                    id={`bookName-${index}`}
-                    name={`bookName`}
-                    value={book.bookName}
+                    id={`_id-${index}`}
+                    name={`_id`}
+                    value={book._id}
                     onChange={handleBookChange(index)}
-                    placeholder={`Book Name ${index + 1}`}
-                  />
+                  >
+                    <option value="">--- Select Book ---</option>
+                    {books.map((item, i) => (
+                      <option value={item._id}>{item.name}</option>
+                    ))}
+                  </select>
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>

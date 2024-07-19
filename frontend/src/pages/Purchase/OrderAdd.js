@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 const OrderAdd = () => {
   // Fetches latest Order count for serie generation
 
+  const [books, setBooks] = useState([]);
+
   const [orderData, setOrderData] = useState({
     serie: "",
     date: "",
@@ -39,14 +41,43 @@ const OrderAdd = () => {
   };
 
   const handleBookChange = (index) => (event) => {
-    setOrderData({
-      ...orderData,
-      bookList: orderData.bookList.map((book, i) =>
-        index === i
-          ? { ...book, [event.target.name]: event.target.value }
-          : book
-      ),
-    });
+    const { name, value } = event.target;
+
+    if (name === "_id") {
+      const selectedBook = books.find((book) => book._id === value);
+
+      if (!selectedBook) {
+        console.error(`Book with _id ${value} not found`);
+        return;
+      }
+
+      setOrderData({
+        ...orderData,
+        bookList: orderData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                _id: value,
+                bookName: selectedBook.name,
+                isbn: selectedBook.isbn,
+                price: selectedBook.bookPrice,
+              }
+            : book
+        ),
+      });
+    } else {
+      setOrderData({
+        ...orderData,
+        bookList: orderData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
   };
 
   const handleAddBook = (e) => {
@@ -88,30 +119,42 @@ const OrderAdd = () => {
     }
   };
 
-  const fetchLatestCount = async () => {
-    try {
-      const url = `https://seg-server.vercel.app/api/orders`; // modify URL based on backend
-      const datas = await axios.get(url);
-      const currentMonth = new Date().getMonth();
-      const res = datas.data;
-      const filtered = res.filter((re) => {
-        const dates = new Date(re.date);
-        return dates.getMonth() === currentMonth;
-      });
-      const count = filtered.length;
-      const serie = generateSerie(count);
-
-      setOrderData({
-        ...orderData,
-        serie: serie,
-      });
-    } catch (error) {
-      console.error("Error fetching latest Order count:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchLatestCount = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/orders`; // modify URL based on backend
+        const datas = await axios.get(url);
+        const currentMonth = new Date().getMonth();
+        const res = datas.data;
+        const filtered = res.filter((re) => {
+          const dates = new Date(re.date);
+          return dates.getMonth() === currentMonth;
+        });
+        const count = filtered.length;
+        const serie = generateSerie(count);
+
+        setOrderData({
+          ...orderData,
+          serie: serie,
+        });
+      } catch (error) {
+        console.error("Error fetching latest Order count:", error);
+      }
+    };
+
     fetchLatestCount();
+
+    const getBooks = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/books`; // modify URL based on backend
+        const datas = await axios.get(url);
+        setBooks(datas.data);
+      } catch (error) {
+        window.alert(error.message); // display error message
+      }
+    };
+
+    getBooks();
   }, []);
 
   return (

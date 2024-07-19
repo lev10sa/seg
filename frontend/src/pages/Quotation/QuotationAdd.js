@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 function QuotationAdd() {
   // Fetches latest invoice count for serie generation
 
+  const [books, setBooks] = useState([]);
+
   const [quotationData, setQuotationData] = useState({
     serie: "",
     date: "",
@@ -38,14 +40,43 @@ function QuotationAdd() {
   };
 
   const handleBookChange = (index) => (event) => {
-    setQuotationData({
-      ...quotationData,
-      bookList: quotationData.bookList.map((book, i) =>
-        index === i
-          ? { ...book, [event.target.name]: event.target.value }
-          : book
-      ),
-    });
+    const { name, value } = event.target;
+
+    if (name === "_id") {
+      const selectedBook = books.find((book) => book._id === value);
+
+      if (!selectedBook) {
+        console.error(`Book with _id ${value} not found`);
+        return;
+      }
+
+      setQuotationData({
+        ...quotationData,
+        bookList: quotationData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                _id: value,
+                bookName: selectedBook.name,
+                isbn: selectedBook.isbn,
+                price: selectedBook.bookPrice,
+              }
+            : book
+        ),
+      });
+    } else {
+      setQuotationData({
+        ...quotationData,
+        bookList: quotationData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
   };
 
   const handleAddBook = (e) => {
@@ -90,30 +121,42 @@ function QuotationAdd() {
     }
   };
 
-  const fetchLatestCount = async () => {
-    try {
-      const url = `https://seg-server.vercel.app/api/quotations`; // modify URL based on backend
-      const datas = await axios.get(url);
-      const currentMonth = new Date().getMonth();
-      const res = datas.data;
-      const filtered = res.filter((re) => {
-        const dates = new Date(re.date);
-        return dates.getMonth() === currentMonth;
-      });
-      const count = filtered.length;
-      const serie = generateSerie(count);
-
-      setQuotationData({
-        ...quotationData,
-        serie: serie,
-      });
-    } catch (error) {
-      console.error("Error fetching latest invoice count:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchLatestCount = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/quotations`; // modify URL based on backend
+        const datas = await axios.get(url);
+        const currentMonth = new Date().getMonth();
+        const res = datas.data;
+        const filtered = res.filter((re) => {
+          const dates = new Date(re.date);
+          return dates.getMonth() === currentMonth;
+        });
+        const count = filtered.length;
+        const serie = generateSerie(count);
+
+        setQuotationData({
+          ...quotationData,
+          serie: serie,
+        });
+      } catch (error) {
+        console.error("Error fetching latest invoice count:", error);
+      }
+    };
+
     fetchLatestCount();
+
+    const getBooks = async () => {
+      try {
+        const url = `https://seg-server.vercel.app/api/books`; // modify URL based on backend
+        const datas = await axios.get(url);
+        setBooks(datas.data);
+      } catch (error) {
+        window.alert(error.message); // display error message
+      }
+    };
+
+    getBooks();
   }, []);
 
   return (
