@@ -58,6 +58,16 @@ export const getQuotationByKey = asyncHandler(async (req, res) => {
     const qt = await Quotation.find({
       $or: [
         {
+          date: {
+            $regex: req.params.key,
+          },
+        },
+        {
+          sales: {
+            $regex: req.params.key,
+          },
+        },
+        {
           serie: {
             $regex: req.params.key,
           },

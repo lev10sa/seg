@@ -58,6 +58,16 @@ export const getInvoiceByKey = asyncHandler(async (req, res) => {
     const inv = await Invoice.find({
       $or: [
         {
+          date: {
+            $regex: req.params.key,
+          },
+        },
+        {
+          sales: {
+            $regex: req.params.key,
+          },
+        },
+        {
           serie: {
             $regex: req.params.key,
           },

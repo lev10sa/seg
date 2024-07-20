@@ -58,6 +58,16 @@ export const getOrderByKey = asyncHandler(async (req, res) => {
     const ord = await Order.find({
       $or: [
         {
+          date: {
+            $regex: req.params.key,
+          },
+        },
+        {
+          sales: {
+            $regex: req.params.key,
+          },
+        },
+        {
           serie: {
             $regex: req.params.key,
           },
