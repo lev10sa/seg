@@ -23,7 +23,7 @@ export const getOrders = asyncHandler(async (req, res) => {
   try {
     const ord = await Order.find()
       .populate("bookList")
-      .sort({ date: -1, serie: -1 });
+      .sort({ serie: -1, date: -1 });
     if (!ord) {
       res.status(404);
       throw new Error(`cannot find any Order`);
@@ -40,7 +40,7 @@ export const getOrderById = asyncHandler(async (req, res) => {
   try {
     const ord = await Order.findById(req.params.id)
       .populate("bookList")
-      .sort({ date: -1, serie: -1 });
+      .sort({ serie: -1, date: -1 });
     if (!ord) {
       res.status(404);
       throw new Error(`cannot find any Order id`);
@@ -105,7 +105,7 @@ export const getOrderByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ date: -1, serie: -1 });
+    }).sort({ serie: -1, date: -1 });
     if (!ord) {
       res.status(404);
       throw new Error(`cannot find any Order id`);

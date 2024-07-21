@@ -23,7 +23,7 @@ export const getQuotations = asyncHandler(async (req, res) => {
   try {
     const qt = await Quotation.find()
       .populate("bookList")
-      .sort({ date: -1, serie: -1 });
+      .sort({ serie: -1, date: -1 });
     if (!qt) {
       res.status(404);
       throw new Error(`cannot find any Quotation`);
@@ -40,7 +40,7 @@ export const getQuotationById = asyncHandler(async (req, res) => {
   try {
     const qt = await Quotation.findById(req.params.id)
       .populate("bookList")
-      .sort({ date: -1, serie: -1 });
+      .sort({ serie: -1, date: -1 });
     if (!qt) {
       res.status(404);
       throw new Error(`cannot find any Quotation id`);
@@ -105,7 +105,7 @@ export const getQuotationByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ date: -1, serie: -1 });
+    }).sort({ serie: -1, date: -1 });
     if (!qt) {
       res.status(404);
       throw new Error(`cannot find any Quotation id`);
