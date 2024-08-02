@@ -27,6 +27,7 @@ import {
   PostIdView,
   PostEnEdit,
   PostIdEdit,
+  Stat,
 } from "./pages";
 import { Navigation } from "./components";
 import Cookies from "js-cookie";
@@ -49,7 +50,7 @@ const App = () => {
           <Navigation />
           <div className="main-page">
             <Routes>
-              <Route path="/" element={<BookList />} />
+              <Route path="/" element={<Stat />} />
               <Route path="/books" element={<BookList />} />
               <Route path="/book-add" element={<BookAdd />} />
               <Route path="/book-edit/:id" element={<BookEdit />} />
@@ -74,6 +75,7 @@ const App = () => {
               <Route path="/event-view/:id" element={<EventView />} />
               <Route path="/event-join-list/:id" element={<EventPartyList />} />
               <Route path="/event-join-edit/:id" element={<EventPartyEdit />} />
+              <Route path="/stats" element={<Stat />} />
             </Routes>
           </div>
         </Router>

@@ -36,6 +36,9 @@ const Navigation = () => {
         <div className="tabs">
           {isLogin === true ? (
             <>
+              <button onClick={() => navigate(`/stats`)}>
+                <i className="fas fa-chart"></i> <span>Statistic</span>
+              </button>
               <button onClick={() => navigate(`/books`)}>
                 <i className="fas fa-book"></i> <span>Book</span>
               </button>

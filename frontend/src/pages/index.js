@@ -6,3 +6,4 @@ export * from "./Purchase";
 export * from "./Login";
 export * from "./Event";
 export * from "./Post";
+export * from "./Stat";
