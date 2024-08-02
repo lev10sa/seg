@@ -128,6 +128,7 @@ const Stat = () => {
         <div className="section">
           <h4>Total Sales Revenue</h4>
         </div>
+        <hr />
         <div className="section">
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="today">Today</option>

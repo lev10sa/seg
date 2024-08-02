@@ -34,6 +34,22 @@
   .chart-container {
     height: 300px;
   }
+
+  select {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    padding: 5px;
+  }
+}
+
+select {
+  width: auto;
+  height: auto;
+  display: block;
+  overflow: hidden;
+  padding: 5px;
 }
 
 .date-range-container {
