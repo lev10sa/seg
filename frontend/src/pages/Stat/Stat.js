@@ -126,7 +126,7 @@ const Stat = () => {
     <>
       <div className="section container">
         <div className="section">
-          <h4>Total Revenue</h4>
+          <h4>Total Sales Revenue</h4>
         </div>
         <div className="section">
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
