@@ -195,8 +195,8 @@ const InvoiceList = () => {
                         invoice.bookList.reduce(
                           (sum, book) =>
                             sum +
-                            (book.price - book.price * (book.disc / 100)) *
-                              book.qty,
+                            book.price * book.qty -
+                            book.price * book.qty * (book.disc / 100),
                           0
                         )
                       )}
