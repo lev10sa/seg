@@ -195,14 +195,16 @@ const Stat = () => {
           <table className="books-table">
             <thead>
               <tr>
+                <th>No.</th>
                 <th>Book Name</th>
                 <th>Total Price</th>
                 <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
-              {bestSellingBooks.map(([bookName, data]) => (
-                <tr key={bookName}>
+              {bestSellingBooks.map(([bookName, data], index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
                   <td>{bookName}</td>
                   <td>{formatCurrency(data.totalPrice)}</td>
                   <td>{data.qty}</td>
