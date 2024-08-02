@@ -229,7 +229,7 @@ const InvoiceList = () => {
                         <td>{book.isbn}</td>
                         <td>{book.qty}</td>
                         <td>{formatCurrency(book.price)}</td>
-                        <td>{book.disc}%</td>
+                        <td>{book.disc > 0 ? book.disc + "%" : ""}</td>
                         <td>
                           {formatCurrency(
                             book.price * book.qty -
