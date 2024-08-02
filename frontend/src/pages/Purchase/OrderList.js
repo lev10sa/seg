@@ -194,8 +194,8 @@ const OrderList = () => {
                         order.bookList.reduce(
                           (sum, book) =>
                             sum +
-                            book.price * book.qty -
-                            book.price * book.qty * (book.disc / 100),
+                            (book.price - book.price * (book.disc / 100)) *
+                              book.qty,
                           0
                         )
                       )}
