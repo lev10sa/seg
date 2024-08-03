@@ -35,9 +35,11 @@ const Stat = () => {
             invoiceDate.getFullYear() === now.getFullYear()
           );
         case "lastMonth":
-          const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
-          const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
-          return invoiceDate >= lastMonth && invoiceDate <= lastMonthEnd;
+          const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1);
+          return (
+            invoiceDate.getMonth() === lastMonthDate.getMonth() &&
+            invoiceDate.getFullYear() === lastMonthDate.getFullYear()
+          );
         case "threeMonths":
           return now - invoiceDate < 90 * 24 * 60 * 60 * 1000;
         case "year":
@@ -51,15 +53,10 @@ const Stat = () => {
     });
   };
 
-  const calculateTotalsBySales = (invoices) => {
-    const salesNamesSet = new Set();
-    invoices.forEach((invoice) => {
-      salesNamesSet.add(invoice.sales);
-    });
-
+  const calculateTotalsBySales = (invoices, allSalesNames) => {
     const totals = {};
-    salesNamesSet.forEach((sales) => {
-      totals[sales] = 0;
+    allSalesNames.forEach((sales) => {
+      totals[sales] = { totalSales: 0, totalQty: 0 };
     });
 
     invoices.forEach((invoice) => {
@@ -67,7 +64,8 @@ const Stat = () => {
         const price = parseFloat(book.price);
         const qty = parseInt(book.qty, 10);
         const disc = parseFloat(book.disc) / 100 || 0;
-        totals[invoice.sales] += (price - price * disc) * qty;
+        totals[invoice.sales].totalSales += (price - price * disc) * qty;
+        totals[invoice.sales].totalQty += qty;
       });
     });
 
@@ -84,7 +82,7 @@ const Stat = () => {
         const disc = parseFloat(book.disc) / 100 || 0;
         const totalPrice = (price - price * disc) * qty;
         if (!bookSales[bookName]) {
-          bookSales[bookName] = { totalPrice: 0, qty: 0 };
+          bookSales[bookName] = { totalPrice: 0, qty: 0, sales: invoice.sales };
         }
         bookSales[bookName].totalPrice += totalPrice;
         bookSales[bookName].qty += qty;
@@ -110,12 +108,15 @@ const Stat = () => {
           response.data,
           filter
         );
-        const totals = calculateTotalsBySales(filteredInvoices);
+        const totals = calculateTotalsBySales(filteredInvoices, allSalesNames);
 
         // Ensure all sales names are in the totals object, even if they have no sales
         const completeTotals = {};
         allSalesNames.forEach((sales) => {
-          completeTotals[sales] = totals[sales] || 0;
+          completeTotals[sales] = totals[sales] || {
+            totalSales: 0,
+            totalQty: 0,
+          };
         });
 
         setFilteredData(completeTotals);
@@ -135,7 +136,7 @@ const Stat = () => {
     datasets: [
       {
         label: "Total Sales",
-        data: salesNames.map((name) => filteredData[name]),
+        data: salesNames.map((name) => filteredData[name].totalSales),
         fill: false,
         borderColor: "rgba(75,192,192,1)",
       },
@@ -196,13 +197,15 @@ const Stat = () => {
               <tr>
                 <th>Sales Name</th>
                 <th>Total Sales</th>
+                <th>Total Quantity</th>
               </tr>
             </thead>
             <tbody>
               {salesNames.map((name) => (
                 <tr key={name}>
                   <td>{name}</td>
-                  <td>{formatCurrency(filteredData[name])}</td>
+                  <td>{formatCurrency(filteredData[name].totalSales)}</td>
+                  <td>{filteredData[name].totalQty}</td>
                 </tr>
               ))}
             </tbody>
@@ -222,17 +225,29 @@ const Stat = () => {
                 <th>Book Name</th>
                 <th>Total Price</th>
                 <th>Quantity</th>
+                <th>Sales Name</th>
               </tr>
             </thead>
             <tbody>
-              {bestSellingBooks.map(([bookName, data], index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{bookName}</td>
-                  <td>{formatCurrency(data.totalPrice)}</td>
-                  <td>{data.qty}</td>
+              {bestSellingBooks.length > 0 ? (
+                bestSellingBooks.map(([bookName, data], index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{bookName}</td>
+                    <td>{formatCurrency(data.totalPrice)}</td>
+                    <td>{data.qty}</td>
+                    <td>{data.sales}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
