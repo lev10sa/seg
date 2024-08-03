@@ -195,14 +195,16 @@ const Stat = () => {
           <table className="sales-table">
             <thead>
               <tr>
+                <th>No.</th>
                 <th>Sales Name</th>
                 <th>Total Sales</th>
                 <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
-              {salesNames.map((name) => (
+              {salesNames.map((name, index) => (
                 <tr key={name}>
+                  <td>{index + 1}</td>
                   <td>{name}</td>
                   <td>{formatCurrency(filteredData[name].totalSales)}</td>
                   <td>{filteredData[name].totalQty}</td>
