@@ -111,6 +111,10 @@ body {
 }
 
 @media only screen and (min-width: 601px) {
+  #mobile {
+    display: none;
+  }
+
   .posts,
   .posts .film,
   .posts .film .panel,
@@ -685,6 +689,63 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+  #bog {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    top: 0;
+    left: 0;
+  }
+
+  #sider {
+    width: 60%;
+    height: 100vh;
+    overflow: hidden;
+    display: block;
+    z-index: 997;
+    background: #fff;
+    border-right: 1px solid #111;
+    top: 0;
+    left: 0;
+    position: fixed;
+  }
+
+  #sider button {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    border-bottom: 1px solid #111;
+    padding: 20px 10px;
+    text-align: left;
+    color: #111;
+  }
+
+  #sider button:hover {
+    background: #ddd;
+  }
+
+  #sider button i {
+    margin-right: 10px;
+  }
+
+  #sider .sideh {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: hidden;
+    background: #111;
+    color: #fff;
+  }
+
+  #desktop {
+    display: none;
+  }
+
   .posts,
   .posts .film,
   .posts .film .panel,
