@@ -155,7 +155,6 @@ const Stat = () => {
     <>
       <div className="section container">
         <h4>Total Sales Revenue</h4>
-        <hr />
         <div className="section">
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="today">Today</option>
@@ -167,27 +166,26 @@ const Stat = () => {
             <option value="custom">Custom Range</option>
           </select>
         </div>
-        <div className="section">
-          {filter === "custom" && (
-            <div className="date-range-container">
-              <input
-                type="date"
-                value={customRange.start}
-                onChange={(e) =>
-                  setCustomRange({ ...customRange, start: e.target.value })
-                }
-              />
-              <span>to</span>
-              <input
-                type="date"
-                value={customRange.end}
-                onChange={(e) =>
-                  setCustomRange({ ...customRange, end: e.target.value })
-                }
-              />
-            </div>
-          )}
-        </div>
+        {filter === "custom" && (
+          <div className="date-range-container section">
+            <input
+              type="date"
+              value={customRange.start}
+              onChange={(e) =>
+                setCustomRange({ ...customRange, start: e.target.value })
+              }
+            />
+            <span>to</span>
+            <input
+              type="date"
+              value={customRange.end}
+              onChange={(e) =>
+                setCustomRange({ ...customRange, end: e.target.value })
+              }
+            />
+          </div>
+        )}
+
         <hr />
         {isLoading === false ? (
           <>
@@ -259,7 +257,9 @@ const Stat = () => {
             </div>
           </>
         ) : (
-          "Loading revenue database..."
+          <>
+            <div className="section">Loading revenue database...</div>
+          </>
         )}
       </div>
       <div className="section"></div>
