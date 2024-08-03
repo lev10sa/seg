@@ -695,7 +695,7 @@ body {
     display: none;
     overflow: hidden;
     position: fixed;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 9999;
     top: 0;
     left: 0;
@@ -738,7 +738,7 @@ body {
     height: auto;
     display: block;
     overflow: hidden;
-    background: #111;
+    background: #004;
     color: #fff;
   }
 
