@@ -188,7 +188,6 @@ const Stat = () => {
         <hr />
         {isLoading === false ? (
           <>
-            <div className="section"></div>
             <div className="section">
               <div className="chart-container">
                 <Line data={chartData} options={chartOptions} />
@@ -210,7 +209,7 @@ const Stat = () => {
                       <td>{index + 1}</td>
                       <td>{name}</td>
                       <td>{formatCurrency(filteredData[name].totalSales)}</td>
-                      <td>{filteredData[name].totalQty}</td>
+                      <td>{filteredData[name].totalQty} pcs</td>
                     </tr>
                   ))}
                 </tbody>
