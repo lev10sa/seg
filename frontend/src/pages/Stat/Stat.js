@@ -9,6 +9,7 @@ const Stat = () => {
   const [filter, setFilter] = useState("month");
   const [bestSellingBooks, setBestSellingBooks] = useState([]);
   const [customRange, setCustomRange] = useState({ start: "", end: "" });
+  const [isLoading, setIsLoading] = useState(true);
 
   const formatCurrency = (number) => {
     const options = {
@@ -121,6 +122,8 @@ const Stat = () => {
 
         setFilteredData(completeTotals);
         setBestSellingBooks(calculateBestSellingBooks(filteredInvoices));
+
+        setIsLoading(false);
       } catch (error) {
         window.alert(error.message);
       }
@@ -186,72 +189,78 @@ const Stat = () => {
           )}
         </div>
         <hr />
-        <div className="section">
-          <div className="chart-container">
-            <Line data={chartData} options={chartOptions} />
-          </div>
-        </div>
-        <div className="section">
-          <table className="sales-table">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Sales Name</th>
-                <th>Total Sales</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
-              {salesNames.map((name, index) => (
-                <tr key={name}>
-                  <td>{index + 1}</td>
-                  <td>{name}</td>
-                  <td>{formatCurrency(filteredData[name].totalSales)}</td>
-                  <td>{filteredData[name].totalQty}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <div className="section"></div>
-        <div className="section">
-          <h4>Top 10 Best Selling Books</h4>
-        </div>
-        <hr />
-        <div className="section">
-          <table className="books-table">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Book Name</th>
-                <th>Total Price</th>
-                <th>Quantity</th>
-                <th>Sales Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {bestSellingBooks.length > 0 ? (
-                bestSellingBooks.map(([bookName, data], index) => (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{bookName}</td>
-                    <td>{formatCurrency(data.totalPrice)}</td>
-                    <td>{data.qty}</td>
-                    <td>{data.sales}</td>
+        {isLoading === false ? (
+          <>
+            <div className="section">
+              <div className="chart-container">
+                <Line data={chartData} options={chartOptions} />
+              </div>
+            </div>
+            <div className="section">
+              <table className="sales-table">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Sales Name</th>
+                    <th>Total Sales</th>
+                    <th>Total Quantity</th>
                   </tr>
-                ))
-              ) : (
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              )}
-            </tbody>
-          </table>
-        </div>
+                </thead>
+                <tbody>
+                  {salesNames.map((name, index) => (
+                    <tr key={name}>
+                      <td>{index + 1}</td>
+                      <td>{name}</td>
+                      <td>{formatCurrency(filteredData[name].totalSales)}</td>
+                      <td>{filteredData[name].totalQty}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="section"></div>
+            <div className="section">
+              <h4>Top 10 Best Selling Books</h4>
+            </div>
+            <hr />
+            <div className="section">
+              <table className="books-table">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Book Name</th>
+                    <th>Total Price</th>
+                    <th>Total Quantity</th>
+                    <th>Sales Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bestSellingBooks.length > 0 ? (
+                    bestSellingBooks.map(([bookName, data], index) => (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{bookName}</td>
+                        <td>{formatCurrency(data.totalPrice)}</td>
+                        <td>{data.qty} pcs</td>
+                        <td>{data.sales}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </>
+        ) : (
+          "Loading revenue database..."
+        )}
       </div>
       <div className="section"></div>
     </>
