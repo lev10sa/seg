@@ -197,7 +197,7 @@ const Stat = () => {
               <tr>
                 <th>Sales Name</th>
                 <th>Total Sales</th>
-                <th>Total Quantity</th>
+                <th>Quantity</th>
               </tr>
             </thead>
             <tbody>
