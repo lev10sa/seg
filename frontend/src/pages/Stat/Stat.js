@@ -185,10 +185,10 @@ const Stat = () => {
             />
           </div>
         )}
-
         <hr />
         {isLoading === false ? (
           <>
+            <div className="section"></div>
             <div className="section">
               <div className="chart-container">
                 <Line data={chartData} options={chartOptions} />
