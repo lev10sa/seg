@@ -212,7 +212,6 @@ const Stat = () => {
           </table>
         </div>
         <div className="section"></div>
-        <div className="section"></div>
         <div className="section">
           <h4>Top 10 Best Selling Books</h4>
         </div>
