@@ -30,9 +30,14 @@ const Stat = () => {
         case "week":
           return now - invoiceDate < 7 * 24 * 60 * 60 * 1000;
         case "month":
-          return now - invoiceDate < 30 * 24 * 60 * 60 * 1000;
+          return (
+            invoiceDate.getMonth() === now.getMonth() &&
+            invoiceDate.getFullYear() === now.getFullYear()
+          );
         case "lastMonth":
-          return now - invoiceDate < 30 * 24 * 60 * 60 * 1000;
+          const lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+          const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+          return invoiceDate >= lastMonth && invoiceDate <= lastMonthEnd;
         case "threeMonths":
           return now - invoiceDate < 90 * 24 * 60 * 60 * 1000;
         case "year":
@@ -47,11 +52,17 @@ const Stat = () => {
   };
 
   const calculateTotalsBySales = (invoices) => {
-    const totals = {};
+    const salesNamesSet = new Set();
     invoices.forEach((invoice) => {
-      if (!totals[invoice.sales]) {
-        totals[invoice.sales] = 0;
-      }
+      salesNamesSet.add(invoice.sales);
+    });
+
+    const totals = {};
+    salesNamesSet.forEach((sales) => {
+      totals[sales] = 0;
+    });
+
+    invoices.forEach((invoice) => {
       invoice.bookList.forEach((book) => {
         const price = parseFloat(book.price);
         const qty = parseInt(book.qty, 10);
@@ -59,6 +70,7 @@ const Stat = () => {
         totals[invoice.sales] += (price - price * disc) * qty;
       });
     });
+
     return totals;
   };
 
@@ -89,11 +101,24 @@ const Stat = () => {
         const url = `https://seg-server.vercel.app/api/invoices`;
         const response = await axios.get(url);
 
+        // Get all unique sales names from the invoices
+        const allSalesNames = new Set(
+          response.data.map((invoice) => invoice.sales)
+        );
+
         const filteredInvoices = filterInvoicesByDateRange(
           response.data,
           filter
         );
-        setFilteredData(calculateTotalsBySales(filteredInvoices));
+        const totals = calculateTotalsBySales(filteredInvoices);
+
+        // Ensure all sales names are in the totals object, even if they have no sales
+        const completeTotals = {};
+        allSalesNames.forEach((sales) => {
+          completeTotals[sales] = totals[sales] || 0;
+        });
+
+        setFilteredData(completeTotals);
         setBestSellingBooks(calculateBestSellingBooks(filteredInvoices));
       } catch (error) {
         window.alert(error.message);
