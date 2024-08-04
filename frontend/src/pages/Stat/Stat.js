@@ -272,9 +272,9 @@ const Stat = () => {
                 <thead>
                   <tr>
                     <th>Sales Name</th>
-                    <th>Invoice</th>
-                    <th>Quotation</th>
-                    <th>PO</th>
+                    <th>Total Invoice</th>
+                    <th>Total Quotation</th>
+                    <th>Total PO</th>
                   </tr>
                 </thead>
                 <tbody>
