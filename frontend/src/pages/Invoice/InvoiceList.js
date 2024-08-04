@@ -83,11 +83,15 @@ const InvoiceList = () => {
     return `${day}/${month}/${year}`;
   }
 
-  const salesSet = (a, b, c) => {
-    setSearch(a);
+  const salesSet = (a, b, c, d) => {
+    if (a !== "All") {
+      setSearch(a);
+    }
+
     document.getElementById(a).classList.add("active");
     document.getElementById(b).classList.remove("active");
     document.getElementById(c).classList.remove("active");
+    document.getElementById(d).classList.remove("active");
   };
 
   // render the display
@@ -110,25 +114,31 @@ const InvoiceList = () => {
         <p>Ditemukan: {invoices.length} data</p>
       </div>
       <div className="section lang">
-        <span>Select Sales:</span>
         <button
           type="button"
-          onClick={() => salesSet("Angga", "Cahyo", "Tulus")}
-          id="angga"
+          onClick={() => salesSet("All", "Cahyo", "Tulus", "Angga")}
+          id="All"
           className="active"
+        >
+          All
+        </button>
+        <button
+          type="button"
+          onClick={() => salesSet("Angga", "Cahyo", "Tulus", "All")}
+          id="Angga"
         >
           Angga
         </button>
         <button
           type="button"
-          onClick={() => salesSet("Cahyo", "Angga", "Tulus")}
+          onClick={() => salesSet("Cahyo", "Angga", "Tulus", "All")}
           id="Cahyo"
         >
           Cahyo
         </button>
         <button
           type="button"
-          onClick={() => salesSet("Tulus", "Cahyo", "Angga")}
+          onClick={() => salesSet("Tulus", "Cahyo", "Angga", "All")}
           id="Tulus"
         >
           Tulus
