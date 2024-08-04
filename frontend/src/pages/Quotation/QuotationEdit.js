@@ -90,19 +90,24 @@ const QuotationEdit = () => {
     };
 
     getBooks();
+  }, [id]);
 
+  useEffect(() => {
     const changeDeal = async () => {
-      quotationData.bookList.map((item, index) => {
-        const selectedBook = books.find(
-          (book) => book.isbn === quotationData.bookList[index].isbn
-        );
+      quotationData.bookList.forEach((item, index) => {
+        const selectedBook = books.find((book) => book.isbn === item.isbn);
 
-        if (selectedBook) {
+        if (item.isbn === null || item.isbn === "") {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: none";
+          bame.style = "display: block";
+        } else if (selectedBook) {
           const bame = document.getElementById("bame-" + index);
           const hed = document.getElementById("hed-" + index);
           hed.style = "display: block";
           bame.style = "display: none";
-        } else {
+        } else if (!selectedBook) {
           const bame = document.getElementById("bame-" + index);
           const hed = document.getElementById("hed-" + index);
           hed.style = "display: none";
@@ -112,7 +117,7 @@ const QuotationEdit = () => {
     };
 
     changeDeal();
-  }, [id]);
+  }, [books, quotationData]);
 
   const handleChange = (event) => {
     setQuotationData({
