@@ -86,6 +86,8 @@ const InvoiceList = () => {
   const salesSet = (a, b, c, d) => {
     if (a !== "All") {
       setSearch(a);
+    } else {
+      setSearch("");
     }
 
     document.getElementById(a).classList.add("active");
