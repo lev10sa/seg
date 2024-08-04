@@ -103,7 +103,7 @@ const InvoiceEdit = () => {
     if (name === "isbn") {
       const selectedBook = books.find((book) => book.isbn === value);
 
-      if (selectedBook) {
+      if (selectedBook || value === "") {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: block";
