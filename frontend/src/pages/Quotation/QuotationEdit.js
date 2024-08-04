@@ -97,7 +97,12 @@ const QuotationEdit = () => {
       quotationData.bookList.forEach((item, index) => {
         const selectedBook = books.find((book) => book.isbn === item.isbn);
 
-        if (item.isbn === null || item.isbn === "" || item.isbn === "-") {
+        if (
+          item.isbn === null ||
+          item.isbn === "" ||
+          item.isbn === "-" ||
+          item.bookName === ""
+        ) {
           const bame = document.getElementById("bame-" + index);
           const hed = document.getElementById("hed-" + index);
           hed.style = "display: none";
