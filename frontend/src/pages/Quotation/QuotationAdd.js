@@ -43,6 +43,13 @@ function QuotationAdd() {
     const { name, value } = event.target;
 
     if (name === "isbn") {
+      if (name === "isbn" && value === "-") {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+      }
+
       const selectedBook = books.find((book) => book.isbn === value);
 
       if (selectedBook) {
@@ -291,10 +298,21 @@ function QuotationAdd() {
                     onChange={handleBookChange(index)}
                   >
                     <option value="">--- Select Book ---</option>
+                    <option value="-">[Custom Book Name]</option>
                     {books.map((item, i) => (
                       <option value={item.isbn}>{item.name}</option>
                     ))}
                   </select>
+                  <input
+                    type="text"
+                    className="input"
+                    id={`bame-${index}`}
+                    name="bookName"
+                    style={{ display: "none" }}
+                    value={book.bookName}
+                    onChange={handleBookChange(index)}
+                    placeholder="Book Name"
+                  />
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>
