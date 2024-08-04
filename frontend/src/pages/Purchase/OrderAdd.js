@@ -20,6 +20,21 @@ const OrderAdd = () => {
     bookList: [],
   });
 
+  const handleReset = () => {
+    setOrderData({
+      ...orderData,
+
+      date: "",
+      name: "",
+      company: "",
+      email: "",
+      phone: "",
+      address: "",
+      sales: "",
+      bookList: [],
+    });
+  };
+
   // Generate series function
   const generateSerie = (count) => {
     // Update latestCount with the actual value
@@ -391,7 +406,7 @@ const OrderAdd = () => {
                 <button type="button" className="btn" onClick={handleAddBook}>
                   Add Book
                 </button>
-                <button type="reset" className="btn">
+                <button type="button" className="btn" onClick={handleReset}>
                   Reset
                 </button>
                 <button type="submit" className="btn">

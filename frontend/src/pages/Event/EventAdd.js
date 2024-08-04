@@ -20,6 +20,23 @@ function EventAdd() {
     group: "",
   });
 
+  const handleReset = () => {
+    setEventData({
+      ...eventData,
+      price: "",
+      model: "",
+      title: "",
+      desc: "",
+      pic: "",
+      img: "",
+      address: "",
+      start: "",
+      end: "",
+      contact: "",
+      group: "",
+    });
+  };
+
   // Setting up useNavigate
   const navigate = useNavigate();
 
@@ -218,7 +235,7 @@ function EventAdd() {
             </div>
             <div className="section">
               <div className="controls">
-                <button type="reset" className="btn">
+                <button type="button" className="btn" onClick={handleReset}>
                   Reset
                 </button>
                 <button type="submit" className="btn">

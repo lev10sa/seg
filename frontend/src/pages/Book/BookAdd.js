@@ -12,6 +12,14 @@ const BookAdd = () => {
   const [bookPrice, setBookPrice] = useState("");
   const [ebookPrice, setEbookPrice] = useState("");
 
+  const handleReset = () => {
+    setName("");
+    setIsbn("");
+    setCategory("");
+    setBookPrice("");
+    setEbookPrice("");
+  };
+
   // setting up useNavigate
   const navigate = useNavigate();
 
@@ -98,7 +106,7 @@ const BookAdd = () => {
             </div>
             <div className="field">
               <div className="controls">
-                <button type="reset" className="btn">
+                <button type="button" className="btn" onClick={handleReset}>
                   Reset
                 </button>
                 <button type="sumbit" className="btn">
