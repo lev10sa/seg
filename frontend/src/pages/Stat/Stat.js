@@ -10,6 +10,7 @@ const Stat = () => {
   const [bestSellingBooks, setBestSellingBooks] = useState([]);
   const [customRange, setCustomRange] = useState({ start: "", end: "" });
   const [isLoading, setIsLoading] = useState(true);
+  const [stats, setStats] = useState({});
 
   const formatCurrency = (number) => {
     const options = {
@@ -19,39 +20,6 @@ const Stat = () => {
       maximumFractionDigits: 2,
     };
     return new Intl.NumberFormat("id-ID", options).format(number);
-  };
-
-  const filterInvoicesByDateRange = (invoices, range) => {
-    const now = new Date();
-    return invoices.filter((invoice) => {
-      const invoiceDate = new Date(invoice.date);
-      switch (range) {
-        case "today":
-          return invoiceDate.toDateString() === now.toDateString();
-        case "week":
-          return now - invoiceDate < 7 * 24 * 60 * 60 * 1000;
-        case "month":
-          return (
-            invoiceDate.getMonth() === now.getMonth() &&
-            invoiceDate.getFullYear() === now.getFullYear()
-          );
-        case "lastMonth":
-          const lastMonthDate = new Date(now.getFullYear(), now.getMonth() - 1);
-          return (
-            invoiceDate.getMonth() === lastMonthDate.getMonth() &&
-            invoiceDate.getFullYear() === lastMonthDate.getFullYear()
-          );
-        case "threeMonths":
-          return now - invoiceDate < 90 * 24 * 60 * 60 * 1000;
-        case "year":
-          return now - invoiceDate < 365 * 24 * 60 * 60 * 1000;
-        case "custom":
-          const { start, end } = customRange;
-          return invoiceDate >= new Date(start) && invoiceDate <= new Date(end);
-        default:
-          return false;
-      }
-    });
   };
 
   const calculateTotalsBySales = (invoices, allSalesNames) => {
@@ -100,10 +68,91 @@ const Stat = () => {
         const url = `https://seg-server.vercel.app/api/invoices`;
         const response = await axios.get(url);
 
+        const uriA = `https://seg-server.vercel.app/api/invoices/key/Angga`;
+        const uriB = `https://seg-server.vercel.app/api/invoices/key/Cahyo`;
+        const uriC = `https://seg-server.vercel.app/api/invoices/key/Tulus`;
+        const uriaA = `https://seg-server.vercel.app/api/quotations/key/Angga`;
+        const uribB = `https://seg-server.vercel.app/api/quotations/key/Cahyo`;
+        const uricC = `https://seg-server.vercel.app/api/quotations/key/Tulus`;
+        const uriaaA = `https://seg-server.vercel.app/api/orders/key/Angga`;
+        const uribbB = `https://seg-server.vercel.app/api/orders/key/Cahyo`;
+        const uriccC = `https://seg-server.vercel.app/api/orders/key/Tulus`;
+
+        const resA = await axios.get(uriA);
+        const resB = await axios.get(uriB);
+        const resC = await axios.get(uriC);
+        const resaA = await axios.get(uriaA);
+        const resbB = await axios.get(uribB);
+        const rescC = await axios.get(uricC);
+        const resaaA = await axios.get(uriaaA);
+        const resbbB = await axios.get(uribbB);
+        const resccC = await axios.get(uriccC);
+
+        const brad = [
+          {
+            saled: "Angga",
+            invoice: resA.data.length,
+            quotation: resaA.data.length,
+            po: resaaA.data.length,
+          },
+          {
+            saled: "Cahyo",
+            invoice: resB.data.length,
+            quotation: resbB.data.length,
+            po: resbbB.data.length,
+          },
+          {
+            saled: "Tulus",
+            invoice: resC.data.length,
+            quotation: rescC.data.length,
+            po: resccC.data.length,
+          },
+        ];
+
+        setStats(brad);
+
         // Get all unique sales names from the invoices
         const allSalesNames = new Set(
           response.data.map((invoice) => invoice.sales)
         );
+
+        const filterInvoicesByDateRange = (invoices, range) => {
+          const now = new Date();
+          return invoices.filter((invoice) => {
+            const invoiceDate = new Date(invoice.date);
+            switch (range) {
+              case "today":
+                return invoiceDate.toDateString() === now.toDateString();
+              case "week":
+                return now - invoiceDate < 7 * 24 * 60 * 60 * 1000;
+              case "month":
+                return (
+                  invoiceDate.getMonth() === now.getMonth() &&
+                  invoiceDate.getFullYear() === now.getFullYear()
+                );
+              case "lastMonth":
+                const lastMonthDate = new Date(
+                  now.getFullYear(),
+                  now.getMonth() - 1
+                );
+                return (
+                  invoiceDate.getMonth() === lastMonthDate.getMonth() &&
+                  invoiceDate.getFullYear() === lastMonthDate.getFullYear()
+                );
+              case "threeMonths":
+                return now - invoiceDate < 90 * 24 * 60 * 60 * 1000;
+              case "year":
+                return now - invoiceDate < 365 * 24 * 60 * 60 * 1000;
+              case "custom":
+                const { start, end } = customRange;
+                return (
+                  invoiceDate >= new Date(start) && invoiceDate <= new Date(end)
+                );
+              default:
+                return false;
+            }
+          });
+        };
 
         const filteredInvoices = filterInvoicesByDateRange(
           response.data,
@@ -154,7 +203,7 @@ const Stat = () => {
   return (
     <>
       <div className="section container">
-        <h4>Total Sales Revenue</h4>
+        <h4>Total Sales Insight</h4>
         <div className="section">
           <select value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="today">Today</option>
@@ -197,7 +246,6 @@ const Stat = () => {
               <table className="sales-table">
                 <thead>
                   <tr>
-                    <th>No.</th>
                     <th>Sales Name</th>
                     <th>Total Sales</th>
                     <th>Total Quantity</th>
@@ -205,12 +253,40 @@ const Stat = () => {
                 </thead>
                 <tbody>
                   {salesNames.map((name, index) => (
-                    <tr key={name}>
-                      <td>{index + 1}</td>
+                    <tr key={index}>
                       <td>{name}</td>
                       <td>{formatCurrency(filteredData[name].totalSales)}</td>
                       <td>{filteredData[name].totalQty} pcs</td>
                     </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="section"></div>
+            <div className="section">
+              <h4>Total Statistic</h4>
+            </div>
+            <hr />
+            <div className="section">
+              <table className="books-table">
+                <thead>
+                  <tr>
+                    <th>Sales Name</th>
+                    <th>Invoice</th>
+                    <th>Quotation</th>
+                    <th>PO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stats.map((item, index) => (
+                    <>
+                      <tr key={index}>
+                        <td>{item.saled}</td>
+                        <td>{item.invoice}</td>
+                        <td>{item.quotation}</td>
+                        <td>{item.po}</td>
+                      </tr>
+                    </>
                   ))}
                 </tbody>
               </table>
