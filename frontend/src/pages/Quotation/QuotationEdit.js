@@ -105,25 +105,34 @@ const QuotationEdit = () => {
     if (name === "isbn") {
       const selectedBook = books.find((book) => book.isbn === value);
 
-      if (!selectedBook) {
-        console.error(`Book with _id ${value} not found`);
-        return;
+      if (selectedBook) {
+        setQuotationData({
+          ...quotationData,
+          bookList: quotationData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+
+                  bookName: selectedBook.name,
+                  isbn: selectedBook.isbn,
+                  price: selectedBook.bookPrice,
+                }
+              : book
+          ),
+        });
+      } else {
+        setQuotationData({
+          ...quotationData,
+          bookList: quotationData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  [name]: value,
+                }
+              : book
+          ),
+        });
       }
-
-      setQuotationData({
-        ...quotationData,
-        bookList: quotationData.bookList.map((book, i) =>
-          index === i
-            ? {
-                ...book,
-
-                bookName: selectedBook.name,
-                isbn: selectedBook.isbn,
-                price: selectedBook.bookPrice,
-              }
-            : book
-        ),
-      });
     } else {
       setQuotationData({
         ...quotationData,
@@ -276,7 +285,7 @@ const QuotationEdit = () => {
                   <label className="label">Book Name</label>
                   <select
                     type="text"
-                    id={`isbn-${index}`}
+                    id={`hed-${index}`}
                     name={`isbn`}
                     value={book.isbn}
                     onChange={handleBookChange(index)}

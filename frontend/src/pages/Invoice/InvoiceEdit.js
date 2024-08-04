@@ -103,25 +103,34 @@ const InvoiceEdit = () => {
     if (name === "isbn") {
       const selectedBook = books.find((book) => book.isbn === value);
 
-      if (!selectedBook) {
-        console.error(`Book with _id ${value} not found`);
-        return;
+      if (selectedBook) {
+        setInvoiceData({
+          ...invoiceData,
+          bookList: invoiceData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+
+                  bookName: selectedBook.name,
+                  isbn: selectedBook.isbn,
+                  price: selectedBook.bookPrice,
+                }
+              : book
+          ),
+        });
+      } else {
+        setInvoiceData({
+          ...invoiceData,
+          bookList: invoiceData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  [name]: value,
+                }
+              : book
+          ),
+        });
       }
-
-      setInvoiceData({
-        ...invoiceData,
-        bookList: invoiceData.bookList.map((book, i) =>
-          index === i
-            ? {
-                ...book,
-
-                bookName: selectedBook.name,
-                isbn: selectedBook.isbn,
-                price: selectedBook.bookPrice,
-              }
-            : book
-        ),
-      });
     } else {
       setInvoiceData({
         ...invoiceData,
@@ -274,7 +283,7 @@ const InvoiceEdit = () => {
                   <label className="label">Book Name</label>
                   <select
                     type="text"
-                    id={`isbn-${index}`}
+                    id={`hed-${index}`}
                     name={`isbn`}
                     value={book.isbn}
                     onChange={handleBookChange(index)}
