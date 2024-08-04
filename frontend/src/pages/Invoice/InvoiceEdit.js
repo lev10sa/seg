@@ -95,7 +95,7 @@ const InvoiceEdit = () => {
       invoiceData.bookList.forEach((item, index) => {
         const selectedBook = books.find((book) => book.isbn === item.isbn);
 
-        if (item.isbn === null || item.isbn === "") {
+        if (item.isbn === null || item.isbn === "" || item.isbn === "-") {
           const bame = document.getElementById("bame-" + index);
           const hed = document.getElementById("hed-" + index);
           hed.style = "display: none";
