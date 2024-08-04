@@ -101,16 +101,14 @@ const InvoiceEdit = () => {
     const { name, value } = event.target;
 
     if (name === "isbn") {
-      if (name === "isbn" && value === "-") {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-      }
-
       const selectedBook = books.find((book) => book.isbn === value);
 
       if (selectedBook) {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: block";
+        bame.style = "display: none";
+
         setInvoiceData({
           ...invoiceData,
           bookList: invoiceData.bookList.map((book, i) =>
@@ -125,7 +123,12 @@ const InvoiceEdit = () => {
               : book
           ),
         });
-      } else {
+      } else if (!selectedBook || value === "-") {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+
         setInvoiceData({
           ...invoiceData,
           bookList: invoiceData.bookList.map((book, i) =>

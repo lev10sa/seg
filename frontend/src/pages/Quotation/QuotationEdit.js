@@ -103,16 +103,14 @@ const QuotationEdit = () => {
     const { name, value } = event.target;
 
     if (name === "isbn") {
-      if (name === "isbn" && value === "-") {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-      }
-
       const selectedBook = books.find((book) => book.isbn === value);
 
       if (selectedBook) {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: block";
+        bame.style = "display: none";
+
         setQuotationData({
           ...quotationData,
           bookList: quotationData.bookList.map((book, i) =>
@@ -127,7 +125,12 @@ const QuotationEdit = () => {
               : book
           ),
         });
-      } else {
+      } else if (!selectedBook || value === "-") {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+
         setQuotationData({
           ...quotationData,
           bookList: quotationData.bookList.map((book, i) =>

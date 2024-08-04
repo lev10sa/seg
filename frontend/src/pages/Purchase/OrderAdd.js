@@ -44,16 +44,14 @@ const OrderAdd = () => {
     const { name, value } = event.target;
 
     if (name === "isbn") {
-      if (name === "isbn" && value === "-") {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-      }
-
       const selectedBook = books.find((book) => book.isbn === value);
 
       if (selectedBook) {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: block";
+        bame.style = "display: none";
+
         setOrderData({
           ...orderData,
           bookList: orderData.bookList.map((book, i) =>
@@ -68,7 +66,12 @@ const OrderAdd = () => {
               : book
           ),
         });
-      } else {
+      } else if (!selectedBook || value === "-") {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+
         setOrderData({
           ...orderData,
           bookList: orderData.bookList.map((book, i) =>
