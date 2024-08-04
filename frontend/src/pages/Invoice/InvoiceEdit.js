@@ -88,6 +88,28 @@ const InvoiceEdit = () => {
     };
 
     getBooks();
+
+    const changeDeal = async () => {
+      invoiceData.bookList.map((item, index) => {
+        const selectedBook = books.find(
+          (book) => book.isbn === invoiceData.bookList[index].isbn
+        );
+
+        if (selectedBook) {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: block";
+          bame.style = "display: none";
+        } else {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: none";
+          bame.style = "display: block";
+        }
+      });
+    };
+
+    changeDeal();
   }, [id]);
 
   const handleChange = (event) => {
@@ -140,7 +162,11 @@ const InvoiceEdit = () => {
               : book
           ),
         });
-      } else if (!selectedBook || value === "-") {
+      } else if (
+        (!selectedBook && value === "") ||
+        (!selectedBook && value === "-") ||
+        !selectedBook
+      ) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: none";
@@ -316,11 +342,21 @@ const InvoiceEdit = () => {
                     onChange={handleBookChange(index)}
                   >
                     <option value="">--- Select Book ---</option>
-                    <option value="custom">Custom Book Name</option>
+                    <option value="-">[Custom Book Name]</option>
                     {books.map((item, i) => (
                       <option value={item.isbn}>{item.name}</option>
                     ))}
                   </select>
+                  <input
+                    type="text"
+                    className="input"
+                    id={`bame-${index}`}
+                    name="bookName"
+                    style={{ display: "none" }}
+                    value={book.bookName}
+                    onChange={handleBookChange(index)}
+                    placeholder="Book Name"
+                  />
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>

@@ -98,7 +98,11 @@ const OrderAdd = () => {
               : book
           ),
         });
-      } else if (!selectedBook || value === "-") {
+      } else if (
+        (!selectedBook && value === "") ||
+        (!selectedBook && value === "-") ||
+        !selectedBook
+      ) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: none";

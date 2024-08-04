@@ -88,6 +88,28 @@ const OrderEdit = () => {
     };
 
     getBooks();
+
+    const changeDeal = async () => {
+      orderData.bookList.map((item, index) => {
+        const selectedBook = books.find(
+          (book) => book.isbn === orderData.bookList[index].isbn
+        );
+
+        if (selectedBook) {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: block";
+          bame.style = "display: none";
+        } else {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: none";
+          bame.style = "display: block";
+        }
+      });
+    };
+
+    changeDeal();
   }, [id]);
 
   const handleChange = (event) => {
@@ -140,7 +162,11 @@ const OrderEdit = () => {
               : book
           ),
         });
-      } else if (!selectedBook || value === "-") {
+      } else if (
+        (!selectedBook && value === "") ||
+        (!selectedBook && value === "-") ||
+        !selectedBook
+      ) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: none";

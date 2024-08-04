@@ -25,8 +25,8 @@ const QuotationEdit = () => {
   // setting up useNavigate
   const navigate = useNavigate();
 
-  // create Invoice deleter function
-  const delInvoice = async () => {
+  // create quotation deleter function
+  const delquotation = async () => {
     try {
       await axios.delete(
         `https://seg-server.vercel.app/api/quotations/id/${id}`
@@ -38,7 +38,7 @@ const QuotationEdit = () => {
     }
   };
 
-  // create Invoice update function
+  // create quotation update function
   const updQuotation = async (e) => {
     e.preventDefault(); // Prevent default form submission
     try {
@@ -48,7 +48,7 @@ const QuotationEdit = () => {
         bookList: quotationData.bookList.filter(Boolean),
       };
 
-      // Add the Invoice into database with axios
+      // Add the quotation into database with axios
       await axios.patch(
         `https://seg-server.vercel.app/api/quotations/id/${id}`,
         cleanedData
@@ -62,7 +62,7 @@ const QuotationEdit = () => {
 
   // setting up useEffect to do tasks in real-time
   useEffect(() => {
-    // create Invoice loader callback function
+    // create quotation loader callback function
     const getQuotationById = async () => {
       try {
         // get all the datas from database with axios
@@ -90,6 +90,28 @@ const QuotationEdit = () => {
     };
 
     getBooks();
+
+    const changeDeal = async () => {
+      quotationData.bookList.map((item, index) => {
+        const selectedBook = books.find(
+          (book) => book.isbn === quotationData.bookList[index].isbn
+        );
+
+        if (selectedBook) {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: block";
+          bame.style = "display: none";
+        } else {
+          const bame = document.getElementById("bame-" + index);
+          const hed = document.getElementById("hed-" + index);
+          hed.style = "display: none";
+          bame.style = "display: block";
+        }
+      });
+    };
+
+    changeDeal();
   }, [id]);
 
   const handleChange = (event) => {
@@ -142,7 +164,11 @@ const QuotationEdit = () => {
               : book
           ),
         });
-      } else if (!selectedBook || value === "-") {
+      } else if (
+        (!selectedBook && value === "") ||
+        (!selectedBook && value === "-") ||
+        !selectedBook
+      ) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: none";
@@ -199,9 +225,9 @@ const QuotationEdit = () => {
     <>
       <div className="section">
         <div className="section headline">
-          <h4>Add Invoice</h4>
+          <h4>Add quotation</h4>
           <button onClick={() => navigate(`/quotations`)} className="btn">
-            See All Invoices
+            See All quotations
           </button>
         </div>
         <div className="section">
@@ -393,7 +419,7 @@ const QuotationEdit = () => {
                 <button type="button" className="btn" onClick={handleAddBook}>
                   Add Book
                 </button>
-                <button type="button" onClick={delInvoice} className="btn">
+                <button type="button" onClick={delquotation} className="btn">
                   Delete
                 </button>
                 <button type="submit" className="btn">
