@@ -130,7 +130,7 @@ const InvoiceEdit = () => {
     if (name === "isbn") {
       const selectedBook = books.find((book) => book.isbn === value);
 
-      if (value === null || value === "") {
+      if (value === null || value === "" || value === "-") {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: block";
@@ -167,11 +167,7 @@ const InvoiceEdit = () => {
               : book
           ),
         });
-      } else if (
-        (!selectedBook && value === "") ||
-        (!selectedBook && value === "-") ||
-        !selectedBook
-      ) {
+      } else if (!selectedBook) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: none";
