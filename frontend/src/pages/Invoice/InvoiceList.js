@@ -83,6 +83,13 @@ const InvoiceList = () => {
     return `${day}/${month}/${year}`;
   }
 
+  const salesSet = (a, b, c) => {
+    setSearch(a);
+    document.getElementById(a).classList.add("active");
+    document.getElementById(b).classList.remove("active");
+    document.getElementById(c).classList.remove("active");
+  };
+
   // render the display
   return (
     <>
@@ -101,6 +108,31 @@ const InvoiceList = () => {
           />
         </div>
         <p>Ditemukan: {invoices.length} data</p>
+      </div>
+      <div className="section lang">
+        <span>Select Sales:</span>
+        <button
+          type="button"
+          onClick={() => salesSet("Angga", "Cahyo", "Tulus")}
+          id="angga"
+          className="active"
+        >
+          Angga
+        </button>
+        <button
+          type="button"
+          onClick={() => salesSet("Cahyo", "Angga", "Tulus")}
+          id="Cahyo"
+        >
+          Cahyo
+        </button>
+        <button
+          type="button"
+          onClick={() => salesSet("Tulus", "Cahyo", "Angga")}
+          id="Tulus"
+        >
+          Tulus
+        </button>
       </div>
       {isLoading ? (
         <div className="section">Loading Invoice Database...</div> // display status when loading
