@@ -50,6 +50,18 @@ function QuotationAdd() {
         const hed = document.getElementById("hed-" + index);
         hed.style = "display: block";
         bame.style = "display: none";
+
+        setQuotationData({
+          ...quotationData,
+          bookList: quotationData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  [name]: value,
+                }
+              : book
+          ),
+        });
       } else if (selectedBook) {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
