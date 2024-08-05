@@ -5,49 +5,24 @@ const Insig = () => {
   const [stats, setStats] = useState([]);
 
   useEffect(() => {
+    const fetchData = async (key) => {
+      const [invoices, quotations, orders] = await Promise.all([
+        axios.get(`https://seg-server.vercel.app/api/invoices/key/${key}`),
+        axios.get(`https://seg-server.vercel.app/api/quotations/key/${key}`),
+        axios.get(`https://seg-server.vercel.app/api/orders/key/${key}`),
+      ]);
+      return {
+        saled: key,
+        invoice: invoices.data.length,
+        quotation: quotations.data.length,
+        po: orders.data.length,
+      };
+    };
+
     const getBrad = async () => {
-      const uriA = `https://seg-server.vercel.app/api/invoices/key/Angga`;
-      const uriB = `https://seg-server.vercel.app/api/invoices/key/Cahyo`;
-      const uriC = `https://seg-server.vercel.app/api/invoices/key/Tulus`;
-      const uriaA = `https://seg-server.vercel.app/api/quotations/key/Angga`;
-      const uribB = `https://seg-server.vercel.app/api/quotations/key/Cahyo`;
-      const uricC = `https://seg-server.vercel.app/api/quotations/key/Tulus`;
-      const uriaaA = `https://seg-server.vercel.app/api/orders/key/Angga`;
-      const uribbB = `https://seg-server.vercel.app/api/orders/key/Cahyo`;
-      const uriccC = `https://seg-server.vercel.app/api/orders/key/Tulus`;
-
-      const resA = await axios.get(uriA);
-      const resB = await axios.get(uriB);
-      const resC = await axios.get(uriC);
-      const resaA = await axios.get(uriaA);
-      const resbB = await axios.get(uribB);
-      const rescC = await axios.get(uricC);
-      const resaaA = await axios.get(uriaaA);
-      const resbbB = await axios.get(uribbB);
-      const resccC = await axios.get(uriccC);
-
-      const brad = [
-        {
-          saled: "Angga",
-          invoice: resA.data.length,
-          quotation: resaA.data.length,
-          po: resaaA.data.length,
-        },
-        {
-          saled: "Cahyo",
-          invoice: resB.data.length,
-          quotation: resbB.data.length,
-          po: resbbB.data.length,
-        },
-        {
-          saled: "Tulus",
-          invoice: resC.data.length,
-          quotation: rescC.data.length,
-          po: resccC.data.length,
-        },
-      ];
-
-      setStats(brad);
+      const keys = ["Angga", "Cahyo", "Tulus"];
+      const results = await Promise.all(keys.map(fetchData));
+      setStats(results);
     };
 
     getBrad();
