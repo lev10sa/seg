@@ -149,11 +149,10 @@ const Stat = () => {
           const keys = ["Angga", "Cahyo", "Tulus"];
           const results = await Promise.all(keys.map(fetchData));
           setStats(results);
+          setIsLoading(false);
         };
 
         getBrad();
-
-        setIsLoading(false);
       } catch (error) {
         window.alert(error.message);
       }
