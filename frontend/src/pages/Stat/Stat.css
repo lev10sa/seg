@@ -28,6 +28,7 @@
   background: #111;
   color: #fff;
   text-align: left;
+  font-weight: normal;
 }
 
 @media (max-width: 768px) {
