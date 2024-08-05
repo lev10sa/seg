@@ -23,6 +23,11 @@
   padding: 8px;
 }
 
+.sales-table tr,
+.books-table tr {
+  background: #ddd;
+}
+
 .sales-table th,
 .books-table th {
   background: #111;
