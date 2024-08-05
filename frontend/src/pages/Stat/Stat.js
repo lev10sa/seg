@@ -3,7 +3,6 @@ import axios from "axios";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import "./Stat.css";
-import Insig from "./Insig.js";
 
 const Stat = () => {
   const [filteredData, setFilteredData] = useState({});
@@ -11,6 +10,7 @@ const Stat = () => {
   const [bestSellingBooks, setBestSellingBooks] = useState([]);
   const [customRange, setCustomRange] = useState({ start: "", end: "" });
   const [isLoading, setIsLoading] = useState(true);
+  const [stats, setStats] = useState([]);
 
   const formatCurrency = (number) => {
     const options = {
@@ -129,6 +129,30 @@ const Stat = () => {
         setFilteredData(completeTotals);
         setBestSellingBooks(calculateBestSellingBooks(filteredInvoices));
 
+        const fetchData = async (key) => {
+          const [invoices, quotations, orders] = await Promise.all([
+            axios.get(`https://seg-server.vercel.app/api/invoices/key/${key}`),
+            axios.get(
+              `https://seg-server.vercel.app/api/quotations/key/${key}`
+            ),
+            axios.get(`https://seg-server.vercel.app/api/orders/key/${key}`),
+          ]);
+          return {
+            saled: key,
+            invoice: invoices.data.length,
+            quotation: quotations.data.length,
+            po: orders.data.length,
+          };
+        };
+
+        const getBrad = async () => {
+          const keys = ["Angga", "Cahyo", "Tulus"];
+          const results = await Promise.all(keys.map(fetchData));
+          setStats(results);
+        };
+
+        getBrad();
+
         setIsLoading(false);
       } catch (error) {
         window.alert(error.message);
@@ -220,7 +244,32 @@ const Stat = () => {
               </table>
             </div>
             <div className="section"></div>
-            <Insig />
+            <div className="section">
+              <h4>Total Statistic</h4>
+            </div>
+            <hr />
+            <div className="section">
+              <table className="books-table">
+                <thead>
+                  <tr>
+                    <th>Sales Name</th>
+                    <th>Total Invoice</th>
+                    <th>Total Quotation</th>
+                    <th>Total PO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {stats.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.saled}</td>
+                      <td>{item.invoice}</td>
+                      <td>{item.quotation}</td>
+                      <td>{item.po}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
             <div className="section"></div>
             <div className="section">
               <h4>Top 10 Best Selling Books</h4>
