@@ -1020,8 +1020,8 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .navbar .tabs button {
@@ -1037,11 +1037,11 @@ body {
 
   .navbar .tabs button span {
     margin-top: 5px;
-    font-size: 5pt;
+    font-size: 4pt;
   }
 
   .navbar .tabs button i {
-    font-size: 16pt;
+    font-size: 15pt;
   }
 
   .headline {
