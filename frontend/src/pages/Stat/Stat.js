@@ -3,6 +3,7 @@ import axios from "axios";
 import { Line } from "react-chartjs-2";
 import "chart.js/auto";
 import "./Stat.css";
+import Insig from "./Insig.js";
 
 const Stat = () => {
   const [filteredData, setFilteredData] = useState({});
@@ -10,7 +11,6 @@ const Stat = () => {
   const [bestSellingBooks, setBestSellingBooks] = useState([]);
   const [customRange, setCustomRange] = useState({ start: "", end: "" });
   const [isLoading, setIsLoading] = useState(true);
-  const [stats, setStats] = useState({});
 
   const formatCurrency = (number) => {
     const options = {
@@ -67,49 +67,6 @@ const Stat = () => {
       try {
         const url = `https://seg-server.vercel.app/api/invoices`;
         const response = await axios.get(url);
-
-        const uriA = `https://seg-server.vercel.app/api/invoices/key/Angga`;
-        const uriB = `https://seg-server.vercel.app/api/invoices/key/Cahyo`;
-        const uriC = `https://seg-server.vercel.app/api/invoices/key/Tulus`;
-        const uriaA = `https://seg-server.vercel.app/api/quotations/key/Angga`;
-        const uribB = `https://seg-server.vercel.app/api/quotations/key/Cahyo`;
-        const uricC = `https://seg-server.vercel.app/api/quotations/key/Tulus`;
-        const uriaaA = `https://seg-server.vercel.app/api/orders/key/Angga`;
-        const uribbB = `https://seg-server.vercel.app/api/orders/key/Cahyo`;
-        const uriccC = `https://seg-server.vercel.app/api/orders/key/Tulus`;
-
-        const resA = await axios.get(uriA);
-        const resB = await axios.get(uriB);
-        const resC = await axios.get(uriC);
-        const resaA = await axios.get(uriaA);
-        const resbB = await axios.get(uribB);
-        const rescC = await axios.get(uricC);
-        const resaaA = await axios.get(uriaaA);
-        const resbbB = await axios.get(uribbB);
-        const resccC = await axios.get(uriccC);
-
-        const brad = [
-          {
-            saled: "Angga",
-            invoice: resA.data.length,
-            quotation: resaA.data.length,
-            po: resaaA.data.length,
-          },
-          {
-            saled: "Cahyo",
-            invoice: resB.data.length,
-            quotation: resbB.data.length,
-            po: resbbB.data.length,
-          },
-          {
-            saled: "Tulus",
-            invoice: resC.data.length,
-            quotation: rescC.data.length,
-            po: resccC.data.length,
-          },
-        ];
-
-        setStats(brad);
 
         // Get all unique sales names from the invoices
         const allSalesNames = new Set(
@@ -263,34 +220,7 @@ const Stat = () => {
               </table>
             </div>
             <div className="section"></div>
-            <div className="section">
-              <h4>Total Statistic</h4>
-            </div>
-            <hr />
-            <div className="section">
-              <table className="books-table">
-                <thead>
-                  <tr>
-                    <th>Sales Name</th>
-                    <th>Total Invoice</th>
-                    <th>Total Quotation</th>
-                    <th>Total PO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {stats.map((item, index) => (
-                    <>
-                      <tr key={index}>
-                        <td>{item.saled}</td>
-                        <td>{item.invoice}</td>
-                        <td>{item.quotation}</td>
-                        <td>{item.po}</td>
-                      </tr>
-                    </>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <Insig />
             <div className="section"></div>
             <div className="section">
               <h4>Top 10 Best Selling Books</h4>
