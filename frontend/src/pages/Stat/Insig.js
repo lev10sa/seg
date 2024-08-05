@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const Insig = () => {
-  const [stats, setStats] = useState({});
+  const [stats, setStats] = useState([]);
 
   useEffect(() => {
     const getBrad = async () => {
@@ -71,14 +71,12 @@ const Insig = () => {
           </thead>
           <tbody>
             {stats.map((item, index) => (
-              <>
-                <tr key={index}>
-                  <td>{item.saled}</td>
-                  <td>{item.invoice}</td>
-                  <td>{item.quotation}</td>
-                  <td>{item.po}</td>
-                </tr>
-              </>
+              <tr key={index}>
+                <td>{item.saled}</td>
+                <td>{item.invoice}</td>
+                <td>{item.quotation}</td>
+                <td>{item.po}</td>
+              </tr>
             ))}
           </tbody>
         </table>
