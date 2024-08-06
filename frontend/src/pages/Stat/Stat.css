@@ -23,8 +23,8 @@
   padding: 8px;
 }
 
-.sales-table tr,
-.books-table tr {
+.sales-table tr:hover,
+.books-table tr:hover {
   background: #ddd;
 }
 
