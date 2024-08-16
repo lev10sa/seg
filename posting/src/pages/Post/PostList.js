@@ -125,10 +125,6 @@ const PostList = () => {
     document.getElementById(b).classList.remove("active");
   };
 
-  const viewPost = (val) => {
-    window.open(val, "_blank");
-  };
-
   // render the display
   return (
     <>
