@@ -35,11 +35,6 @@ function PostIdEdit() {
 
   const handleChange = (e) => {
     // For non-file inputs, set the value directly
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, "0");
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const year = now.getFullYear();
-    const formattedDate = `-${day}-${month}-${year}`;
 
     const cleanData = {
       ...postData,
@@ -54,12 +49,6 @@ function PostIdEdit() {
 
     document.getElementById("submit").innerText = `Updating data...`;
     document.getElementById("submit").type = `reset`;
-
-    const now = new Date();
-    const day = String(now.getDate()).padStart(2, "0");
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const year = now.getFullYear();
-    const formattedDate = `-${day}-${month}-${year}`;
 
     const cleanedData = {
       ...postData,
