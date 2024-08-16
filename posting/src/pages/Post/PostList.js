@@ -189,7 +189,7 @@ const PostList = () => {
                 </button>
                 <button
                   onClick={() =>
-                    viewPost(
+                    navigate(
                       `https://seg-client.vercel.app/post-view/${lang}/${post._id}`
                     )
                   }
