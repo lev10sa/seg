@@ -125,10 +125,6 @@ const PostList = () => {
     document.getElementById(b).classList.remove("active");
   };
 
-  const viewPost = (val) => {
-    window.open(val, "_blank");
-  };
-
   // render the display
   return (
     <>
@@ -189,8 +185,8 @@ const PostList = () => {
                 </button>
                 <button
                   onClick={() =>
-                    viewPost(
-                      `https://compasspubindonesia.com/post-view/${lang}/${post._id}`
+                    navigate(
+                      `https://seg-client.vercel.app/post-view/${lang}/${post._id}`
                     )
                   }
                   className="btn"
