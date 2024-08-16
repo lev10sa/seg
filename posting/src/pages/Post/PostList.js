@@ -190,7 +190,7 @@ const PostList = () => {
                 <button
                   onClick={() =>
                     viewPost(
-                      `https://compasspubindonesia.com/post-view/${lang}/${post._id}`
+                      `https://seg-client.vercel.app/post-view/${lang}/${post._id}`
                     )
                   }
                   className="btn"
