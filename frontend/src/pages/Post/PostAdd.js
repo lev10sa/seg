@@ -130,6 +130,7 @@ function PostAdd() {
                 placeholder="Title"
               />
             </div>
+
             <div className="field">
               <label className="label">Category</label>
               <input

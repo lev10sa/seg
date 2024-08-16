@@ -125,6 +125,10 @@ const PostList = () => {
     document.getElementById(b).classList.remove("active");
   };
 
+  const viewPost = (val) => {
+    window.open(val, "_blank");
+  };
+
   // render the display
   return (
     <>
@@ -152,7 +156,7 @@ const PostList = () => {
           id="id"
           className="active"
         >
-          Indonesian
+          Indonesia
         </button>
         <button type="button" onClick={() => langSet("en", "id")} id="en">
           English
@@ -184,7 +188,11 @@ const PostList = () => {
                   EDIT
                 </button>
                 <button
-                  onClick={() => navigate(`/post-view/${lang}/${post._id}`)}
+                  onClick={() =>
+                    viewPost(
+                      `https://compasspubindonesia.com/post-view/${lang}/${post._id}`
+                    )
+                  }
                   className="btn"
                 >
                   VIEW
