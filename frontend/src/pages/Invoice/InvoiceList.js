@@ -68,7 +68,7 @@ const InvoiceList = () => {
     };
 
     getInvoices();
-  }, [search, invoices]); // dependency array with only `getInvoices`
+  }, [search]); // dependency array with only `getInvoices`
 
   function formatDate(dateString) {
     // Create a new Date object from the input string
