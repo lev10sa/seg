@@ -111,6 +111,7 @@ const PostIdView = () => {
           <div className="section">
             <div className="posts section" key={post._id}>
               <h3>{post.title}</h3>
+              <div className="section"></div>
               <p>{formatTime(post.date)}</p>
               <p>
                 <strong>Category:</strong> {post.category}
@@ -122,12 +123,6 @@ const PostIdView = () => {
               <div className="film">
                 <img src={post.banner} alt={post.banner} id="main" />
                 <div className="panel">
-                  <img
-                    src={post.banner}
-                    alt={post.banner}
-                    id="main-0"
-                    onClick={() => selMain(0)}
-                  />
                   {post.fileList.map((file, index) => (
                     <img
                       src={file.url}
