@@ -22,6 +22,18 @@ const Stat = () => {
     return new Intl.NumberFormat("id-ID", options).format(number);
   };
 
+  const calculateGrandTotals = () => {
+    const grandTotalSales = salesNames.reduce(
+      (acc, name) => acc + filteredData[name].totalSales,
+      0
+    );
+    const grandTotalQty = salesNames.reduce(
+      (acc, name) => acc + filteredData[name].totalQty,
+      0
+    );
+    return { grandTotalSales, grandTotalQty };
+  };
+
   const calculateTotalsBySales = (invoices, allSalesNames) => {
     const totals = {};
     allSalesNames.forEach((sales) => {
@@ -59,7 +71,7 @@ const Stat = () => {
     });
     return Object.entries(bookSales)
       .sort((a, b) => b[1].qty - a[1].qty)
-      .slice(0, 10);
+      .slice(0, 10000);
   };
 
   useEffect(() => {
@@ -162,6 +174,7 @@ const Stat = () => {
   }, [filter, customRange]);
 
   const salesNames = Object.keys(filteredData);
+  const { grandTotalSales, grandTotalQty } = calculateGrandTotals();
 
   const chartData = {
     labels: salesNames,
@@ -233,12 +246,19 @@ const Stat = () => {
                 </thead>
                 <tbody>
                   {salesNames.map((name, index) => (
-                    <tr key={index}>
-                      <td>{name}</td>
-                      <td>{formatCurrency(filteredData[name].totalSales)}</td>
-                      <td>{filteredData[name].totalQty} pcs</td>
-                    </tr>
+                    <>
+                      <tr key={index}>
+                        <td>{name}</td>
+                        <td>{formatCurrency(filteredData[name].totalSales)}</td>
+                        <td>{filteredData[name].totalQty} cps</td>
+                      </tr>
+                    </>
                   ))}
+                  <tr>
+                    <th>Grand Total</th>
+                    <td>{formatCurrency(grandTotalSales)}</td>
+                    <td>{grandTotalQty} cps</td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -271,7 +291,7 @@ const Stat = () => {
             </div>
             <div className="section"></div>
             <div className="section">
-              <h4>Top 10 Best Selling Books</h4>
+              <h4>Best Selling Books</h4>
             </div>
             <hr />
             <div className="section">
@@ -292,7 +312,7 @@ const Stat = () => {
                         <td>{index + 1}</td>
                         <td>{bookName}</td>
                         <td>{formatCurrency(data.totalPrice)}</td>
-                        <td>{data.qty} pcs</td>
+                        <td>{data.qty} cps</td>
                         <td>{data.sales}</td>
                       </tr>
                     ))
