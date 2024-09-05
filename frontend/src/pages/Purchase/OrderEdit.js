@@ -138,8 +138,8 @@ const OrderEdit = () => {
       if (value === null || value === "" || value === "-") {
         const bame = document.getElementById("bame-" + index);
         const hed = document.getElementById("hed-" + index);
-        hed.style = "display: block";
-        bame.style = "display: none";
+        hed.style = "display: none";
+        bame.style = "display: block";
 
         setOrderData({
           ...orderData,
