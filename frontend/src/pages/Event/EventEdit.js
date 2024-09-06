@@ -42,7 +42,6 @@ function EventEdit() {
   // create Event update function
   const updEvent = async (e) => {
     e.preventDefault(); // Prevent default form submission
-    const slg = eventData.name.toLocaleLowerCase().split(" ").join("-");
     const cleanedData = {
       ...eventData,
     };
