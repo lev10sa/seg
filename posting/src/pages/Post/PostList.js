@@ -184,7 +184,7 @@ const PostList = () => {
                   EDIT
                 </button>
                 <button
-                  onClick={() => navigate(`post-view/${lang}/${post._id}`)}
+                  onClick={() => navigate(`/post-view/${lang}/${post._id}`)}
                   className="btn"
                 >
                   VIEW
