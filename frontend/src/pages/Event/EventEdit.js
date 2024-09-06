@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 function EventEdit() {
-  const [selectedFile, setSelectedFile] = useState(null);
   const [eventData, setEventData] = useState({
     price: "",
     model: "",
@@ -47,7 +46,6 @@ function EventEdit() {
     };
 
     const formData = new FormData();
-    formData.append("img", selectedFile);
     try {
       // Add the Event into database with axios
       await axios.patch(
@@ -95,20 +93,6 @@ function EventEdit() {
       setEventData({
         ...eventData,
         [event.target.name]: event.target.value,
-      });
-    }
-  };
-
-  const handleFile = (event) => {
-    if (event.target.files[0] !== null) {
-      setSelectedFile(event.target.files[0]);
-      // Access the filename from the selected file
-      const fileDir = "https://compasspubindonesia.com/media/api/events/img/";
-      const file = event.target.files[0];
-      const filename = fileDir + file.name;
-      setEventData({
-        ...eventData,
-        img: filename,
       });
     }
   };
