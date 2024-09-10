@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import prerender from "prerender-node";
 
 // error handler
 import errorHandler from "./config/error.js";
@@ -24,6 +25,7 @@ const app = express();
 
 // use dependencies and routers
 app.use(
+  prerender.set("prerenderToken", "U21ta0TCNxvRYPmInhrA"),
   express.json(),
   express.urlencoded({ extended: false }),
   cors(),
