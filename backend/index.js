@@ -52,5 +52,5 @@ mongoose.connect(uri, {}).then(() => {
   app.listen(port, () => console.log("server started..."));
 });
 const db = mongoose.connection;
-db.on("error", (error) => window.alert(error.message));
+db.on("error", (error) => console.log(error.message));
 db.once("open", () => console.log("connected to db..."));
