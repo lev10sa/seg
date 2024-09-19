@@ -55,6 +55,18 @@ function EventPartyList() {
     getParty();
   }, [id, search]); // dependency array with only `getParty`
 
+  const formatDate = (val) => {
+    const date = new Date(val);
+    const d = date.getDay();
+    const m = date.getMonth();
+    const y = date.getFullYear();
+    const hh = date.getHours();
+    const mm = date.getMinutes;
+    const exec = `${d}/${m}/${y} (${hh}:${mm})`;
+
+    return exec;
+  };
+
   // render the display
   return (
     <>
@@ -85,14 +97,19 @@ function EventPartyList() {
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Participant Name</th>
+                  <th>Date</th>
+                  <th>Name</th>
                   <th>Company</th>
                   <th>Occupation</th>
                   <th>Attendance</th>
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Address</th>
-                  <th>Attachment</th>
+                  {parties.find((party) => party.file !== "") ? (
+                    <th>Attachment</th>
+                  ) : (
+                    ""
+                  )}
                   <th>Action</th>
                 </tr>
               </thead>
@@ -101,6 +118,7 @@ function EventPartyList() {
                   // table content
                   <tr key={party._id}>
                     <td>{index + 1}</td>
+                    <td>{formatDate(party.createdAt)}</td>
                     <td>{party.name}</td>
                     <td>{party.company}</td>
                     <td>{party.job}</td>
@@ -108,15 +126,20 @@ function EventPartyList() {
                     <td>{party.phone}</td>
                     <td>{party.email}</td>
                     <td>{party.address.toUpperCase()}</td>
-                    <td>
-                      <a
-                        href={`${party.file}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        View This
-                      </a>
-                    </td>
+                    {party.file !== "" ? (
+                      <td>
+                        <a
+                          href={`${party.file}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          View This
+                        </a>
+                      </td>
+                    ) : (
+                      ""
+                    )}
+
                     <td>
                       <button
                         onClick={() =>
