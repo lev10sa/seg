@@ -58,7 +58,7 @@ function EventPartyList() {
   const formatDate = (val) => {
     const date = new Date(val);
     const d = date.getDay();
-    const m = date.getMonth();
+    const m = date.getMonth() + 1;
     const y = date.getFullYear();
     const hh = date.getHours();
     const mm = date.getMinutes();
