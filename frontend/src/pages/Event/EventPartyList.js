@@ -67,6 +67,30 @@ function EventPartyList() {
     return exec;
   };
 
+  const formatPhone = (val) => {
+    // Replace '+62' at the start of the string with '0'
+    let cleanedPhone = val.replace(/^(\+62|0|\+9)/, "0");
+
+    // Remove any symbols like '-', '+', '/', '\', '#', '$', '!', etc.
+    cleanedPhone = cleanedPhone.replace(/[-+\\#$!]/g, "");
+
+    cleanedPhone = cleanedPhone.replace(/\s+/g, "");
+
+    return cleanedPhone;
+  };
+
+  const formatWhatsApp = (val) => {
+    // Replace '+62' at the start of the string with '0'
+    let pH = val.replace(/^(\+62|0|\+9)/, "62");
+
+    // Remove any symbols like '-', '+', '/', '\', '#', '$', '!', etc.
+    pH = pH.replace(/[-+\\#$!]/g, "");
+
+    pH = pH.replace(/\s+/g, "");
+
+    return pH;
+  };
+
   // render the display
   return (
     <>
@@ -127,8 +151,25 @@ function EventPartyList() {
                     <td>{party.company}</td>
                     <td>{party.job}</td>
                     {party.room !== "" ? <td>${party.room}</td> : ""}
-                    <td>{party.phone}</td>
-                    <td>{party.email}</td>
+                    <td>
+                      <a
+                        href={`https://wa.me/${formatWhatsApp(party.phone)}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {formatPhone(party.phone)}
+                      </a>
+                    </td>
+                    <td>
+                      <a
+                        href={`mailto:${party.email.toLowerCase()}`}
+                        target="_blank"
+                        rel="noreferrer"
+                        style={{ textTransform: "lowercase" }}
+                      >
+                        {party.email}
+                      </a>
+                    </td>
                     <td>{party.address.toUpperCase()}</td>
                     {party.file !== "" ? (
                       <td>
