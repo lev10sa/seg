@@ -97,8 +97,8 @@ function EventPartyList() {
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Date</th>
-                  <th>Name</th>
+                  <th>Reg. Date</th>
+                  <th>Participant Name</th>
                   <th>Company</th>
                   <th>Occupation</th>
                   {parties.find((party) => party.room !== "") ? (
