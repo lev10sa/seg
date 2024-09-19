@@ -60,7 +60,9 @@ function EventPartyList() {
     const d = date.getDate();
     const m = date.getMonth() + 1;
     const y = date.getFullYear();
-    const exec = `${d}/${m}/${y}`;
+    const hh = date.getHours();
+    const mm = date.getMinutes();
+    const exec = `${d}/${m}/${y} ${hh}:${mm} WIB`;
 
     return exec;
   };
@@ -95,8 +97,8 @@ function EventPartyList() {
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Register Date</th>
-                  <th>Participant Name</th>
+                  <th>Date</th>
+                  <th>Name</th>
                   <th>Company</th>
                   <th>Occupation</th>
                   {parties.find((party) => party.room !== "") ? (
