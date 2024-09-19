@@ -60,9 +60,7 @@ function EventPartyList() {
     const d = date.getDay();
     const m = date.getMonth() + 1;
     const y = date.getFullYear();
-    const hh = date.getHours();
-    const mm = date.getMinutes();
-    const exec = `${d}/${m}/${y} - ${hh}:${mm} WIB`;
+    const exec = `${d}/${m}/${y}`;
 
     return exec;
   };
