@@ -101,7 +101,11 @@ function EventPartyList() {
                   <th>Name</th>
                   <th>Company</th>
                   <th>Occupation</th>
-                  <th>Attendance</th>
+                  {parties.find((party) => party.room !== "") ? (
+                    <th>Attendance</th>
+                  ) : (
+                    ""
+                  )}
                   <th>Phone</th>
                   <th>Email</th>
                   <th>Address</th>
@@ -122,7 +126,7 @@ function EventPartyList() {
                     <td>{party.name}</td>
                     <td>{party.company}</td>
                     <td>{party.job}</td>
-                    <td>{party.room}</td>
+                    {party.room !== "" ? <td>${party.room}</td> : ""}
                     <td>{party.phone}</td>
                     <td>{party.email}</td>
                     <td>{party.address.toUpperCase()}</td>
@@ -139,7 +143,6 @@ function EventPartyList() {
                     ) : (
                       ""
                     )}
-
                     <td>
                       <button
                         onClick={() =>
