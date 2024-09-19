@@ -63,7 +63,7 @@ export const getPartyByEvent = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ name: 1, room: -1, address: 1 });
+    }).sort({ createdAt: -1 });
     if (!prt) {
       res.status(404);
       throw new Error(`cannot find any Party id`);
@@ -106,7 +106,7 @@ export const getPartyByKey = asyncHandler(async (req, res) => {
           },
         },
       ],
-    }).sort({ name: 1, room: -1, address: 1 });
+    }).sort({ createdAt: -1 });
     if (!prt) {
       res.status(404);
       throw new Error(`cannot find any Party id`);
