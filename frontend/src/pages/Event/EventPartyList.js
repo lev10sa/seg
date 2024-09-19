@@ -150,7 +150,7 @@ function EventPartyList() {
                     <td>{party.name}</td>
                     <td>{party.company}</td>
                     <td>{party.job}</td>
-                    {party.room !== "" ? <td>${party.room}</td> : ""}
+                    {party.room !== "" ? <td>{party.room}</td> : ""}
                     <td>
                       <a
                         href={`https://wa.me/${formatWhatsApp(party.phone)}`}
