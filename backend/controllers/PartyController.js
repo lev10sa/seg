@@ -22,7 +22,7 @@ export const setParty = asyncHandler(async (req, res) => {
 export const getParty = asyncHandler(async (req, res) => {
   try {
     const prt = await Party.find().sort({
-      timestamps: -1,
+      createdAt: -1,
     });
     if (!prt) {
       res.status(404);
@@ -39,7 +39,7 @@ export const getParty = asyncHandler(async (req, res) => {
 export const getPartyById = asyncHandler(async (req, res) => {
   try {
     const prt = await Party.findById(req.params.id).sort({
-      timestamps,
+      createdAt: -1,
     });
     if (!prt) {
       res.status(404);
