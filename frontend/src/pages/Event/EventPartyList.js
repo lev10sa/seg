@@ -61,7 +61,7 @@ function EventPartyList() {
     const m = date.getMonth();
     const y = date.getFullYear();
     const hh = date.getHours();
-    const mm = date.getMinutes;
+    const mm = date.getMinutes();
     const exec = `${d}/${m}/${y} (${hh}:${mm})`;
 
     return exec;
