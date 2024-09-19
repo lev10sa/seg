@@ -69,7 +69,7 @@ function EventPartyList() {
 
   const formatPhone = (val) => {
     // Replace '+62' at the start of the string with '0'
-    let cleanedPhone = val.replace(/^(\+62|0|\+9)/, "0");
+    let cleanedPhone = val.replace(/^(\+62|62|0|\+9)/, "0");
 
     // Remove any symbols like '-', '+', '/', '\', '#', '$', '!', etc.
     cleanedPhone = cleanedPhone.replace(/[-+\\#$!]/g, "");
@@ -81,7 +81,7 @@ function EventPartyList() {
 
   const formatWhatsApp = (val) => {
     // Replace '+62' at the start of the string with '0'
-    let pH = val.replace(/^(\+62|0|\+9)/, "62");
+    let pH = val.replace(/^(\+62|62|0|\+9)/, "62");
 
     // Remove any symbols like '-', '+', '/', '\', '#', '$', '!', etc.
     pH = pH.replace(/[-+\\#$!]/g, "");
