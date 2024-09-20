@@ -57,12 +57,14 @@ function EventPartyList() {
 
   const formatDate = (val) => {
     const date = new Date(val);
-    const d = date.getDate();
-    const m = date.getMonth() + 1;
-    const y = date.getFullYear();
-    const hh = date.getHours();
-    const mm = date.getMinutes();
-    const exec = `${d}/${m}/${y}, ${hh}:${mm} WIB.`;
+
+const d = String(date.getDate()).padStart(2, '0');
+const m = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+const y = date.getFullYear();
+const hh = String(date.getHours()).padStart(2, '0');
+const mm = String(date.getMinutes()).padStart(2, '0');
+
+const exec = `${d}/${m}/${y}, ${hh}:${mm} WIB.`;
 
     return exec;
   };
