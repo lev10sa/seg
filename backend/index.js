@@ -18,6 +18,7 @@ import partyRouter from "./routes/PartyRoute.js";
 import eventRouter from "./routes/EventRoute.js";
 import postEnRouter from "./routes/PostEnRoute.js";
 import postIdRouter from "./routes/PostIdRoute.js";
+import { exportSalesData } from "./models/InvoiceModel.js";
 
 // prepare dependencies
 config();
@@ -38,7 +39,8 @@ app.use(
   partyRouter,
   eventRouter,
   postEnRouter,
-  postIdRouter
+  postIdRouter,
+  exportSalesData
 );
 
 // connect to db
