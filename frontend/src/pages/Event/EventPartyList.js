@@ -138,7 +138,7 @@ function EventPartyList() {
                   {parties.find((party) => party.file !== "") ? (
                     <th>Attachment</th>
                   ) : (
-                    ""
+                    <th>Attachment</th>
                   )}
                   <th>Action</th>
                 </tr>
