@@ -9,7 +9,7 @@ const EventView = () => {
   const [event, setEvent] = useState({
     price: "",
     model: "",
-    name: "",
+    title: "",
     desc: "",
     pic: "",
     img: "",
@@ -127,7 +127,7 @@ const EventView = () => {
             <div className="view" key={event._id}>
               <img src={event.img} alt={event.img} />
               <div className="section caption">
-                <h4 title={event.name}>{event.name}</h4>
+                <h4 title={event.title}>{event.title}</h4>
                 <p title={event.pic}>
                   <strong>Speaker:</strong>
                 </p>
