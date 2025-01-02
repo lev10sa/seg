@@ -117,7 +117,10 @@ function InvoiceEdit() {
     e.preventDefault();
     setInvoiceData({
       ...invoiceData,
-      bookList: [...invoiceData.bookList],
+      bookList: [
+        ...invoiceData.bookList,
+        { bookName: "", isbn: "", price: "", qty: "", disc: "" },
+      ],
     });
   };
 
