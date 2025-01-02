@@ -50,11 +50,6 @@ function InvoiceEdit() {
       const selectedBook = books.find((book) => book.isbn === value);
 
       if (value === null || value === "" || value === "-") {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-
         setInvoiceData({
           ...invoiceData,
           bookList: invoiceData.bookList.map((book, i) =>
@@ -187,36 +182,6 @@ function InvoiceEdit() {
     };
 
     getBooks();
-
-    const changeDeal = async () => {
-      invoiceData.bookList.forEach((item, index) => {
-        const selectedBook = books.find((book) => book.isbn === item.isbn);
-
-        if (
-          item.isbn === null ||
-          item.isbn === "" ||
-          item.isbn === "-" ||
-          item.bookName === ""
-        ) {
-          const bame = document.getElementById("bame-" + index);
-          const hed = document.getElementById("hed-" + index);
-          hed.style = "display: none";
-          bame.style = "display: block";
-        } else if (selectedBook) {
-          const bame = document.getElementById("bame-" + index);
-          const hed = document.getElementById("hed-" + index);
-          hed.style = "display: block";
-          bame.style = "display: none";
-        } else if (!selectedBook) {
-          const bame = document.getElementById("bame-" + index);
-          const hed = document.getElementById("hed-" + index);
-          hed.style = "display: none";
-          bame.style = "display: block";
-        }
-      });
-    };
-
-    changeDeal();
   }, [id, books, invoiceData]);
 
   return (
@@ -341,7 +306,6 @@ function InvoiceEdit() {
                         className="input"
                         id={`bame-${index}`}
                         name="bookName"
-                        style={{ display: "none" }}
                         value={book.bookName}
                         onChange={handleBookChange(index)}
                         placeholder="Book Name"
