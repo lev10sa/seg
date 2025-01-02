@@ -78,7 +78,6 @@ function InvoiceEdit() {
             index === i
               ? {
                   ...book,
-
                   bookName: selectedBook.name,
                   isbn: selectedBook.isbn,
                   price: selectedBook.bookPrice,
@@ -123,10 +122,7 @@ function InvoiceEdit() {
     e.preventDefault();
     setInvoiceData({
       ...invoiceData,
-      bookList: [
-        ...invoiceData.bookList,
-        { bookName: "", isbn: "", price: "", qty: "", disc: "" },
-      ],
+      bookList: [...invoiceData.bookList],
     });
   };
 
@@ -422,10 +418,10 @@ function InvoiceEdit() {
                   Add Book
                 </button>
                 <button type="button" className="btn" onClick={delInvoice}>
-                  Delete
+                  Reset
                 </button>
                 <button type="submit" className="btn">
-                  Update
+                  Create
                 </button>
               </div>
             </div>
