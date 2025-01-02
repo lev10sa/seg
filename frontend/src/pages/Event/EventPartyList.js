@@ -180,12 +180,12 @@ function EventPartyList() {
                           target="_blank"
                           rel="noreferrer"
                         >
-                          View This
+                          SEE FILE
                         </a>
                       </td>
                     ) : (
                       <td>
-                        <a>No Attachment</a>
+                        <a>No FILE</a>
                       </td>
                     )}
                     <td>
