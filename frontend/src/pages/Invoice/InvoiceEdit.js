@@ -293,7 +293,7 @@ function InvoiceEdit() {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  {book.isbn === "" || book.isbn === "-" ? (
+                  {book.isbn === "-" ? (
                     <>
                       <input
                         type="text"
