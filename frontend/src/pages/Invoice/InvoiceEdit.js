@@ -1,10 +1,10 @@
-// import dependencies
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-// create the main function
-const InvoiceEdit = () => {
+function InvoiceEdit() {
+  // Fetches latest invoice count for serie generation
+
   const [books, setBooks] = useState([]);
 
   const [invoiceData, setInvoiceData] = useState({
@@ -22,9 +22,6 @@ const InvoiceEdit = () => {
   // get id from parameter
   const { id } = useParams();
 
-  // setting up useNavigate
-  const navigate = useNavigate();
-
   // create Invoice deleter function
   const delInvoice = async () => {
     try {
@@ -34,6 +31,108 @@ const InvoiceEdit = () => {
     } catch (error) {
       window.alert(error.message); // display error message
     }
+  };
+
+  // setting up useNavigate
+  const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setInvoiceData({
+      ...invoiceData,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleBookChange = (index) => (event) => {
+    const { name, value } = event.target;
+
+    if (name === "isbn") {
+      const selectedBook = books.find((book) => book.isbn === value);
+
+      if (value === null || value === "" || value === "-") {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+
+        setInvoiceData({
+          ...invoiceData,
+          bookList: invoiceData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  [name]: value,
+                }
+              : book
+          ),
+        });
+      } else if (selectedBook) {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: block";
+        bame.style = "display: none";
+
+        setInvoiceData({
+          ...invoiceData,
+          bookList: invoiceData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  bookName: selectedBook.name,
+                  isbn: selectedBook.isbn,
+                  price: selectedBook.bookPrice,
+                }
+              : book
+          ),
+        });
+      } else if (!selectedBook) {
+        const bame = document.getElementById("bame-" + index);
+        const hed = document.getElementById("hed-" + index);
+        hed.style = "display: none";
+        bame.style = "display: block";
+
+        setInvoiceData({
+          ...invoiceData,
+          bookList: invoiceData.bookList.map((book, i) =>
+            index === i
+              ? {
+                  ...book,
+                  [name]: value,
+                }
+              : book
+          ),
+        });
+      }
+    } else {
+      setInvoiceData({
+        ...invoiceData,
+        bookList: invoiceData.bookList.map((book, i) =>
+          index === i
+            ? {
+                ...book,
+                [name]: value,
+              }
+            : book
+        ),
+      });
+    }
+  };
+
+  const handleAddBook = (e) => {
+    e.preventDefault();
+    setInvoiceData({
+      ...invoiceData,
+      bookList: [...invoiceData.bookList],
+    });
+  };
+
+  const handleRemoveBook = (e) => {
+    e.preventDefault();
+    const lastBookIndex = invoiceData.bookList.length - 1;
+    setInvoiceData({
+      ...invoiceData,
+      bookList: invoiceData.bookList.filter((book, i) => i !== lastBookIndex),
+    });
   };
 
   // create Invoice update function
@@ -88,9 +187,7 @@ const InvoiceEdit = () => {
     };
 
     getBooks();
-  }, [id]);
 
-  useEffect(() => {
     const changeDeal = async () => {
       invoiceData.bookList.forEach((item, index) => {
         const selectedBook = books.find((book) => book.isbn === item.isbn);
@@ -120,110 +217,7 @@ const InvoiceEdit = () => {
     };
 
     changeDeal();
-  }, [books, invoiceData]);
-
-  const handleChange = (event) => {
-    setInvoiceData({
-      ...invoiceData,
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  const handleBookChange = (index) => (event) => {
-    const { name, value } = event.target;
-
-    if (name === "isbn") {
-      const selectedBook = books.find((book) => book.isbn === value);
-
-      if (value === null || value === "" || value === "-") {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-
-        setInvoiceData({
-          ...invoiceData,
-          bookList: invoiceData.bookList.map((book, i) =>
-            index === i
-              ? {
-                  ...book,
-                  [name]: value,
-                }
-              : book
-          ),
-        });
-      } else if (selectedBook) {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: block";
-        bame.style = "display: none";
-
-        setInvoiceData({
-          ...invoiceData,
-          bookList: invoiceData.bookList.map((book, i) =>
-            index === i
-              ? {
-                  ...book,
-
-                  bookName: selectedBook.name,
-                  isbn: selectedBook.isbn,
-                  price: selectedBook.bookPrice,
-                }
-              : book
-          ),
-        });
-      } else if (!selectedBook) {
-        const bame = document.getElementById("bame-" + index);
-        const hed = document.getElementById("hed-" + index);
-        hed.style = "display: none";
-        bame.style = "display: block";
-
-        setInvoiceData({
-          ...invoiceData,
-          bookList: invoiceData.bookList.map((book, i) =>
-            index === i
-              ? {
-                  ...book,
-                  [name]: value,
-                }
-              : book
-          ),
-        });
-      }
-    } else {
-      setInvoiceData({
-        ...invoiceData,
-        bookList: invoiceData.bookList.map((book, i) =>
-          index === i
-            ? {
-                ...book,
-                [name]: value,
-              }
-            : book
-        ),
-      });
-    }
-  };
-
-  const handleAddBook = (e) => {
-    e.preventDefault();
-    setInvoiceData({
-      ...invoiceData,
-      bookList: [
-        ...invoiceData.bookList,
-        { bookName: "", isbn: "", price: "", qty: "", disc: "" },
-      ],
-    });
-  };
-
-  const handleRemoveBook = (e) => {
-    e.preventDefault();
-    const lastBookIndex = invoiceData.bookList.length - 1;
-    setInvoiceData({
-      ...invoiceData,
-      bookList: invoiceData.bookList.filter((book, i) => i !== lastBookIndex),
-    });
-  };
+  }, [id, books, invoiceData]);
 
   return (
     <>
@@ -340,29 +334,36 @@ const InvoiceEdit = () => {
                 </div>
                 <div className="field">
                   <label className="label">Book Name</label>
-                  <select
-                    type="text"
-                    id={`hed-${index}`}
-                    name={`isbn`}
-                    value={book.isbn}
-                    onChange={handleBookChange(index)}
-                  >
-                    <option value="">--- Select Book ---</option>
-                    <option value="-">[Custom Book Name]</option>
-                    {books.map((item, i) => (
-                      <option value={item.isbn}>{item.name}</option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    className="input"
-                    id={`bame-${index}`}
-                    name="bookName"
-                    style={{ display: "none" }}
-                    value={book.bookName}
-                    onChange={handleBookChange(index)}
-                    placeholder="Book Name"
-                  />
+                  {book.isbn === "" || book.isbn === "-" ? (
+                    <>
+                      <input
+                        type="text"
+                        className="input"
+                        id={`bame-${index}`}
+                        name="bookName"
+                        style={{ display: "none" }}
+                        value={book.bookName}
+                        onChange={handleBookChange(index)}
+                        placeholder="Book Name"
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <select
+                        type="text"
+                        id={`hed-${index}`}
+                        name={`isbn`}
+                        value={book.isbn}
+                        onChange={handleBookChange(index)}
+                      >
+                        <option value="">--- Select Book ---</option>
+                        <option value="-">[Custom Book Name]</option>
+                        {books.map((item, i) => (
+                          <option value={item.isbn}>{item.name}</option>
+                        ))}
+                      </select>
+                    </>
+                  )}
                 </div>
                 <div className="field">
                   <label className="label">ISBN</label>
@@ -423,7 +424,7 @@ const InvoiceEdit = () => {
                 <button type="button" className="btn" onClick={handleAddBook}>
                   Add Book
                 </button>
-                <button type="button" onClick={delInvoice} className="btn">
+                <button type="button" className="btn" onClick={delInvoice}>
                   Delete
                 </button>
                 <button type="submit" className="btn">
@@ -436,7 +437,6 @@ const InvoiceEdit = () => {
       </div>
     </>
   );
-};
+}
 
-// export the main function
 export default InvoiceEdit;
